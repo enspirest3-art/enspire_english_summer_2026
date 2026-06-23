@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speaking Practice Poster: All About Me & My Home</title>
+    <!-- Tailwind CSS for high-quality, modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for friendly, clear educational typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfbf7;
+        }
+        /* Custom styles for printing the poster cleanly on A4 */
+        @media print {
+            body {
+                background-color: #ffffff;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-container {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            input {
+                border-bottom: 2px solid #000000 !important;
+                background-color: transparent !important;
+            }
+        }
+        .blank-input {
+            transition: all 0.2s ease;
+        }
+        .blank-input:focus {
+            outline: none;
+            border-color: #f43f5e;
+            background-color: #fff1f2;
+        }
+    </style>
+</head>
+<body class="py-8 px-4 md:px-8 text-slate-800">
+
+    <!-- Top Action Bar (Hidden when printed) -->
+    <!-- STREAMING_CHUNK: Thiết kế thanh công cụ điều khiển phía trên (Action Bar)... -->
+    <div class="max-w-5xl mx-auto mb-6 flex flex-col md:flex-row justify-between items-center gap-4 no-print bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+        <div>
+            <h1 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                <span>✨ Interactive Speaking Poster</span>
+                <span id="load-badge" class="hidden text-[10px] bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded-full uppercase border border-emerald-200">Loaded Student Data</span>
+            </h1>
+            <p class="text-xs text-slate-500">Fill in details, click 'Share' to get a Student Code, or import a code to display work!</p>
+        </div>
+        <div class="flex flex-wrap gap-2 w-full md:w-auto justify-end">
+            <button onclick="resetPoster()" class="px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+                Clear All
+            </button>
+            <button onclick="openImportModal()" class="px-4 py-2 text-sm font-semibold text-slate-700 bg-amber-100 hover:bg-amber-200 rounded-xl transition flex items-center gap-2">
+                📥 Import Code (Nhập mã)
+            </button>
+            <button onclick="generateShareOptions()" class="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md shadow-indigo-100 transition flex items-center gap-2">
+                🔗 Share Poster
+            </button>
+            <button onclick="window.print()" class="px-5 py-2 text-sm font-semibold text-white bg-rose-500 hover:bg-rose-600 rounded-xl shadow-md shadow-rose-100 transition flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                Print / PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Popup -->
+    <div id="toast-message" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-700 max-w-sm">
+            <span class="text-xl">🎉</span>
+            <div>
+                <p class="font-extrabold text-sm" id="toast-title">Success!</p>
+                <p class="text-xs text-slate-300" id="toast-desc">Information processed successfully.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHARE OPTIONS MODAL (Chức năng chia sẻ không lo lỗi 404) -->
+    <!-- STREAMING_CHUNK: Tạo hộp thoại hiển thị các lựa chọn chia sẻ (Share Options)... -->
+    <div id="share-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden no-print">
+        <div class="bg-white p-6 rounded-3xl border-4 border-slate-900 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] max-w-lg w-full mx-4">
+            <h3 class="text-xl font-extrabold text-slate-900 uppercase mb-2 flex items-center gap-2">
+                <span>🔗</span> Share Your Poster
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Choose one of the secure ways below to share your answers with your teacher.</p>
+            
+            <div class="space-y-4">
+                <!-- Method 1: Student Code (FOOLPROOF & RECOMMENDED) -->
+                <div class="p-4 bg-amber-50 rounded-2xl border-2 border-dashed border-amber-300">
+                    <span class="text-xs font-extrabold text-amber-700 uppercase block mb-1">Method 1: Copy Student Code (Recommended)</span>
+                    <p class="text-xs text-slate-600 mb-2">Perfect for local offline files or online class chatbox. No 404 errors!</p>
+                    <div class="flex gap-2">
+                        <input type="text" id="share-code-text" readonly class="flex-grow p-2 border border-slate-300 rounded-lg bg-white text-xs font-mono text-slate-700 focus:outline-none">
+                        <button onclick="copyContent('share-code-text', 'Code Copied!', 'Send this code to your teacher in chat!')" class="px-4 py-2 text-xs font-bold text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition shrink-0">
+                            Copy Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Method 2: Shareable Link -->
+                <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+                    <span class="text-xs font-extrabold text-indigo-700 uppercase block mb-1">Method 2: Copy Full URL Link</span>
+                    <p class="text-xs text-slate-600 mb-2">Use this when the website is hosted on a real server (e.g., GitHub Pages, School Web).</p>
+                    <div class="flex gap-2">
+                        <input type="text" id="share-url-text" readonly class="flex-grow p-2 border border-indigo-200 rounded-lg bg-white text-xs font-mono text-slate-600 focus:outline-none">
+                        <button onclick="copyContent('share-url-text', 'Link Copied!', 'Use this URL if your app is hosted online!')" class="px-4 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition shrink-0">
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end mt-4">
+                <button onclick="closeShareModal()" class="px-5 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+                    Close Window
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMPORT MODAL (Dành cho giáo viên nhập mã của học sinh) -->
+    <!-- STREAMING_CHUNK: Tạo hộp thoại nhập mã học viên (Import Modal)... -->
+    <div id="import-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden no-print">
+        <div class="bg-white p-6 rounded-3xl border-4 border-slate-900 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] max-w-md w-full mx-4">
+            <h3 class="text-xl font-extrabold text-slate-900 uppercase mb-2 flex items-center gap-2">
+                <span>📥</span> Import Student Code
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Paste the code sent by your student in the box below to load their answers onto the screen.</p>
+            
+            <textarea id="import-code-area" placeholder="Paste student code here (starts with POSTER-...)" class="w-full p-3 border-2 border-slate-300 rounded-xl bg-slate-50 text-slate-700 text-xs font-mono resize-none h-32 focus:outline-none focus:border-indigo-500 mb-4"></textarea>
+
+            <div class="flex gap-2 justify-end">
+                <button onclick="closeImportModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+                    Cancel
+                </button>
+                <button onclick="processImportCode()" class="px-5 py-2 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition">
+                    Load Answers
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Poster Layout Container -->
+    <!-- STREAMING_CHUNK: Thiết kế khối cấu trúc chính của Poster... -->
+    <div class="print-container max-w-5xl mx-auto bg-white border-4 border-slate-900 rounded-3xl shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] overflow-hidden">
+        
+        <!-- Poster Header Banner -->
+        <div class="bg-amber-100 border-b-4 border-slate-900 p-6 md:p-8 text-center relative">
+            <div class="absolute top-3 left-3 bg-rose-500 text-white font-bold text-xs uppercase px-3 py-1 rounded-full border-2 border-slate-900">
+                Unit 1
+            </div>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 uppercase">
+                Let's Talk About Me & My Home!
+            </h2>
+            <p class="text-sm md:text-base font-medium text-slate-600 mt-2">
+                First Day Practice Poster • Ideal for ESL Preschool Teachers & Young Learners
+            </p>
+        </div>
+
+        <!-- Poster Body Grid (Left Column: Outline | Right Column: Vocabulary) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 border-b-4 border-slate-900">
+            
+            <!-- LEFT COLUMN: SPEAKING OUTLINE (7 cols) -->
+            <!-- STREAMING_CHUNK: Tạo khung sườn bài nói (Speaking Outline)... -->
+            <div class="lg:col-span-7 p-6 md:p-8 bg-white lg:border-r-4 border-slate-900 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-rose-500 text-white font-extrabold text-sm border-2 border-slate-900">A</span>
+                        <h3 class="text-xl font-extrabold uppercase tracking-wide text-slate-900">Speaking Outline</h3>
+                    </div>
+
+                    <!-- Speech Frame Lines -->
+                    <div class="space-y-6 text-lg md:text-xl font-bold text-slate-800 leading-relaxed">
+                        
+                        <!-- Line 1: Hello -->
+                        <div class="flex items-center flex-wrap gap-2">
+                            <span class="text-rose-500">👋</span>
+                            <span>Hello,</span>
+                        </div>
+
+                        <!-- Line 2: Name -->
+                        <div class="flex items-center flex-wrap gap-2">
+                            <span>My name is</span>
+                            <input type="text" id="input-name" placeholder="..................................." 
+                                   class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-amber-50/50 px-2 py-0.5 rounded focus:bg-rose-50 w-64 max-w-full"
+                                   onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                            <span class="text-slate-400 font-normal">.</span>
+                        </div>
+
+                        <!-- Line 3: Age -->
+                        <div class="flex items-center flex-wrap gap-2">
+                            <span>I'm</span>
+                            <input type="text" id="input-age" placeholder="........" 
+                                   class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-amber-50/50 px-2 py-0.5 rounded focus:bg-rose-50 w-24 text-center"
+                                   onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                            <span>years old.</span>
+                        </div>
+
+                        <!-- Line 4: Color -->
+                        <div class="flex items-center flex-wrap gap-2">
+                            <span>I like</span>
+                            <input type="text" id="input-color" placeholder="[color]" 
+                                   class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-amber-50/50 px-2 py-0.5 rounded focus:bg-rose-50 w-40"
+                                   onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                            <span class="text-slate-400 font-normal">.</span>
+                        </div>
+
+                        <!-- Line 5: Hobbies -->
+                        <div class="flex items-start flex-wrap gap-2">
+                            <span>I like</span>
+                            <input type="text" id="input-hobby" placeholder="[V-ing / Hobby]" 
+                                   class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-amber-50/50 px-2 py-0.5 rounded focus:bg-rose-50 w-72 max-w-full"
+                                   onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                            <span class="text-slate-400 font-normal">.</span>
+                        </div>
+
+                        <!-- Line 6: Rooms count -->
+                        <div class="flex items-center flex-wrap gap-2">
+                            <span>There are</span>
+                            <input type="text" id="input-rooms" placeholder="[number]" 
+                                   class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-amber-50/50 px-2 py-0.5 rounded focus:bg-rose-50 w-24 text-center"
+                                   onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                            <span>rooms in my house.</span>
+                        </div>
+
+                        <!-- Line 7: Favorite Part -->
+                        <div class="flex items-start flex-wrap gap-2 leading-relaxed">
+                            <span>My favorite part of my home is the</span>
+                            <input type="text" id="input-favroom" placeholder="[favourite room]" 
+                                   class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-amber-50/50 px-2 py-0.5 rounded focus:bg-rose-50 w-52"
+                                   onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                            <span class="text-slate-400 font-normal">.</span>
+                        </div>
+
+                        <!-- Line 8: Custom Interactive Activity Sentence -->
+                        <div class="bg-rose-50/60 p-4 rounded-2xl border-2 border-dashed border-rose-300 text-slate-800 mt-4">
+                            <span class="text-xs uppercase font-extrabold text-rose-500 block mb-2">⭐ Custom Room Activity (Học viên tự điền):</span>
+                            <div class="flex items-center flex-wrap gap-2 leading-relaxed text-base md:text-lg">
+                                <span>I like</span>
+                                <input type="text" id="input-custom-act1" placeholder="[V-ing activity]" 
+                                       class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-white px-2 py-0.5 rounded focus:bg-rose-100 w-44"
+                                       onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                                <span>and</span>
+                                <input type="text" id="input-custom-act2" placeholder="[V-ing activity]" 
+                                       class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-white px-2 py-0.5 rounded focus:bg-rose-100 w-44"
+                                       onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                                <span>in the</span>
+                                <input type="text" id="input-custom-room" placeholder="[room / area]" 
+                                       class="blank-input font-extrabold text-rose-600 text-center border-b-2 border-dashed border-slate-400 bg-white px-2 py-0.5 rounded focus:bg-rose-100 w-36"
+                                       onclick="setActiveInput(this)" oninput="saveToLocalStorage()">
+                                <span class="text-slate-400 font-normal">.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: VOCABULARY WORD BANK (5 cols) -->
+            <!-- STREAMING_CHUNK: Tạo ngân hàng từ vựng thông minh (Vocabulary Bank)... -->
+            <div class="lg:col-span-5 p-6 md:p-8 bg-sky-50/40 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-sky-500 text-white font-extrabold text-sm border-2 border-slate-900">B</span>
+                        <h3 class="text-xl font-extrabold uppercase tracking-wide text-slate-900">Vocabulary Bank</h3>
+                    </div>
+
+                    <!-- Instruction Note -->
+                    <p class="text-xs text-slate-500 mb-4 bg-white p-2 rounded-lg border border-slate-200 no-print">
+                        💡 <strong>Tip:</strong> Click an input field on the left first, then click any word below to fill it in instantly!
+                    </p>
+
+                    <!-- Word Bank Categories -->
+                    <div class="space-y-6">
+                        
+                        <!-- 1. Colors -->
+                        <div>
+                            <span class="text-xs font-extrabold uppercase text-slate-400 tracking-wider block mb-2">🎨 Colors</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="fillWord('red')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Red</button>
+                                <button onclick="fillWord('pink')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Pink</button>
+                                <button onclick="fillWord('blue')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Blue</button>
+                                <button onclick="fillWord('green')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Green</button>
+                                <button onclick="fillWord('yellow')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Yellow</button>
+                                <button onclick="fillWord('purple')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Purple</button>
+                            </div>
+                        </div>
+
+                        <!-- 2. Hobbies -->
+                        <div>
+                            <span class="text-xs font-extrabold uppercase text-slate-400 tracking-wider block mb-2">⚽ Hobbies (V-ing)</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="fillWord('listening to music')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Listening to music</button>
+                                <button onclick="fillWord('shopping')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Shopping</button>
+                                <button onclick="fillWord('travelling')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Travelling</button>
+                                <button onclick="fillWord('gardening')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Gardening</button>
+                                <button onclick="fillWord('playing sports')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Playing sports</button>
+                                <button onclick="fillWord('watching TV')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Watching TV</button>
+                                <button onclick="fillWord('cooking')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Cooking</button>
+                            </div>
+                        </div>
+
+                        <!-- 3. Room Numbers -->
+                        <div>
+                            <span class="text-xs font-extrabold uppercase text-indigo-600 tracking-wider block mb-2">🔢 Room Numbers</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="fillWord('3')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">3</button>
+                                <button onclick="fillWord('4')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">4</button>
+                                <button onclick="fillWord('5')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">5</button>
+                                <button onclick="fillWord('6')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">6</button>
+                                <button onclick="fillWord('7')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">7</button>
+                                <button onclick="fillWord('8')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">8</button>
+                            </div>
+                        </div>
+
+                        <!-- 4. Rooms & Areas -->
+                        <div>
+                            <span class="text-xs font-extrabold uppercase text-slate-400 tracking-wider block mb-2">🏡 Rooms & Areas</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="fillWord('bedroom')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Bedroom</button>
+                                <button onclick="fillWord('bathroom')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Bathroom</button>
+                                <button onclick="fillWord('living room')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Living room</button>
+                                <button onclick="fillWord('kitchen')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Kitchen</button>
+                                <button onclick="fillWord('garden')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Garden</button>
+                                <button onclick="fillWord('balcony')" class="px-2.5 py-1 text-xs font-semibold bg-white border border-slate-300 rounded-lg hover:bg-slate-100 hover:border-slate-800 transition">Balcony</button>
+                            </div>
+                        </div>
+
+                        <!-- 5. Room Activities (V-ing) -->
+                        <div>
+                            <span class="text-xs font-extrabold uppercase text-emerald-600 tracking-wider block mb-2">🏠 Room Activities (V-ing)</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="fillWord('reading books')" class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-700 transition text-emerald-800">Reading books</button>
+                                <button onclick="fillWord('watering flowers')" class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-700 transition text-emerald-800">Watering flowers</button>
+                                <button onclick="fillWord('sleeping')" class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-700 transition text-emerald-800">Sleeping</button>
+                                <button onclick="fillWord('watching movies')" class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-700 transition text-emerald-800">Watching movies</button>
+                                <button onclick="fillWord('making dinner')" class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-700 transition text-emerald-800">Making dinner</button>
+                                <button onclick="fillWord('taking a bath')" class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-700 transition text-emerald-800">Taking a bath</button>
+                                <button onclick="fillWord('playing games')" class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-700 transition text-emerald-800">Playing games</button>
+                                <button onclick="fillWord('drinking hot tea')" class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:border-emerald-700 transition text-emerald-800">Drinking hot tea</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM SECTION: COMPLETE DIALOGUE MODEL -->
+        <div class="bg-amber-50 p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500 text-white font-extrabold text-sm border-2 border-slate-900">C</span>
+                <h3 class="text-xl font-extrabold uppercase tracking-wide text-slate-900">Model Speaking Passage (Hội thoại mẫu)</h3>
+            </div>
+            
+            <div class="bg-white border-2 border-slate-900 rounded-2xl p-5 md:p-6 shadow-sm relative">
+                <div class="absolute -top-3 right-4 bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full border border-emerald-300 uppercase">
+                    Level A2 / B1
+                </div>
+                <p class="text-slate-700 leading-relaxed text-base md:text-lg font-medium">
+                    "Hello! My name is <strong class="text-rose-500 underline decoration-wavy">Lan</strong>. I'm <strong class="text-rose-500 underline decoration-wavy">28</strong> years old. I like <strong class="text-rose-500 underline decoration-wavy">pink</strong>. I like <strong class="text-rose-500 underline decoration-wavy">cooking and gardening</strong>. 
+                    There are <strong class="text-rose-500 underline decoration-wavy">4</strong> rooms in the house. My favorite part of my home is the <strong class="text-rose-500 underline decoration-wavy">balcony</strong>. I like <strong class="text-rose-500 underline decoration-wavy">reading books</strong> and <strong class="text-rose-500 underline decoration-wavy">watering flowers</strong> in the <strong class="text-rose-500 underline decoration-wavy">balcony</strong>."
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script Section for Logic, Copy, Auto-Save and Fallback Dialogs -->
+    <!-- STREAMING_CHUNK: Viết mã Javascript xử lý các tác vụ lưu trữ, xuất/nhập mã an toàn... -->
+    <script>
+        let activeInput = null;
+        const inputIds = [
+            'input-name', 'input-age', 'input-color', 'input-hobby', 
+            'input-rooms', 'input-favroom', 'input-custom-act1', 
+            'input-custom-act2', 'input-custom-room'
+        ];
+
+        // Process data synchronization on page load
+        window.onload = function() {
+            activeInput = document.getElementById('input-name');
+            activeInput.focus();
+
+            // 1. Try to load shared data from URL hash first (will work when hosted on real servers)
+            if (window.location.hash) {
+                try {
+                    const hashData = window.location.hash.substring(1);
+                    if (hashData.startsWith('data=')) {
+                        const base64Str = hashData.substring(5);
+                        loadDataFromBase64(base64Str);
+                        return; // Prevent local storage overwrite when viewing shared URL
+                    }
+                } catch (e) {
+                    console.error("Error decoding hash data:", e);
+                }
+            }
+
+            // 2. Fallback: Load local draft if exists
+            loadFromLocalStorage();
+        };
+
+        function setActiveInput(element) {
+            activeInput = element;
+        }
+
+        // Fill clicked word into currently selected blank space
+        function fillWord(word) {
+            if (activeInput) {
+                activeInput.value = word;
+                saveToLocalStorage();
+                
+                // Shift focus automatically to the next logical field to ease typing flow
+                const inputs = Array.from(document.querySelectorAll('.blank-input'));
+                const currentIndex = inputs.indexOf(activeInput);
+                if (currentIndex !== -1 && currentIndex < inputs.length - 1) {
+                    activeInput = inputs[currentIndex + 1];
+                    activeInput.focus();
+                } else {
+                    activeInput = null;
+                }
+            }
+        }
+
+        // AUTO-SAVE to local storage as user types
+        function saveToLocalStorage() {
+            if (window.location.hash && window.location.hash.includes('data=')) return;
+
+            const data = {};
+            inputIds.forEach(id => {
+                data[id] = document.getElementById(id).value;
+            });
+            localStorage.setItem('speaking_poster_draft_v2', JSON.stringify(data));
+        }
+
+        // LOAD local draft
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('speaking_poster_draft_v2');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    inputIds.forEach(id => {
+                        if (data[id] !== undefined) {
+                            document.getElementById(id).value = data[id];
+                        }
+                    });
+                } catch(e) {
+                    console.error("Error parsing local draft:", e);
+                }
+            }
+        }
+
+        // Generates BOTH: Raw Code and URL link for modal selection (Avoids 404 blockages)
+        function generateShareOptions() {
+            const data = {};
+            inputIds.forEach(id => {
+                data[id] = document.getElementById(id).value;
+            });
+
+            try {
+                // Encode Unicode string safely to Base64
+                const jsonStr = JSON.stringify(data);
+                const base64Str = btoa(unescape(encodeURIComponent(jsonStr)));
+                
+                // 1. Generate Raw student code
+                const studentCode = "POSTER-" + base64Str;
+                document.getElementById('share-code-text').value = studentCode;
+
+                // 2. Generate Full URL (works when hosted online)
+                const baseUrl = window.location.href.split('#')[0];
+                const shareUrl = baseUrl + "#data=" + base64Str;
+                document.getElementById('share-url-text').value = shareUrl;
+
+                // Open modal containing the options
+                openShareModal();
+            } catch (e) {
+                console.error("Failed to generate code:", e);
+                showToast("Error", "Could not generate data. Make sure fields are valid.");
+            }
+        }
+
+        // Safe loader from base64
+        function loadDataFromBase64(base64Str) {
+            try {
+                const jsonStr = decodeURIComponent(escape(atob(base64Str)));
+                const data = JSON.parse(jsonStr);
+                
+                inputIds.forEach(id => {
+                    if (data[id] !== undefined) {
+                        document.getElementById(id).value = data[id];
+                    }
+                });
+                
+                // Show "Loaded" Badge
+                document.getElementById('load-badge').classList.remove('hidden');
+                showToast("Data Loaded!", "Student's answers successfully loaded onto the poster.");
+            } catch (e) {
+                console.error("Error parsing data string:", e);
+                showToast("Import Failed", "The code or link paste was invalid.");
+            }
+        }
+
+        // Action when teacher pastes Code and hits load
+        function processImportCode() {
+            let code = document.getElementById('import-code-area').value.trim();
+            if (!code) {
+                showToast("Empty Code", "Please paste a code first.");
+                return;
+            }
+
+            if (code.startsWith("POSTER-")) {
+                code = code.substring(7); // Remove the header
+            }
+
+            loadDataFromBase64(code);
+            closeImportModal();
+        }
+
+        // Clipboard copier with support for iframe sandbox
+        function copyContent(inputId, successTitle, successDesc) {
+            const textEl = document.getElementById(inputId);
+            textEl.select();
+            textEl.setSelectionRange(0, 99999); // For mobile device support
+
+            let copied = false;
+            try {
+                copied = document.execCommand("copy");
+            } catch (err) {
+                console.warn("execCommand copy failed:", err);
+            }
+
+            if (copied) {
+                showToast(successTitle, successDesc);
+            } else {
+                showToast("Select All & Copy", "Press Ctrl+C (Cmd+C) to copy manual text!");
+            }
+        }
+
+        // Modal Controllers
+        function openShareModal() { document.getElementById('share-modal').classList.remove('hidden'); }
+        function closeShareModal() { document.getElementById('share-modal').classList.add('hidden'); }
+        function openImportModal() { document.getElementById('import-modal').classList.remove('hidden'); }
+        function closeImportModal() { document.getElementById('import-modal').classList.add('hidden'); }
+
+        // Custom UI Toast Alerts instead of alert()
+        function showToast(title, desc) {
+            const toast = document.getElementById('toast-message');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-desc').innerText = desc;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 4000);
+        }
+
+        // Reset all fields
+        function resetPoster() {
+            if (window.location.hash) {
+                history.replaceState("", document.title, window.location.pathname);
+                document.getElementById('load-badge').classList.add('hidden');
+            }
+
+            const inputs = document.querySelectorAll('.blank-input');
+            inputs.forEach(input => input.value = '');
+            
+            localStorage.removeItem('speaking_poster_draft_v2');
+
+            activeInput = document.getElementById('input-name');
+            activeInput.focus();
+            showToast("Poster Cleared", "All fields and drafts have been reset.");
+        }
+    </script>
+</body>
+</html>
