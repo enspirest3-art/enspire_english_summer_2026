@@ -118,6 +118,9 @@
         </div>
       </div>
 
+      <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white transition" style="background:var(--sage)">
+        🛡️ Quản trị
+      </button>
       <button onclick="resetPoster()" class="px-4 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50 transition" style="border-color:var(--paper-deep); color:var(--ink-soft)">
         🗑️ Xoá form
       </button>
@@ -184,6 +187,28 @@
       </button>
 
       <div id="entries-list" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+    </div>
+  </div>
+
+  <!-- ============ ADMIN MODAL ============ -->
+  <div id="admin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm no-print px-4">
+    <div class="bg-white rounded-3xl border-2 max-w-3xl w-full p-6 shadow-2xl max-h-[88vh] flex flex-col" style="border-color:var(--ink)">
+      <div class="flex items-center justify-between mb-1">
+        <h3 class="font-display font-700 text-xl" style="color:var(--ink)">🛡️ Bảng quản trị</h3>
+        <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">✕</button>
+      </div>
+      <p class="text-xs mb-4" style="color:var(--ink-soft)">Xem kết quả của tất cả học viên và nhắc những bạn chưa nộp.</p>
+
+      <!-- Summary + bulk actions -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 p-3 rounded-xl" style="background:var(--paper-deep)">
+        <p id="admin-summary" class="text-xs font-semibold" style="color:var(--ink)">Đang tải...</p>
+        <div class="flex gap-2 flex-wrap">
+          <button onclick="mailtoBulkMissing()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--coral)">✉️ Gửi mail nhắc (chưa nộp)</button>
+          <button onclick="copyMissingEmails()" class="px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--ink-soft); color:var(--ink-soft)">📋 Copy email chưa nộp</button>
+        </div>
+      </div>
+
+      <div id="admin-list" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
     </div>
   </div>
 
@@ -379,10 +404,13 @@
   // ---------- State ----------
   let activeInput = null;
   let currentUser = null;
+  let currentProfile = null;
   let currentEntryId = null;
   let myEntries = [];
   let authMode = 'login';
   let autosaveTimer = null;
+  let adminProfiles = [];
+  let adminEntriesByUser = {};
 
   const inputIds = [
     'input-name', 'input-age', 'input-color', 'input-hobby',
@@ -517,6 +545,13 @@
 
   async function handleSessionChange(session){
     currentUser = session ? session.user : null;
+    if (currentUser){
+      const { data: profile, error } = await sb.from('profiles').select('*').eq('id', currentUser.id).single();
+      if (error) console.warn('Không tải được profile:', error.message);
+      currentProfile = profile || null;
+    } else {
+      currentProfile = null;
+    }
     renderAuthUI();
     if (currentUser){
       await loadMyEntries();
@@ -532,14 +567,17 @@
   function renderAuthUI(){
     const openAuthBtn = document.getElementById('btn-open-auth');
     const chipWrap = document.getElementById('user-chip-wrap');
+    const adminBtn = document.getElementById('btn-open-admin');
     if (currentUser){
       openAuthBtn.classList.add('hidden');
       chipWrap.classList.remove('hidden');
       document.getElementById('user-email-label').innerText = currentUser.email;
       document.getElementById('user-avatar').innerText = currentUser.email.charAt(0).toUpperCase();
+      adminBtn.classList.toggle('hidden', !(currentProfile && currentProfile.is_admin));
     } else {
       openAuthBtn.classList.remove('hidden');
       chipWrap.classList.add('hidden');
+      adminBtn.classList.add('hidden');
     }
     updateSaveStatusUI();
   }
@@ -663,6 +701,150 @@
   function openEntriesModal(){ renderEntriesList(); document.getElementById('entries-modal').classList.remove('hidden'); }
   function closeEntriesModal(){ document.getElementById('entries-modal').classList.add('hidden'); }
 
+  // ---------- Admin panel ----------
+  const FIELD_LABELS = {
+    'input-name': 'Tên', 'input-age': 'Tuổi', 'input-color': 'Màu yêu thích',
+    'input-hobby': 'Sở thích', 'input-rooms': 'Số phòng', 'input-favroom': 'Phòng yêu thích',
+    'input-custom-act1': 'Hoạt động 1', 'input-custom-act2': 'Hoạt động 2', 'input-custom-room': 'Phòng hoạt động'
+  };
+
+  function openAdminModal(){
+    document.getElementById('admin-modal').classList.remove('hidden');
+    loadAdminData();
+  }
+  function closeAdminModal(){ document.getElementById('admin-modal').classList.add('hidden'); }
+
+  async function loadAdminData(){
+    document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-soft)">Đang tải dữ liệu...</p>`;
+
+    const [{ data: profiles, error: pErr }, { data: entries, error: eErr }] = await Promise.all([
+      sb.from('profiles').select('*').order('created_at', { ascending:true }),
+      sb.from('poster_entries').select('*').order('updated_at', { ascending:false })
+    ]);
+
+    if (pErr || eErr){
+      showToast('⚠️', 'Lỗi tải dữ liệu admin', (pErr || eErr).message);
+      document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--coral)">Không tải được dữ liệu.</p>`;
+      return;
+    }
+
+    adminProfiles = profiles || [];
+    adminEntriesByUser = {};
+    (entries || []).forEach(e => {
+      if (!adminEntriesByUser[e.user_id]) adminEntriesByUser[e.user_id] = [];
+      adminEntriesByUser[e.user_id].push(e);
+    });
+
+    renderAdminList();
+  }
+
+  function getMissingProfiles(){
+    return adminProfiles.filter(p => !adminEntriesByUser[p.id] || adminEntriesByUser[p.id].length === 0);
+  }
+
+  function renderAdminList(){
+    const missing = getMissingProfiles();
+    const submittedCount = adminProfiles.length - missing.length;
+    document.getElementById('admin-summary').innerText =
+      `Tổng: ${adminProfiles.length} user — ✅ Đã nộp: ${submittedCount} — ⚠️ Chưa nộp: ${missing.length}`;
+
+    const container = document.getElementById('admin-list');
+    if (!adminProfiles.length){
+      container.innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-soft)">Chưa có user nào.</p>`;
+      return;
+    }
+
+    container.innerHTML = adminProfiles.map(p => {
+      const list = adminEntriesByUser[p.id] || [];
+      const has = list.length > 0;
+      const latest = has ? list[0] : null;
+      const badge = has
+        ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--teal-soft); color:#155f59">✅ Đã nộp (${list.length})</span>`
+        : `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--sun-soft); color:var(--coral-dark)">⚠️ Chưa nộp</span>`;
+
+      return `
+        <div class="p-3 rounded-xl border" style="border-color:var(--paper-deep)">
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div class="min-w-0">
+              <p class="text-sm font-bold truncate" style="color:var(--ink)">${escapeHtml(p.display_name || p.email)}</p>
+              <p class="text-[11px] font-mono truncate" style="color:var(--ink-soft)">${escapeHtml(p.email)}</p>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              ${badge}
+              ${has ? `<button data-toggle-id="${p.id}" class="admin-toggle-btn px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--teal); color:var(--teal)">Xem</button>` : ''}
+              <button data-mail-id="${escapeHtml(p.email)}" class="admin-mail-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--ink)">✉️ Mail</button>
+            </div>
+          </div>
+          <div id="admin-detail-${p.id}" class="hidden mt-3 pt-3 border-t" style="border-color:var(--paper-deep)">
+            ${(list || []).map(e => `
+              <div class="mb-2 p-2.5 rounded-lg" style="background:var(--paper)">
+                <p class="text-xs font-bold mb-1" style="color:var(--ink)">${escapeHtml(e.title)} <span class="font-mono font-normal" style="color:var(--ink-soft)">— ${fmtDate(e.updated_at)}</span></p>
+                <div class="grid grid-cols-2 gap-1 text-[12px]" style="color:var(--ink-soft)">
+                  ${Object.entries(FIELD_LABELS).map(([key, label]) => `<div><strong style="color:var(--ink)">${label}:</strong> ${escapeHtml((e.data && e.data[key]) || '—')}</div>`).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  document.getElementById('admin-list').addEventListener('click', (e) => {
+    const toggleBtn = e.target.closest('.admin-toggle-btn');
+    const mailBtn = e.target.closest('.admin-mail-btn');
+    if (toggleBtn){
+      document.getElementById('admin-detail-' + toggleBtn.dataset.toggleId).classList.toggle('hidden');
+    }
+    if (mailBtn){
+      mailtoSingle(mailBtn.dataset.mailId);
+    }
+  });
+
+  function mailtoSingle(email){
+    const subject = 'Nhắc nhở: hoàn thành bài luyện nói "All About Me & My Home"';
+    const body = `Chào bạn,\n\nCô/thầy thấy bạn chưa nộp bài luyện nói "All About Me & My Home". Hãy hoàn thành và lưu lại trong hệ thống nhé!\n\nCảm ơn bạn.`;
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  function mailtoBulkMissing(){
+    const missing = getMissingProfiles();
+    if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
+    const emails = missing.map(p => p.email).filter(Boolean);
+    const subject = 'Nhắc nhở: hoàn thành bài luyện nói "All About Me & My Home"';
+    const body = `Chào các bạn,\n\nCô/thầy thấy một số bạn chưa nộp bài luyện nói "All About Me & My Home". Hãy hoàn thành và lưu lại trong hệ thống sớm nhé!\n\nCảm ơn các bạn.`;
+    const mailto = `mailto:?bcc=${encodeURIComponent(emails.join(','))}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (mailto.length > 1800){
+      showToast('⚠️', 'Danh sách quá dài', 'Mail app có thể không mở được link quá dài — hãy dùng "Copy email chưa nộp" rồi dán tay vào ô Bcc.');
+    }
+    window.location.href = mailto;
+  }
+
+  function copyText(str){
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(str).then(
+        () => showToast('📋', 'Đã copy!', 'Danh sách email đã được sao chép.'),
+        () => fallbackCopy(str)
+      );
+    } else {
+      fallbackCopy(str);
+    }
+  }
+  function fallbackCopy(str){
+    const ta = document.createElement('textarea');
+    ta.value = str; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('📋', 'Đã copy!', 'Danh sách email đã được sao chép.'); }
+    catch(e){ showToast('⚠️', 'Copy thất bại', 'Vui lòng chọn và copy thủ công.'); }
+    document.body.removeChild(ta);
+  }
+
+  function copyMissingEmails(){
+    const missing = getMissingProfiles();
+    if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
+    copyText(missing.map(p => p.email).filter(Boolean).join(', '));
+  }
+
   // close dropdown when clicking elsewhere
   document.addEventListener('click', (e) => {
     const wrap = document.getElementById('user-chip-wrap');
@@ -678,7 +860,7 @@
     setActiveInput, fillWord, resetPoster, openAuthModal, closeAuthModal,
     switchAuthTab, submitAuthForm, doSignOut, toggleUserMenu, closeUserMenu,
     openEntriesModal, closeEntriesModal, startNewDraft, saveCurrentEntry,
-    onFieldInput
+    onFieldInput, openAdminModal, closeAdminModal, mailtoBulkMissing, copyMissingEmails
   });
 </script>
 </body>
