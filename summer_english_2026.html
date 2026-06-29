@@ -17,26 +17,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/space-mono@latest/latin-700-normal.css">
 <style>
 :root{
-  --paper:#FBF8F1;
-  --paper-deep:#F0E9D8;
-  --paper-soft:#FFFFFF;
-  --ink:#0F1729;
-  --ink-soft:#4A5578;
-  --ink-muted:#8B93AB;
-  --coral:#FF6B5B;
-  --coral-dark:#E5483A;
-  --coral-soft:#FFE8E4;
-  --teal:#0D9488;
-  --teal-dark:#0F766E;
-  --teal-soft:#E0F5F2;
-  --sun:#F59E0B;
-  --sun-soft:#FEF3C7;
-  --sage:#10B981;
-  --sage-soft:#D1FAE5;
-  --violet:#8B5CF6;
-  --violet-soft:#EDE9FE;
-  --border:#E5E7EB;
-  --border-strong:#CBD5E1;
+  --paper:#FBF8F1; --paper-deep:#F0E9D8; --paper-soft:#FFFFFF;
+  --ink:#0F1729; --ink-soft:#4A5578; --ink-muted:#8B93AB;
+  --coral:#FF6B5B; --coral-dark:#E5483A; --coral-soft:#FFE8E4;
+  --teal:#0D9488; --teal-dark:#0F766E; --teal-soft:#E0F5F2;
+  --sun:#F59E0B; --sun-soft:#FEF3C7;
+  --sage:#10B981; --sage-soft:#D1FAE5;
+  --violet:#8B5CF6; --violet-soft:#EDE9FE;
+  --border:#E5E7EB; --border-strong:#CBD5E1;
   --shadow-sm: 0 1px 2px rgba(15, 23, 41, 0.04);
   --shadow-md: 0 4px 12px -2px rgba(15, 23, 41, 0.08), 0 2px 4px -1px rgba(15, 23, 41, 0.04);
   --shadow-lg: 0 12px 32px -8px rgba(15, 23, 41, 0.15), 0 4px 8px -2px rgba(15, 23, 41, 0.08);
@@ -50,324 +38,122 @@ body{
     radial-gradient(1000px 500px at 110% 10%, rgba(13, 148, 136, 0.08), transparent 60%),
     radial-gradient(900px 600px at 50% 110%, rgba(139, 92, 246, 0.06), transparent 60%),
     linear-gradient(180deg, #FAF7F0 0%, #F5F1E8 100%);
-  color: var(--ink);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: var(--ink); min-height: 100vh;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
 .font-display{ font-family:'Fredoka', sans-serif; letter-spacing: -0.01em; }
 .font-mono{ font-family:'Space Mono', monospace; }
-
-/* Logo */
 .company-logo{ height: 36px; width: auto; object-fit: contain; transition: transform .25s ease; filter: drop-shadow(0 1px 2px rgba(0,0,0,.06)); }
 .company-logo:hover{ transform: scale(1.04); }
-.company-logo-lg{ height: 52px; width: auto; object-fit: contain; }
-
-/* Stamp */
 .stamp{
   width: 88px; height: 88px; border-radius: 50%;
   background: linear-gradient(135deg, #fff 0%, #FBF7EF 100%);
   border: 2.5px solid var(--ink);
   display:flex; align-items:center; justify-content:center;
-  transform: rotate(-8deg);
-  position:relative; flex-shrink:0;
+  transform: rotate(-8deg); position:relative; flex-shrink:0;
   box-shadow: var(--shadow-md), inset 0 0 0 6px #fff;
 }
-.stamp::before{
-  content:''; position:absolute; inset:6px;
-  border:1.5px dashed var(--ink); border-radius:50%;
-}
-.stamp-text{
-  font-family:'Fredoka', sans-serif; font-weight:700;
-  font-size:10px; line-height:1.2; text-align:center;
-  letter-spacing:.05em; text-transform:uppercase; color:var(--ink);
-}
-
-/* .binder-holes{
-  position:absolute; left:0; top:0; bottom:0; width:28px;
-  display:none;
-  flex-direction:column; justify-content:space-evenly; align-items:center;
-  background: repeating-linear-gradient(180deg, transparent 0, transparent 38px, rgba(15,23,41,0.04) 38px, rgba(15,23,41,0.04) 40px);
-}
-.binder-holes span{
-  width:12px; height:12px; border-radius:50%;
-  background: linear-gradient(135deg, #fff, #f5f5f0);
-  border:2px solid var(--ink-soft);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.18);
-} */
+.stamp::before{ content:''; position:absolute; inset:6px; border:1.5px dashed var(--ink); border-radius:50%; }
+.stamp-text{ font-family:'Fredoka', sans-serif; font-weight:700; font-size:10px; line-height:1.2; text-align:center; letter-spacing:.05em; text-transform:uppercase; color:var(--ink); }
 @media (min-width: 1024px){ .binder-holes{ display:flex; } }
-
-/* Inputs */
-.blank-input{
-  transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 80px; max-width: 100%; width: auto;
-  overflow: visible; text-overflow: clip; white-space: nowrap;
-  padding: 4px 12px; border-radius: 10px;
-  font-size: inherit;
-}
-.blank-input:focus{
-  outline:none; border-color: var(--coral) !important;
-  background-color:#fff !important;
-  box-shadow: 0 0 0 4px rgba(255,107,91,0.15), 0 2px 8px rgba(255,107,91,0.2);
-  transform: translateY(-1px);
-}
-.sentence-row{
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: 8px 12px; width: 100%; overflow: visible;
-}
+.blank-input{ transition: all .2s cubic-bezier(0.4, 0, 0.2, 1); min-width: 80px; max-width: 100%; width: auto; overflow: visible; text-overflow: clip; white-space: nowrap; padding: 4px 12px; border-radius: 10px; font-size: inherit; }
+.blank-input:focus{ outline:none; border-color: var(--coral) !important; background-color:#fff !important; box-shadow: 0 0 0 4px rgba(255,107,91,0.15), 0 2px 8px rgba(255,107,91,0.2); transform: translateY(-1px); }
+.sentence-row{ display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; width: 100%; overflow: visible; }
 .sentence-row > span{ flex-shrink: 0; }
-
-/* Tabs */
 .tab-btn{ color: var(--ink-soft); transition: all 0.2s ease; }
-.tab-btn[data-active="true"]{
-  background: #fff; color: var(--ink);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Scrollbar */
+.tab-btn[data-active="true"]{ background: #fff; color: var(--ink); box-shadow: var(--shadow-sm); }
 ::-webkit-scrollbar{ width:8px; height:8px; }
 ::-webkit-scrollbar-track{ background: transparent; }
 ::-webkit-scrollbar-thumb{ background: var(--border-strong); border-radius:8px; }
 ::-webkit-scrollbar-thumb:hover{ background: var(--ink-soft); }
-
-/* Preview */
 .preview-line{ line-height: 2; word-wrap: break-word; overflow-wrap: break-word; }
-.preview-line .pv-val{
-  color: var(--coral-dark);
-  font-weight: 800;
-  border-bottom: 2px dashed var(--coral);
-  padding: 0 6px;
-  display: inline-block;
-  min-width: 20px;
-}
-.preview-line .pv-empty{
-  color: var(--ink-muted);
-  font-style: italic;
-  border-bottom: 2px dashed var(--border-strong);
-  padding: 0 6px;
-  opacity: .7;
-}
-
-/* Status chip */
-.status-chip{
-  display:inline-flex; align-items:center; gap:6px;
-  padding:5px 12px; border-radius:999px;
-  font-size:11px; font-weight:700;
-  box-shadow: var(--shadow-sm);
-}
+.preview-line .pv-val{ color: var(--coral-dark); font-weight: 800; border-bottom: 2px dashed var(--coral); padding: 0 6px; display: inline-block; min-width: 20px; }
+.preview-line .pv-empty{ color: var(--ink-muted); font-style: italic; border-bottom: 2px dashed var(--border-strong); padding: 0 6px; opacity: .7; }
+.status-chip{ display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; font-size:11px; font-weight:700; box-shadow: var(--shadow-sm); }
 .status-chip.ok{ background:var(--sage-soft); color:#047857; }
 .status-chip.err{ background:var(--coral-soft); color:var(--coral-dark); }
 .status-chip.warn{ background:var(--sun-soft); color:#B45309; }
-.status-chip .dot{
-  width:8px; height:8px; border-radius:50%;
-  background:currentColor;
-  animation: pulse 1.5s infinite;
-}
+.status-chip .dot{ width:8px; height:8px; border-radius:50%; background:currentColor; animation: pulse 1.5s infinite; }
 @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
-
-/* Saved cards */
-.saved-card{
-  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-sm);
-  border: 1.5px solid var(--border);
-}
-.saved-card:hover{
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--border-strong);
-}
-.saved-card .field-chip{
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  font-size: 11px; font-weight: 600;
-  background: var(--paper);
-  color: var(--ink);
-  margin: 3px;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border);
-}
-.saved-card .field-chip:hover{
-  background: var(--sun-soft);
-  border-color: var(--sun);
-}
+.saved-card{ transition: all .3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-sm); border: 1.5px solid var(--border); }
+.saved-card:hover{ transform: translateY(-2px); box-shadow: var(--shadow-lg); border-color: var(--border-strong); }
+.saved-card .field-chip{ display: inline-flex; align-items: center; gap: 4px; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; background: var(--paper); color: var(--ink); margin: 3px; transition: all 0.2s ease; border: 1px solid var(--border); }
+.saved-card .field-chip:hover{ background: var(--sun-soft); border-color: var(--sun); }
 .saved-card .field-chip .label{ color: var(--ink-muted); margin-right: 2px; }
 .saved-card .field-chip .val{ color: var(--coral-dark); font-weight: 700; }
-
-/* Buttons */
 button{ transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
 button:hover:not(:disabled){ transform: translateY(-1px); }
 button:active:not(:disabled){ transform: translateY(0); }
-
-/* Debug log */
-.debug-box{
-  font-family:'Space Mono', monospace;
-  font-size:11px;
-  background:#0d1220;
-  color:#a7f3d0;
-  border-radius:12px;
-  padding:12px;
-  max-height:180px;
-  overflow-y:auto;
-  white-space:pre-wrap;
-  word-break:break-all;
-}
+.debug-box{ font-family:'Space Mono', monospace; font-size:11px; background:#0d1220; color:#a7f3d0; border-radius:12px; padding:12px; max-height:180px; overflow-y:auto; white-space:pre-wrap; word-break:break-all; }
 .debug-box .err-line{ color:#fca5a5; }
 .debug-box .warn-line{ color:#fcd34d; }
 .debug-box .info-line{ color:#93c5fd; }
-
-/* Card elevated */
-.card-elevated{
-  box-shadow: var(--shadow-xl);
-  border: 1.5px solid var(--border);
-}
-
-/* Section card */
-.section-card{
-  background: #fff;
-  border: 1.5px solid var(--border);
-  border-radius: 24px;
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-}
-
-/* Toolbar */
-.toolbar{
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border: 1px solid rgba(229, 231, 235, 0.8);
-  box-shadow: var(--shadow-md);
-}
-
-/* Section header */
-.section-header{
-  display: flex; align-items: center; gap: 12px;
-  padding-bottom: 16px; margin-bottom: 20px;
-  border-bottom: 1.5px dashed var(--border);
-}
-.section-badge{
-  display: flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 12px;
-  font-family: 'Fredoka', sans-serif; font-weight: 700;
-  color: #fff; font-size: 15px;
-  box-shadow: var(--shadow-sm);
-  flex-shrink: 0;
-}
-
-/* Word chip */
-.word-chip{
-  transition: all .2s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.word-chip::before{
-  content:''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
-  opacity: 0; transition: opacity .2s;
-}
+.card-elevated{ box-shadow: var(--shadow-xl); border: 1.5px solid var(--border); }
+.section-card{ background: #fff; border: 1.5px solid var(--border); border-radius: 24px; box-shadow: var(--shadow-md); overflow: hidden; }
+.toolbar{ background: rgba(255,255,255,0.85); backdrop-filter: saturate(180%) blur(12px); -webkit-backdrop-filter: saturate(180%) blur(12px); border: 1px solid rgba(229, 231, 235, 0.8); box-shadow: var(--shadow-md); }
+.section-header{ display: flex; align-items: center; gap: 12px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1.5px dashed var(--border); }
+.section-badge{ display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; font-family: 'Fredoka', sans-serif; font-weight: 700; color: #fff; font-size: 15px; box-shadow: var(--shadow-sm); flex-shrink: 0; }
+.word-chip{ transition: all .2s ease; cursor: pointer; position: relative; overflow: hidden; }
+.word-chip::before{ content:''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent); opacity: 0; transition: opacity .2s; }
 .word-chip:hover::before{ opacity: 1; }
-.word-chip:hover{
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-md);
-}
+.word-chip:hover{ transform: translateY(-2px) scale(1.02); box-shadow: var(--shadow-md); }
+.modern-input{ transition: all .2s ease; border: 1.5px solid var(--border); background: #fff; }
+.modern-input:focus{ outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1); }
+.bg-gradient-warm{ background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 50%, #FCD34D 100%); }
+.bg-gradient-teal{ background: linear-gradient(135deg, #E0F5F2 0%, #CCFBF1 100%); }
+.bg-gradient-sage{ background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); }
+.bg-gradient-paper{ background: linear-gradient(135deg, #FAFAF6 0%, #F5F5F0 100%); }
+.poster-header{ background: radial-gradient(600px 300px at 80% 20%, rgba(255,255,255,0.4), transparent 60%), linear-gradient(135deg, #FEF3C7 0%, #FDE68A 50%, #FCD34D 100%); border-bottom: 1.5px solid var(--ink); position: relative; overflow: hidden; }
+.level-badge{ background: linear-gradient(135deg, #fff 0%, #FEF3C7 100%); border: 1.5px solid var(--sun); color: var(--coral-dark); box-shadow: var(--shadow-sm); }
+.modal-backdrop{ background: rgba(15, 23, 41, 0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.modal-content{ animation: modalIn .3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes modalIn{ from{ opacity: 0; transform: scale(0.95) translateY(10px); } to{ opacity: 1; transform: scale(1) translateY(0); } }
+#toast-message > div{ box-shadow: var(--shadow-xl); backdrop-filter: blur(12px); }
+@media print{ body{ background:#fff; } .no-print{ display:none !important; } .print-card{ box-shadow:none !important; border-color:#000 !important; } input{ border-bottom:2px solid #000 !important; background:transparent !important; color:#000 !important; } }
+@media (max-width: 640px){ .blank-input{ padding: 3px 8px; font-size: 16px; } }
+.input-with-dropdown{ position: relative; display: inline-flex; align-items: center; gap: 0; vertical-align: middle; }
+.input-with-dropdown .blank-input{ border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; border-right: none !important; }
+.dropdown-toggle-btn{ display: inline-flex; align-items: center; justify-content: center; height: 32px; min-width: 32px; padding: 0 10px; border: 1.5px solid var(--ink-soft); border-radius: 10px; background: var(--paper); color: var(--ink-soft); font-size: 11px; font-weight: 700; transition: all .2s ease; flex-shrink: 0; }
+.dropdown-toggle-btn:hover{ background: var(--coral-soft); color: var(--coral-dark); border-color: var(--coral); transform: none; }
+.dropdown-toggle-btn[aria-expanded="true"]{ background: var(--coral); color: #fff; border-color: var(--coral-dark); }
+.dropdown-menu{ position: absolute; top: calc(100% + 6px); left: 0; min-width: 200px; max-width: 320px; max-height: 260px; overflow-y: auto; background: #fff; border: 1.5px solid var(--border-strong); border-radius: 14px; box-shadow: var(--shadow-lg); z-index: 60; padding: 6px; display: none; animation: ddIn .18s cubic-bezier(0.34, 1.3, 0.64, 1); }
+.dropdown-menu.open{ display: block; }
+@keyframes ddIn{ from{ opacity: 0; transform: translateY(-4px) scale(0.98); } to{ opacity: 1; transform: translateY(0) scale(1); } }
+.dropdown-menu .dd-header{ padding: 6px 10px 8px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); border-bottom: 1px dashed var(--border); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.dropdown-menu .dd-item{ display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--ink); background: transparent; border: none; transition: all .15s ease; }
+.dropdown-menu .dd-item:hover{ background: var(--coral-soft); color: var(--coral-dark); transform: translateX(2px); }
+.dropdown-menu .dd-item .dd-dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink: 0; opacity: .6; }
+.dropdown-menu .dd-item .dd-check{ margin-left: auto; font-size: 11px; color: var(--sage); opacity: 0; transition: opacity .15s; }
+.dropdown-menu .dd-item[data-selected="true"] .dd-check{ opacity: 1; }
+.dropdown-menu .dd-item[data-selected="true"]{ background: var(--sage-soft); color: #047857; }
+.dd-color-swatch{ width: 14px; height: 14px; border-radius: 4px; border: 1.5px solid rgba(0,0,0,0.1); flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5); }
 
-/* Input field modern */
-.modern-input{
-  transition: all .2s ease;
-  border: 1.5px solid var(--border);
-  background: #fff;
-}
-.modern-input:focus{
-  outline: none;
-  border-color: var(--teal);
-  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
-}
+.feedback-badge{ display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; }
+.feedback-badge.type-1{ background:#DBEAFE; color:#1E40AF; }
+.feedback-badge.type-2{ background:#FEF3C7; color:#92400E; }
+.feedback-badge.type-3{ background:#D1FAE5; color:#047857; }
+.feedback-badge.type-4{ background:#FCE7F3; color:#9D174D; }
+.feedback-badge.type-5{ background:#EDE9FE; color:#5B21B6; }
+.feedback-badge.type-default{ background:#F1F5F9; color:#334155; }
+.marks-chip{ display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:800; font-family:'Fredoka',sans-serif; }
+.marks-high{ background:var(--sage-soft); color:#047857; }
+.marks-mid{ background:var(--sun-soft); color:#B45309; }
+.marks-low{ background:var(--coral-soft); color:var(--coral-dark); }
 
-/* Gradient backgrounds */
-.bg-gradient-warm{
-  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 50%, #FCD34D 100%);
-}
-.bg-gradient-teal{
-  background: linear-gradient(135deg, #E0F5F2 0%, #CCFBF1 100%);
-}
-.bg-gradient-sage{
-  background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
-}
-.bg-gradient-sunset{
-  background: linear-gradient(135deg, #FFE4E6 0%, #FECACA 100%);
-}
-.bg-gradient-violet{
-  background: linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%);
-}
-.bg-gradient-paper{
-  background: linear-gradient(135deg, #FAFAF6 0%, #F5F5F0 100%);
-}
+.admin-entry-card{ transition: all .2s ease; border: 1.5px solid var(--border); }
+.admin-entry-card:hover{ border-color: var(--border-strong); box-shadow: var(--shadow-md); }
 
-/* Poster header */
-.poster-header{
-  background:
-    radial-gradient(600px 300px at 80% 20%, rgba(255,255,255,0.4), transparent 60%),
-    linear-gradient(135deg, #FEF3C7 0%, #FDE68A 50%, #FCD34D 100%);
-  border-bottom: 1.5px solid var(--ink);
-  position: relative;
-  overflow: hidden;
-}
-.poster-header::after{
-  content:''; position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(15,23,41,0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(15,23,41,0.03) 0%, transparent 50%);
-  pointer-events: none;
-}
+/* Feedback template row */
+.fb-row{ transition: all .2s ease; border: 1.5px solid var(--border); }
+.fb-row:hover{ border-color: var(--border-strong); }
+.fb-row.editing{ background: var(--sun-soft); border-color: var(--sun); }
+.fb-edit-input{ padding: 6px 10px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; background: #fff; transition: all .15s; }
+.fb-edit-input:focus{ outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15); }
 
-/* Level badge */
-.level-badge{
-  background: linear-gradient(135deg, #fff 0%, #FEF3C7 100%);
-  border: 1.5px solid var(--sun);
-  color: var(--coral-dark);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Modal */
-.modal-backdrop{
-  background: rgba(15, 23, 41, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-.modal-content{
-  animation: modalIn .3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-@keyframes modalIn{
-  from{ opacity: 0; transform: scale(0.95) translateY(10px); }
-  to{ opacity: 1; transform: scale(1) translateY(0); }
-}
-
-/* Toast */
-#toast-message > div{
-  box-shadow: var(--shadow-xl);
-  backdrop-filter: blur(12px);
-}
-
-/* Divider */
-.divider-soft{
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
-}
-
-/* Print */
-@media print{
-  body{ background:#fff; }
-  .no-print{ display:none !important; }
-  .print-card{ box-shadow:none !important; border-color:#000 !important; }
-  input{ border-bottom:2px solid #000 !important; background:transparent !important; color:#000 !important; }
-}
-
-/* Responsive tweaks */
-@media (max-width: 640px){
-  .blank-input{ padding: 3px 8px; font-size: 16px; }
-}
+/* Selected feedback in modal */
+.fb-select-card{ transition: all .15s ease; border: 2px solid var(--border); background: #fff; }
+.fb-select-card:hover{ border-color: var(--sun); background: var(--sun-soft); transform: translateY(-1px); }
+.fb-select-card.selected{ border-color: var(--sage); background: var(--sage-soft); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15); }
 </style>
 </head>
 <body class="px-3 md:px-6 lg:px-8 py-5 md:py-8">
@@ -383,9 +169,7 @@ button:active:not(:disabled){ transform: translateY(0); }
     </div>
   </div>
   <div class="flex flex-wrap items-center gap-2 justify-end">
-    <button id="btn-open-auth" onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg" style="background:var(--ink)">
-      👤 Đăng nhập
-    </button>
+    <button id="btn-open-auth" onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg" style="background:var(--ink)">👤 Đăng nhập</button>
     <div id="user-chip-wrap" class="hidden relative">
       <button id="user-chip" onclick="toggleUserMenu()" class="px-3 py-2 text-sm font-semibold rounded-xl border flex items-center gap-2 hover:shadow-md" style="border-color:var(--border); color:var(--ink); background:#fff">
         <span class="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-sm" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))" id="user-avatar">?</span>
@@ -397,15 +181,9 @@ button:active:not(:disabled){ transform: translateY(0); }
         <button onclick="doSignOut()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t" style="border-color:var(--border)">🚪 Đăng xuất</button>
       </div>
     </div>
-    <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--sage), #059669)">
-      🛡️ Quản trị
-    </button>
-    <button onclick="resetPoster()" class="px-3 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">
-      🗑️ Xóa Form
-    </button>
-    <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg flex items-center gap-2" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">
-      🖨️ In / PDF
-    </button>
+    <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--sage), #059669)">🛡️ Quản trị</button>
+    <button onclick="resetPoster()" class="px-3 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">🗑️</button>
+    <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg flex items-center gap-2" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">🖨️ In / PDF</button>
   </div>
 </div>
 
@@ -416,9 +194,7 @@ button:active:not(:disabled){ transform: translateY(0); }
     <span id="conn-status" class="status-chip warn"><span class="dot"></span> Đang kiểm tra...</span>
   </div>
   <div class="flex gap-2">
-    <button onclick="testConnection()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">
-      🔁 Kiểm tra kết nối máy chủ
-    </button>
+    <button onclick="testConnection()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">🔁 Kiểm tra kết nối</button>
   </div>
 </div>
 
@@ -448,7 +224,7 @@ button:active:not(:disabled){ transform: translateY(0); }
 <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop no-print px-4">
   <div class="modal-content bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl" style="border: 1.5px solid var(--border)">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="font-display font-bold text-xl" style="color:var(--ink)">👤 Tài khoản của bạn</h3>
+      <h3 class="font-display font-bold text-xl" style="color:var(--ink)">👤 Tài khoản</h3>
       <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center">✕</button>
     </div>
     <div class="flex gap-2 mb-5 p-1 rounded-xl" style="background:var(--paper-deep)">
@@ -465,9 +241,7 @@ button:active:not(:disabled){ transform: translateY(0); }
         <input id="auth-password" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter') submitAuthForm()" class="modern-input w-full mt-1 px-3 py-2.5 rounded-xl text-sm">
         <p class="text-[11px] mt-1" style="color:var(--ink-muted)">Tối thiểu 6 ký tự.</p>
       </div>
-      <button id="auth-submit-btn" onclick="submitAuthForm()" class="w-full py-2.5 rounded-xl text-white font-semibold text-sm shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">
-        Đăng nhập
-      </button>
+      <button id="auth-submit-btn" onclick="submitAuthForm()" class="w-full py-2.5 rounded-xl text-white font-semibold text-sm shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">Đăng nhập</button>
       <p id="auth-hint" class="text-xs text-center" style="color:var(--ink-soft)"></p>
     </div>
   </div>
@@ -475,33 +249,65 @@ button:active:not(:disabled){ transform: translateY(0); }
 
 <!-- ============ ADMIN MODAL ============ -->
 <div id="admin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop no-print px-4">
-  <div class="modal-content bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl" style="border: 1.5px solid var(--border)">
-    <div class="px-6 py-4 border-b flex items-center justify-between" style="border-color:var(--border)">
+  <div class="modal-content bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl" style="border: 1.5px solid var(--border)">
+    <div class="px-6 py-4 border-b flex items-center justify-between flex-wrap gap-3" style="border-color:var(--border)">
       <div>
         <h3 class="font-display font-bold text-xl" style="color:var(--ink)">🛡️ Quản trị</h3>
         <p id="admin-summary" class="text-xs mt-0.5" style="color:var(--ink-muted)">Đang tải...</p>
       </div>
-      <div class="flex gap-2">
-        <button onclick="mailtoBulkMissing()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">📧 Nhắc tất cả</button>
-        <button onclick="copyMissingEmails()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">📋 Copy</button>
+      <div class="flex gap-2 flex-wrap">
+        <button onclick="loadAdminData()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">🔄 Làm mới</button>
         <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-700 text-xl w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center">✕</button>
       </div>
     </div>
-    <div id="admin-list" class="space-y-2 overflow-y-auto flex-1 p-4"></div>
+    <div class="flex border-b" style="border-color:var(--border)">
+      <button id="admin-tab-entries" onclick="switchAdminTab('entries')" class="tab-btn px-5 py-3 text-sm font-semibold" data-active="true">📋 Danh sách bài</button>
+      <button id="admin-tab-feedback" onclick="switchAdminTab('feedback')" class="tab-btn px-5 py-3 text-sm font-semibold" data-active="false">⭐ Quản lý loại đánh giá</button>
+    </div>
+    <div id="admin-content-entries" class="flex-1 overflow-y-auto p-4"></div>
+    <div id="admin-content-feedback" class="hidden flex-1 overflow-y-auto p-4"></div>
+  </div>
+</div>
+
+<!-- ============ FEEDBACK EVALUATE MODAL ============ -->
+<div id="feedback-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center modal-backdrop no-print px-4">
+  <div class="modal-content bg-white rounded-3xl max-w-lg w-full max-h-[90vh] flex flex-col shadow-2xl" style="border: 1.5px solid var(--border)">
+    <div class="flex items-center justify-between px-6 py-4 border-b" style="border-color:var(--border)">
+      <h3 class="font-display font-bold text-xl" style="color:var(--ink)">⭐ Đánh giá bài làm</h3>
+      <button onclick="closeFeedbackModal()" class="text-slate-400 hover:text-slate-700 text-xl w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center">✕</button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-6 space-y-4">
+      <div id="feedback-entry-info" class="p-3 rounded-xl text-sm" style="background:var(--paper); border:1px solid var(--border)"></div>
+      <div>
+        <label class="text-xs font-bold uppercase tracking-wide block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
+          <span>1.</span> Chọn loại đánh giá (từ bảng <code class="px-1.5 py-0.5 rounded bg-white font-mono text-[10px]">feedback</code>)
+        </label>
+        <div id="feedback-type-list" class="space-y-2 max-h-[280px] overflow-y-auto pr-1"></div>
+      </div>
+      <div id="feedback-marks-display" class="hidden p-3 rounded-xl border-2" style="border-color:var(--sun); background:var(--sun-soft)">
+        <p class="text-xs font-bold uppercase tracking-wide" style="color:#B45309">Điểm tương ứng</p>
+        <p id="feedback-marks-value" class="text-2xl font-display font-bold" style="color:var(--coral-dark)">—</p>
+        <p id="feedback-marks-detail" class="text-[11px] mt-1" style="color:var(--ink-soft)"></p>
+      </div>
+      <div>
+        <label class="text-xs font-bold uppercase tracking-wide block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
+          <span>2.</span> Nhận xét chi tiết (lưu vào <code class="px-1.5 py-0.5 rounded bg-white font-mono text-[10px]">poster_entries.feedback</code>)
+        </label>
+        <textarea id="feedback-remark" rows="3" placeholder="Nhập nhận xét cho bài làm này..." class="modern-input w-full px-3 py-2.5 rounded-xl text-sm resize-none"></textarea>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t flex gap-2 justify-end" style="border-color:var(--border)">
+      <button onclick="closeFeedbackModal()" class="px-4 py-2 rounded-xl text-sm font-semibold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">Huỷ</button>
+      <button id="btn-submit-feedback" onclick="submitFeedback()" class="px-5 py-2 rounded-xl text-white font-bold text-sm shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--sage), #059669)">💾 Lưu đánh giá</button>
+    </div>
   </div>
 </div>
 
 <!-- ============ MAIN POSTER ============ -->
 <div class="print-card max-w-6xl mx-auto card-elevated rounded-3xl overflow-hidden relative bg-white">
-  <div class="binder-holes">
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-  </div>
-
-  <!-- Header banner -->
+  <div class="binder-holes"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="poster-header px-6 md:px-10 py-8 md:py-10 flex flex-col sm:flex-row items-center gap-5 lg:pl-16 relative z-10">
-    <div class="stamp">
-      <span class="stamp-text">Unit 1<br>✓ Verified</span>
-    </div>
+    <div class="stamp"><span class="stamp-text">Unit 1<br>✓ Verified</span></div>
     <div class="text-center sm:text-left">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-2" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(8px)">
         <span class="w-1.5 h-1.5 rounded-full" style="background: var(--coral)"></span>
@@ -511,18 +317,14 @@ button:active:not(:disabled){ transform: translateY(0); }
       <p class="text-sm mt-2" style="color:var(--ink-soft)">First-day speaking practice • ESL preschool &amp; young learners</p>
     </div>
   </div>
-
-  <!-- Save status bar -->
   <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-b" style="background:var(--paper); border-color:var(--border)">
     <p id="save-status" class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
       <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Mỗi Số báo danh chỉ có thể lưu 1 lần, đã lưu ko thể sửa
     </p>
     <div class="flex gap-2">
-      <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">💾 Lưu</button>
-      <button onclick="saveCurrentEntry({asNew:true})" class="px-4 py-2 rounded-lg text-xs font-bold border-2 hover:bg-white" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
+      <button id="btn-save-main" onclick="saveCurrentEntry()" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">💾 Lưu</button>
     </div>
   </div>
-  <!-- Model passage -->
   <div class="p-6 md:p-9 lg:pl-16 bg-gradient-sage">
     <div class="section-header" style="border-color: rgba(15,23,41,0.1)">
       <span class="section-badge" style="background: linear-gradient(135deg, var(--sage), #059669)">C</span>
@@ -532,18 +334,14 @@ button:active:not(:disabled){ transform: translateY(0); }
       </div>
     </div>
     <div class="bg-white border-2 rounded-2xl p-5 md:p-6 relative shadow-sm" style="border-color:var(--ink)">
-      <div class="absolute -top-3 right-4 level-badge font-bold text-xs px-3 py-1 rounded-full uppercase">
-        Level A2 / B1
-      </div>
+      <div class="absolute -top-3 right-4 level-badge font-bold text-xs px-3 py-1 rounded-full uppercase">Level A2 / B1</div>
       <p class="leading-relaxed text-base md:text-lg font-medium" style="color:var(--ink)">
         "Hello! My name is <strong class="underline decoration-wavy" style="color:var(--coral)">Lan</strong>. I'm <strong class="underline decoration-wavy" style="color:var(--coral)">28</strong> years old. I like <strong class="underline decoration-wavy" style="color:var(--coral)">pink</strong>. I like <strong class="underline decoration-wavy" style="color:var(--coral)">cooking and gardening</strong>.
         There are <strong class="underline decoration-wavy" style="color:var(--coral)">4</strong> rooms in the house. My favorite part of my home is the <strong class="underline decoration-wavy" style="color:var(--coral)">balcony</strong>. I like <strong class="underline decoration-wavy" style="color:var(--coral)">reading books</strong> and <strong class="underline decoration-wavy" style="color:var(--coral)">watering flowers</strong> in the <strong class="underline decoration-wavy" style="color:var(--coral)">balcony</strong>."
       </p>
     </div>
   </div>
-  <!-- Body grid -->
   <div style="border-color:var(--border)">
-    <!-- LEFT: speaking outline -->
     <div class="lg:col-span-7 p-6 md:p-9 lg:border-r-2" style="border-color:var(--border)">
       <div class="section-header">
         <span class="section-badge" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">A</span>
@@ -552,8 +350,6 @@ button:active:not(:disabled){ transform: translateY(0); }
           <p class="text-xs" style="color:var(--ink-muted)">Điền vào các ô trống để hoàn thành bài nói</p>
         </div>
       </div>
-
-      <!-- THÔNG TIN HỌC VIÊN -->
       <div class="mb-6 p-5 rounded-2xl border-2 bg-gradient-warm" style="border-color:var(--sun)">
         <p class="text-xs uppercase font-bold mb-3 tracking-wider flex items-center gap-2" style="color:var(--coral-dark)">
           <span class="w-6 h-6 rounded-md flex items-center justify-center text-white text-[10px]" style="background:var(--coral)">📝</span>
@@ -562,79 +358,71 @@ button:active:not(:disabled){ transform: translateY(0); }
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Họ và tên (*)</label>
-            <input type="text" id="input-name" placeholder="Nguyễn Văn A"
-              class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm shadow-sm">
+            <input type="text" id="input-name" placeholder="Nguyễn Văn A" class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm shadow-sm" oninput="onStudentInfoChange()">
           </div>
           <div>
             <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Số báo danh (*)</label>
-            <input type="text" id="input-student-id" placeholder="VD: MH001, SS001,MD001"
-              class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm font-mono shadow-sm">
+            <input type="text" id="input-student-id" placeholder="VD: 001" class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm font-mono shadow-sm" oninput="onStudentInfoChange()">
           </div>
         </div>
-        <p class="text-[13px] mt-3 flex items-center gap-1.5" style="color:red">
-          <strong>💡 Lưu ý</strong><strong class="px-1.5 py-0.5 rounded bg-white text-[13px]">Tên trường Ví dụ Minh Khai là MK + số thứ tự => MK1. Với cụm trường ví dụ Sao sáng 1 và Sao Sáng 2 là 1SS1 2SS1 ...</strong>
+        <div id="sbd-lookup-status" class="mt-3 hidden">
+          <div class="flex items-center gap-2 p-2.5 rounded-lg text-xs font-semibold" style="background:var(--teal-soft); color:#0F766E; border:1px solid var(--teal)">
+            <span>✅</span>
+            <span id="sbd-lookup-msg">Đã tìm thấy bài làm trước đó.</span>
+          </div>
+        </div>
+        <p class="text-[11px] mt-3 flex items-center gap-1.5" style="color:var(--ink-soft)">
+          <span>💡</span> Tiêu đề bản lưu: <code class="px-1.5 py-0.5 rounded bg-white font-mono text-[10px]">[SBD: xxx] Tên</code>
         </p>
       </div>
       <div class="space-y-5 text-lg md:text-xl font-semibold leading-relaxed" style="color:var(--ink)">
         <div class="sentence-row"><span class="text-2xl">👋</span><span class="text-xl">Hello,</span></div>
-
         <div class="sentence-row">
           <span>My name is</span>
-          <input type="text" id="input-fullname" placeholder="..."
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
-            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-            onclick="setActiveInput(this)" oninput="onFieldInput()">
-            
+          <input type="text" id="input-fullname" placeholder="..." class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
           <span style="color:var(--ink-soft)">.</span>
         </div>
-
         <div class="sentence-row">
           <span>I'm</span>
-          <input type="text" id="input-age" placeholder="..."
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
-            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-            onclick="setActiveInput(this)" oninput="onFieldInput()">
-             
+          <input type="text" id="input-age" placeholder="..." class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
           <span>years old.</span>
         </div>
-
         <div class="sentence-row">
           <span>I like</span>
-          <input type="text" id="input-color" placeholder="[color]"
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
-            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-            onclick="setActiveInput(this)" oninput="onFieldInput()">
-            <button onclick="toggleMenu('color-menu','input-color','bank-colors')">▼</button>
+          <span class="input-with-dropdown">
+            <input type="text" id="input-color" placeholder="[color]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-color', event)" aria-expanded="false" title="Chọn màu">▾</button>
+            <div id="dd-color" class="dropdown-menu" role="listbox"></div>
+          </span>
           <span style="color:var(--ink-soft)">.</span>
         </div>
-
         <div class="sentence-row">
           <span>I like</span>
-          <input type="text" id="input-hobby" placeholder="[V-ing / Hobby]"
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
-            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span class="input-with-dropdown">
+            <input type="text" id="input-hobby" placeholder="[V-ing / Hobby]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-hobby', event)" aria-expanded="false" title="Chọn sở thích">▾</button>
+            <div id="dd-hobby" class="dropdown-menu" role="listbox"></div>
+          </span>
           <span style="color:var(--ink-soft)">.</span>
         </div>
-
         <div class="sentence-row">
           <span>There are</span>
-          <input type="text" id="input-rooms" placeholder="[number]"
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
-            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span class="input-with-dropdown">
+            <input type="text" id="input-rooms" placeholder="[number]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-rooms', event)" aria-expanded="false" title="Chọn số phòng">▾</button>
+            <div id="dd-rooms" class="dropdown-menu" role="listbox"></div>
+          </span>
           <span>rooms in my house.</span>
         </div>
-
         <div class="sentence-row">
           <span>My favorite part of my home is the</span>
-          <input type="text" id="input-favroom" placeholder="[favourite room]"
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
-            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span class="input-with-dropdown">
+            <input type="text" id="input-favroom" placeholder="[favourite room]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-favroom', event)" aria-expanded="false" title="Chọn phòng">▾</button>
+            <div id="dd-favroom" class="dropdown-menu" role="listbox"></div>
+          </span>
           <span style="color:var(--ink-soft)">.</span>
         </div>
-
         <div class="p-5 rounded-2xl border-2 border-dashed mt-4 bg-gradient-teal" style="border-color:var(--teal)">
           <div class="flex items-center gap-2 mb-3">
             <span class="text-xs uppercase font-bold" style="color:var(--teal)">⭐ Custom Room Activity</span>
@@ -642,28 +430,28 @@ button:active:not(:disabled){ transform: translateY(0); }
           </div>
           <div class="sentence-row leading-relaxed text-base md:text-lg">
             <span>I like</span>
-            <input type="text" id="input-custom-act1" placeholder="[V-ing activity]"
-              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white"
-              style="color:var(--coral-dark); border-color:var(--ink-soft)"
-              onclick="setActiveInput(this)" oninput="onFieldInput()">
-              
+            <span class="input-with-dropdown">
+              <input type="text" id="input-custom-act1" placeholder="[V-ing activity]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+              <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-act1', event)" aria-expanded="false" title="Chọn hoạt động">▾</button>
+              <div id="dd-act1" class="dropdown-menu" role="listbox"></div>
+            </span>
             <span>and</span>
-            <input type="text" id="input-custom-act2" placeholder="[V-ing activity]"
-              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white"
-              style="color:var(--coral-dark); border-color:var(--ink-soft)"
-              onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <span class="input-with-dropdown">
+              <input type="text" id="input-custom-act2" placeholder="[V-ing activity]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+              <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-act2', event)" aria-expanded="false" title="Chọn hoạt động">▾</button>
+              <div id="dd-act2" class="dropdown-menu" role="listbox"></div>
+            </span>
             <span>in the</span>
-            <input type="text" id="input-custom-room" placeholder="[room / area]"
-              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white"
-              style="color:var(--coral-dark); border-color:var(--ink-soft)"
-              onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <span class="input-with-dropdown">
+              <input type="text" id="input-custom-room" placeholder="[room / area]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+              <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-custom-room', event)" aria-expanded="false" title="Chọn phòng">▾</button>
+              <div id="dd-custom-room" class="dropdown-menu" role="listbox"></div>
+            </span>
             <span style="color:var(--ink-soft)">.</span>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- RIGHT: vocabulary bank -->
     <div class="lg:col-span-5 p-6 md:p-9 bg-gradient-paper">
       <div class="section-header">
         <span class="section-badge" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">B</span>
@@ -672,53 +460,44 @@ button:active:not(:disabled){ transform: translateY(0); }
           <p class="text-xs" style="color:var(--ink-muted)">Nhấn vào từ để điền vào ô đang chọn</p>
         </div>
       </div>
-
       <div class="mb-4 p-3 rounded-xl border flex items-start gap-2" style="background:#fff; border-color:var(--border)">
         <span class="text-base">💡</span>
-        <p class="text-xs" style="color:var(--ink-soft)"><strong>Mẹo:</strong> Click vào ô trống bên trái, sau đó nhấn một từ bên dưới để điền nhanh.</p>
+        <p class="text-xs" style="color:var(--ink-soft)"><strong>Mẹo:</strong> Click vào ô trống, sau đó nhấn từ bên dưới hoặc dùng nút <strong>▾</strong> để chọn.</p>
       </div>
-
       <div class="space-y-5">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
-            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--coral-soft); color:var(--coral-dark)">🎨</span>
-            Colors
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--coral-soft); color:var(--coral-dark)">🎨</span> Colors
           </span>
           <div class="flex flex-wrap gap-1.5" id="bank-colors"></div>
         </div>
         <div>
           <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
-            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--violet-soft); color:var(--violet)">⚽</span>
-            Hobbies (V-ing)
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--violet-soft); color:var(--violet)">⚽</span> Hobbies (V-ing)
           </span>
           <div class="flex flex-wrap gap-1.5" id="bank-hobbies"></div>
         </div>
         <div>
           <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--coral-dark)">
-            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px] bg-white border" style="border-color:var(--coral)">🔢</span>
-            Room Numbers
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px] bg-white border" style="border-color:var(--coral)">🔢</span> Room Numbers
           </span>
           <div class="flex flex-wrap gap-1.5" id="bank-numbers"></div>
         </div>
         <div>
           <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
-            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--sun-soft); color:#B45309">🏡</span>
-            Rooms &amp; Areas
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--sun-soft); color:#B45309">🏡</span> Rooms &amp; Areas
           </span>
           <div class="flex flex-wrap gap-1.5" id="bank-rooms"></div>
         </div>
         <div>
           <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--teal)">
-            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--teal-soft)">🏠</span>
-            Room Activities (V-ing)
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--teal-soft)">🏠</span> Room Activities (V-ing)
           </span>
           <div class="flex flex-wrap gap-1.5" id="bank-activities"></div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Live preview -->
   <div class="p-6 md:p-9 lg:pl-16 border-b-2 bg-gradient-warm" style="border-color:var(--ink)">
     <div class="section-header" style="border-color: rgba(15,23,41,0.1)">
       <span class="section-badge" style="background: linear-gradient(135deg, var(--sun), #D97706)">👁️</span>
@@ -737,34 +516,12 @@ button:active:not(:disabled){ transform: translateY(0); }
       </p>
     </div>
   </div>
-
-  <!-- Model passage -->
-  <!-- <div class="p-6 md:p-9 lg:pl-16 bg-gradient-sage">
-    <div class="section-header" style="border-color: rgba(15,23,41,0.1)">
-      <span class="section-badge" style="background: linear-gradient(135deg, var(--sage), #059669)">C</span>
-      <div>
-        <h3 class="font-display font-bold uppercase tracking-wide text-lg" style="color:var(--ink)">Model Speaking Passage</h3>
-        <p class="text-xs" style="color:var(--ink-soft)">Bài mẫu tham khảo</p>
-      </div>
-    </div>
-    <div class="bg-white border-2 rounded-2xl p-5 md:p-6 relative shadow-sm" style="border-color:var(--ink)">
-      <div class="absolute -top-3 right-4 level-badge font-bold text-xs px-3 py-1 rounded-full uppercase">
-        Level A2 / B1
-      </div>
-      <p class="leading-relaxed text-base md:text-lg font-medium" style="color:var(--ink)">
-        "Hello! My name is <strong class="underline decoration-wavy" style="color:var(--coral)">Lan</strong>. I'm <strong class="underline decoration-wavy" style="color:var(--coral)">28</strong> years old. I like <strong class="underline decoration-wavy" style="color:var(--coral)">pink</strong>. I like <strong class="underline decoration-wavy" style="color:var(--coral)">cooking and gardening</strong>.
-        There are <strong class="underline decoration-wavy" style="color:var(--coral)">4</strong> rooms in the house. My favorite part of my home is the <strong class="underline decoration-wavy" style="color:var(--coral)">balcony</strong>. I like <strong class="underline decoration-wavy" style="color:var(--coral)">reading books</strong> and <strong class="underline decoration-wavy" style="color:var(--coral)">watering flowers</strong> in the <strong class="underline decoration-wavy" style="color:var(--coral)">balcony</strong>."
-      </p>
-    </div>
-  </div> -->
-
   <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-t" style="background:var(--paper); border-color:var(--border)">
     <p class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
       <span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Lưu kết quả của bạn
     </p>
     <div class="flex gap-2">
-      <button onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">💾 Lưu</button>
-      <button onclick="saveCurrentEntry({asNew:true})" class="px-4 py-2 rounded-lg text-xs font-bold border-2 hover:bg-white" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
+      <button onclick="saveCurrentEntry()" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">💾 Lưu</button>
     </div>
   </div>
 </div>
@@ -776,24 +533,19 @@ button:active:not(:disabled){ transform: translateY(0); }
       <div class="flex items-center gap-3">
         <span class="section-badge" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">📂</span>
         <div>
-          <h3 class="font-display font-bold text-lg" style="color:var(--ink)">Danh sách bài đã lưu</h3>
-          <p class="text-xs" style="color:var(--ink-soft)">Tất cả bản ghi bạn đã lưu vào database</p>
+          <h3 class="font-display font-bold text-lg" style="color:var(--ink)">Bài đã lưu</h3>
+          <p class="text-xs" style="color:var(--ink-soft)">Các bản ghi bạn đã lưu</p>
         </div>
       </div>
       <div class="flex gap-2">
-        <button onclick="startNewDraft()" class="px-3 py-2 rounded-xl text-xs font-bold border-2 border-dashed hover:bg-white shadow-sm" style="border-color:var(--teal); color:var(--teal)">
-          ➕ Tạo bản mới
-        </button>
-        <button onclick="loadMyEntries()" class="px-3 py-2 rounded-xl text-xs font-bold border hover:bg-white shadow-sm" style="border-color:var(--border); color:var(--ink-soft)">
-          🔄 Làm mới
-        </button>
+        <button onclick="startNewDraft()" class="px-3 py-2 rounded-xl text-xs font-bold border-2 border-dashed hover:bg-white shadow-sm" style="border-color:var(--teal); color:var(--teal)">➕ Bản mới</button>
+        <button onclick="loadMyEntries()" class="px-3 py-2 rounded-xl text-xs font-bold border hover:bg-white shadow-sm" style="border-color:var(--border); color:var(--ink-soft)">🔄 Làm mới</button>
       </div>
     </div>
     <div id="my-entries-list" class="p-4 md:p-6 space-y-3"></div>
   </div>
 </div>
 
-<!-- Footer -->
 <p class="no-print max-w-6xl mx-auto mt-8 flex items-center justify-center gap-3 text-xs py-4" style="color: var(--ink-muted);">
   <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire" class="h-8 opacity-60">
   <span class="leading-none font-semibold">© 2026 Enspire Education. All rights reserved.</span>
@@ -802,7 +554,6 @@ button:active:not(:disabled){ transform: translateY(0); }
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-// ========== CẤU HÌNH SUPABASE ==========
 const SUPABASE_URL = 'https://wvdikewfuighsnxqjisb.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_G_jgswtnG2zza0_WmW24Fw_85kkKrpY';
 
@@ -810,8 +561,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_G_jgswtnG2zza0_WmW24Fw_85kkKrpY';
 const debugLines = [];
 function logDebug(msg, level='info'){
   const time = new Date().toLocaleTimeString('vi-VN');
-  const line = { time, msg, level };
-  debugLines.push(line);
+  debugLines.push({ time, msg, level });
   if (debugLines.length > 100) debugLines.shift();
   renderDebugLog();
   if (level === 'error') console.error('[SB]', msg);
@@ -828,18 +578,13 @@ function renderDebugLog(){
   el.scrollTop = el.scrollHeight;
 }
 function clearDebugLog(){ debugLines.length = 0; renderDebugLog(); }
-function toggleDebugLog(){
-  document.getElementById('debug-log-wrap').classList.toggle('hidden');
-}
+function toggleDebugLog(){ document.getElementById('debug-log-wrap').classList.toggle('hidden'); }
 
 // ========== SUPABASE CLIENT ==========
 let sb;
 try {
   logDebug(`Khởi tạo client: URL=${SUPABASE_URL}`);
-  logDebug(`Anon key (10 ký tự đầu): ${SUPABASE_ANON_KEY.substring(0, 10)}...`);
-  sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    auth: { persistSession: true, autoRefreshToken: true }
-  });
+  sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
   logDebug('Client Supabase đã tạo thành công.', 'ok');
 } catch (err){
   logDebug('❌ Lỗi tạo client: ' + err.message, 'error');
@@ -853,15 +598,14 @@ let currentProfile = null;
 let currentEntryId = null;
 let myEntries = [];
 let authMode = 'login';
-let autosaveTimer = null;
-let adminProfiles = [];
-let adminEntriesByUser = {};
+let adminEntries = [];
+let adminFeedbacks = []; // data from `feedback` table
+let feedbackTargetEntryId = null;
+let selectedFeedbackRecordId = null; // selected feedback.id
+let lookupTimer = null;
+let editingFeedbackId = null; // for inline edit
 
-const inputIds = [
-  'input-fullname','input-age','input-color','input-hobby',
-  'input-rooms','input-favroom','input-custom-act1',
-  'input-custom-act2','input-custom-room'
-];
+const inputIds = ['input-fullname','input-age','input-color','input-hobby','input-rooms','input-favroom','input-custom-act1','input-custom-act2','input-custom-room'];
 
 // ========== WORD BANK ==========
 const WORD_BANK = {
@@ -871,6 +615,16 @@ const WORD_BANK = {
   'bank-rooms':      ['bedroom','bathroom','living room','kitchen','garden','balcony'],
   'bank-activities': ['reading books','watering flowers','sleeping','watching movies','making dinner','taking a bath','playing games','drinking hot tea']
 };
+const COLOR_HEX = { 'red':'#EF4444','pink':'#EC4899','blue':'#3B82F6','green':'#10B981','yellow':'#F59E0B','purple':'#8B5CF6' };
+const DROPDOWN_CONFIG = {
+  'dd-color':       { bankId:'bank-colors',     targetId:'input-color',       header:'Colors',          headerIcon:'🎨' },
+  'dd-hobby':       { bankId:'bank-hobbies',    targetId:'input-hobby',       header:'Hobbies (V-ing)', headerIcon:'⚽' },
+  'dd-rooms':       { bankId:'bank-numbers',    targetId:'input-rooms',       header:'Room Numbers',    headerIcon:'🔢' },
+  'dd-favroom':     { bankId:'bank-rooms',      targetId:'input-favroom',     header:'Rooms & Areas',   headerIcon:'🏡' },
+  'dd-act1':        { bankId:'bank-activities', targetId:'input-custom-act1', header:'Activities (V-ing)', headerIcon:'🏠' },
+  'dd-act2':        { bankId:'bank-activities', targetId:'input-custom-act2', header:'Activities (V-ing)', headerIcon:'🏠' },
+  'dd-custom-room': { bankId:'bank-rooms',      targetId:'input-custom-room', header:'Rooms & Areas',   headerIcon:'🏡' }
+};
 
 function renderWordBank(){
   Object.entries(WORD_BANK).forEach(([containerId, words]) => {
@@ -878,6 +632,7 @@ function renderWordBank(){
     const accent = containerId === 'bank-activities' ? 'activities' : 'default';
     el.innerHTML = words.map(w => wordChip(w, accent)).join('');
   });
+  Object.entries(DROPDOWN_CONFIG).forEach(([ddId, cfg]) => renderDropdownMenu(ddId, cfg));
 }
 function wordChip(word, style){
   const base = style === 'activities'
@@ -890,88 +645,135 @@ document.addEventListener('click', (e) => {
   if (chip) fillWord(chip.dataset.word);
 });
 
-// ========== AUTO-RESIZE INPUT ==========
+// ========== DROPDOWN ==========
+function renderDropdownMenu(ddId, cfg){
+  const menu = document.getElementById(ddId);
+  if (!menu) return;
+  const words = WORD_BANK[cfg.bankId] || [];
+  const isColor = cfg.bankId === 'bank-colors';
+  const items = words.map(w => {
+    const label = w.charAt(0).toUpperCase() + w.slice(1);
+    const swatch = isColor && COLOR_HEX[w.toLowerCase()]
+      ? `<span class="dd-color-swatch" style="background:${COLOR_HEX[w.toLowerCase()]}"></span>`
+      : `<span class="dd-dot"></span>`;
+    return `<button type="button" class="dd-item" data-value="${escapeHtml(w)}" data-dd-id="${ddId}">${swatch}<span>${escapeHtml(label)}</span><span class="dd-check">✓</span></button>`;
+  }).join('');
+  menu.innerHTML = `<div class="dd-header"><span>${cfg.headerIcon}</span><span>${cfg.header}</span></div>${items}`;
+}
+let openDropdownId = null;
+function toggleDropdown(ddId, ev){
+  if (ev){ ev.stopPropagation(); ev.preventDefault(); }
+  const menu = document.getElementById(ddId);
+  if (!menu) return;
+  const cfg = DROPDOWN_CONFIG[ddId];
+  const targetInput = cfg ? document.getElementById(cfg.targetId) : null;
+  if (openDropdownId === ddId && menu.classList.contains('open')){ closeAllDropdowns(); return; }
+  closeAllDropdowns();
+  if (targetInput){ activeInput = targetInput; targetInput.focus(); }
+  const currentVal = targetInput ? (targetInput.value || '').trim().toLowerCase() : '';
+  menu.querySelectorAll('.dd-item').forEach(btn => {
+    btn.dataset.selected = ((btn.dataset.value || '').toLowerCase() === currentVal) ? 'true' : 'false';
+  });
+  menu.classList.add('open');
+  openDropdownId = ddId;
+  const wrapper = menu.closest('.input-with-dropdown');
+  if (wrapper){ const btn = wrapper.querySelector('.dropdown-toggle-btn'); if (btn) btn.setAttribute('aria-expanded', 'true'); }
+}
+function closeAllDropdowns(){
+  document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+  document.querySelectorAll('.dropdown-toggle-btn[aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+  openDropdownId = null;
+}
+document.addEventListener('click', (e) => {
+  const item = e.target.closest('.dd-item');
+  if (item){
+    e.stopPropagation();
+    const value = item.dataset.value;
+    const ddId = item.dataset.ddId;
+    const cfg = DROPDOWN_CONFIG[ddId];
+    if (cfg && value){
+      const target = document.getElementById(cfg.targetId);
+      if (target){ target.value = value; autoResizeInput(target); activeInput = target; onFieldInput(); }
+    }
+    closeAllDropdowns();
+    return;
+  }
+  if (!e.target.closest('.input-with-dropdown')) closeAllDropdowns();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAllDropdowns(); });
+
+// ========== AUTO-RESIZE ==========
 function autoResizeInput(el){
   if (!el) return;
   const canvas = autoResizeInput._canvas || (autoResizeInput._canvas = document.createElement('canvas'));
   const ctx = canvas.getContext('2d');
   const style = window.getComputedStyle(el);
   ctx.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-  const placeholder = el.placeholder || '';
-  const text = el.value || placeholder;
-  const textWidth = ctx.measureText(text).width;
-  const newWidth = Math.max(80, Math.min(textWidth + 24, window.innerWidth - 80));
-  el.style.width = newWidth + 'px';
+  const text = el.value || el.placeholder || '';
+  el.style.width = Math.max(80, Math.min(ctx.measureText(text).width + 24, window.innerWidth - 80)) + 'px';
 }
-function autoResizeAllInputs(){
-  inputIds.forEach(id => autoResizeInput(document.getElementById(id)));
-}
+function autoResizeAllInputs(){ inputIds.forEach(id => autoResizeInput(document.getElementById(id))); }
 
-// ========== FORM HELPERS ==========
-function getFormData(){
-  const data = {};
-  inputIds.forEach(id => data[id] = document.getElementById(id).value);
-  return data;
-}
-function setFormData(data){
-  inputIds.forEach(id => {
-    const el = document.getElementById(id);
-    el.value = (data && data[id]) || '';
-    autoResizeInput(el);
-  });
-  updateLivePreview();
-}
-function clearForm(){
-  inputIds.forEach(id => {
-    const el = document.getElementById(id);
-    el.value = '';
-    autoResizeInput(el);
-  });
-  updateLivePreview();
-}
-function clearAllForm(){
-  clearForm();
-  document.getElementById('input-name').value = '';
-  document.getElementById('input-student-id').value = '';
-}
+// ========== FORM ==========
+function getFormData(){ const d = {}; inputIds.forEach(id => d[id] = document.getElementById(id).value); return d; }
+function setFormData(data){ inputIds.forEach(id => { const el = document.getElementById(id); el.value = (data && data[id]) || ''; autoResizeInput(el); }); updateLivePreview(); }
+function clearForm(){ inputIds.forEach(id => { const el = document.getElementById(id); el.value = ''; autoResizeInput(el); }); updateLivePreview(); }
+function clearAllForm(){ clearForm(); document.getElementById('input-name').value = ''; document.getElementById('input-student-id').value = ''; }
 function setActiveInput(el){ activeInput = el; }
-
 function fillWord(word){
-  if (!activeInput) {
-    showToast('👆', 'Chọn ô trống trước', 'Hãy click vào một ô trống trước khi chọn từ.');
-    return;
-  }
-  activeInput.value = word;
-  autoResizeInput(activeInput);
-  onFieldInput();
+  if (!activeInput){ showToast('👆', 'Chọn ô trống trước', 'Hãy click vào một ô trống trước khi chọn từ.'); return; }
+  activeInput.value = word; autoResizeInput(activeInput); onFieldInput();
   const inputs = Array.from(document.querySelectorAll('.blank-input'));
   const idx = inputs.indexOf(activeInput);
-  if (idx !== -1 && idx < inputs.length - 1){
-    activeInput = inputs[idx + 1];
-    activeInput.focus();
-  } else {
-    activeInput = null;
-  }
+  if (idx !== -1 && idx < inputs.length - 1){ activeInput = inputs[idx + 1]; activeInput.focus(); } else { activeInput = null; }
+}
+function onFieldInput(){
+  if (document.activeElement && document.activeElement.classList.contains('blank-input')) autoResizeInput(document.activeElement);
+  updateLivePreview();
 }
 
-function onFieldInput(){
-  if (document.activeElement && document.activeElement.classList.contains('blank-input')){
-    autoResizeInput(document.activeElement);
-  }
-  updateLivePreview();
-  if (currentUser && currentEntryId){
-    clearTimeout(autosaveTimer);
-    autosaveTimer = setTimeout(() => saveCurrentEntry({ silent:true }), 1500);
-  }
+// ========== SBD LOOKUP ==========
+function onStudentInfoChange(){
+  clearTimeout(lookupTimer);
+  lookupTimer = setTimeout(() => lookupEntryBySBD(), 600);
+}
+async function lookupEntryBySBD(){
+  const sbd = (document.getElementById('input-student-id').value || '').trim();
+  const statusEl = document.getElementById('sbd-lookup-status');
+  const msgEl = document.getElementById('sbd-lookup-msg');
+  if (!sbd){ statusEl.classList.add('hidden'); currentEntryId = null; updateSaveStatusUI(); return; }
+  logDebug(`🔍 Lookup SBD: "${sbd}"`);
+  try {
+    const { data, error } = await sb.from('poster_entries').select('*').eq('user_id', sbd).maybeSingle();
+    if (error){ logDebug('⚠️ Lookup lỗi: ' + error.message, 'warn'); statusEl.classList.add('hidden'); currentEntryId = null; return; }
+    if (data){
+      currentEntryId = data.id;
+      logDebug(`✅ Found entry ID: ${data.id} for SBD: ${sbd}`, 'ok');
+      msgEl.innerHTML = `✅ Đã tìm thấy bài của <strong>SBD ${escapeHtml(sbd)}</strong>. Dữ liệu sẽ được cập nhật khi lưu.`;
+      statusEl.classList.remove('hidden');
+      const box = statusEl.querySelector('div');
+      box.style.background = 'var(--teal-soft)'; box.style.color = '#0F766E'; box.style.borderColor = 'var(--teal)';
+      statusEl.querySelector('span:first-child').textContent = '✅';
+      const name = (document.getElementById('input-name').value || '').trim();
+      if (!name && data.title) document.getElementById('input-name').value = data.title;
+      setFormData(data.data || {});
+    } else {
+      currentEntryId = null;
+      msgEl.innerHTML = `🆕 SBD <strong>${escapeHtml(sbd)}</strong> chưa có bài. Bấm Lưu để tạo mới.`;
+      statusEl.classList.remove('hidden');
+      const box = statusEl.querySelector('div');
+      box.style.background = 'var(--sun-soft)'; box.style.color = '#B45309'; box.style.borderColor = 'var(--sun)';
+      statusEl.querySelector('span:first-child').textContent = '🆕';
+    }
+    updateSaveStatusUI();
+  } catch (err){ logDebug('❌ Lookup exception: ' + err.message, 'error'); statusEl.classList.add('hidden'); }
 }
 
 // ========== LIVE PREVIEW ==========
 function updateLivePreview(){
   const v = (id) => {
     const val = (document.getElementById(id).value || '').trim();
-    return val
-      ? `<span class="pv-val">${escapeHtml(val)}</span>`
-      : `<span class="pv-empty">...</span>`;
+    return val ? `<span class="pv-val">${escapeHtml(val)}</span>` : `<span class="pv-empty">...</span>`;
   };
   document.getElementById('live-preview').innerHTML =
     `👋 Hello! My name is ${v('input-fullname')}. I'm ${v('input-age')} years old. ` +
@@ -980,11 +782,13 @@ function updateLivePreview(){
     `My favorite part of my home is the ${v('input-favroom')}. ` +
     `I like ${v('input-custom-act1')} and ${v('input-custom-act2')} in the ${v('input-custom-room')}.`;
 }
-
 function resetPoster(){
-  if (!confirm('Xoá trắng tất cả các ô? Bài đã lưu trong database sẽ không bị ảnh hưởng.')) return;
+  if (!confirm('Xoá trắng tất cả các ô?')) return;
   clearAllForm();
+  currentEntryId = null;
+  document.getElementById('sbd-lookup-status').classList.add('hidden');
   document.getElementById('input-name').focus();
+  updateSaveStatusUI();
   showToast('🗑️', 'Đã xoá form', 'Các ô đã được làm trống.');
 }
 
@@ -1004,46 +808,23 @@ function updateConnectionStatus(type, text){
   el.className = 'status-chip ' + (type === 'ok' ? 'ok' : type === 'err' ? 'err' : 'warn');
   el.innerHTML = `<span class="dot"></span> ${escapeHtml(text)}`;
 }
-
 async function testConnection(){
   updateConnectionStatus('warn', 'Đang kiểm tra...');
-  logDebug('Bắt đầu kiểm tra kết nối Supabase...');
+  logDebug('Kiểm tra kết nối...');
   try {
     const t0 = performance.now();
     const { data, error, status } = await sb.from('poster_entries').select('id').limit(1);
-    const t1 = performance.now();
-    const ms = Math.round(t1 - t0);
+    const ms = Math.round(performance.now() - t0);
     logDebug(`SELECT test: status=${status}, time=${ms}ms`);
-    if (error){
-      logDebug(`❌ Lỗi SELECT: ${error.message} (code: ${error.code || 'n/a'})`, 'error');
-      if (error.code === 'PGRST301' || error.message.includes('JWT') || error.message.includes('Invalid')){
-        updateConnectionStatus('err', 'Anon key sai / hết hạn');
-        logDebug('💡 Gợi ý: Kiểm tra lại anon key trong Supabase Dashboard > Settings > API', 'warn');
-      } else if (error.code === '42P01'){
-        updateConnectionStatus('err', 'Bảng chưa tồn tại');
-        logDebug('💡 Gợi ý: Tạo bảng poster_entries trong Supabase SQL Editor', 'warn');
-      } else if (error.message.includes('RLS') || error.code === '42501'){
-        updateConnectionStatus('err', 'Lỗi phân quyền RLS');
-        logDebug('💡 Gợi ý: Bật RLS policy cho phép anon/select', 'warn');
-      } else {
-        updateConnectionStatus('err', 'Lỗi: ' + error.message.substring(0, 50));
-      }
-      return;
-    }
-    logDebug(`✅ Kết nối OK. Trả về ${data ? data.length : 0} dòng.`, 'ok');
+    if (error){ logDebug(`❌ Lỗi: ${error.message}`, 'error'); updateConnectionStatus('err', 'Lỗi: ' + error.message.substring(0, 50)); return; }
+    logDebug(`✅ Kết nối OK (${ms}ms)`, 'ok');
     updateConnectionStatus('ok', `Kết nối OK (${ms}ms)`);
-  } catch (err){
-    logDebug('❌ Exception: ' + err.message, 'error');
-    updateConnectionStatus('err', 'Lỗi mạng / URL sai');
-  }
+  } catch (err){ logDebug('❌ Exception: ' + err.message, 'error'); updateConnectionStatus('err', 'Lỗi mạng'); }
 }
 
 // ========== AUTH ==========
 function openAuthModal(){ document.getElementById('auth-modal').classList.remove('hidden'); }
-function closeAuthModal(){
-  document.getElementById('auth-modal').classList.add('hidden');
-  document.getElementById('auth-hint').innerText = '';
-}
+function closeAuthModal(){ document.getElementById('auth-modal').classList.add('hidden'); document.getElementById('auth-hint').innerText = ''; }
 function switchAuthTab(mode){
   authMode = mode;
   document.getElementById('tab-login').dataset.active = mode === 'login';
@@ -1055,90 +836,44 @@ async function submitAuthForm(){
   const email = document.getElementById('auth-email').value.trim();
   const password = document.getElementById('auth-password').value;
   const hint = document.getElementById('auth-hint');
-  if (!email || !password){ hint.innerText = 'Vui lòng nhập đầy đủ email và mật khẩu.'; return; }
+  if (!email || !password){ hint.innerText = 'Vui lòng nhập đầy đủ.'; return; }
   hint.innerText = 'Đang xử lý...';
   logDebug(`Auth: ${authMode} - ${email}`);
   if (authMode === 'login'){
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
-    if (error){
-      logDebug('❌ Login lỗi: ' + error.message, 'error');
-      hint.innerText = '❌ ' + error.message;
-      return;
-    }
-    logDebug('✅ Login thành công. User ID: ' + data.user.id, 'ok');
+    if (error){ logDebug('❌ Login: ' + error.message, 'error'); hint.innerText = '❌ ' + error.message; return; }
+    logDebug('✅ Login OK. User: ' + data.user.id, 'ok');
     closeAuthModal();
     showToast('✅', 'Đăng nhập thành công', `Chào ${email}!`);
   } else {
     const { data, error } = await sb.auth.signUp({ email, password });
-    if (error){
-      logDebug('❌ Signup lỗi: ' + error.message, 'error');
-      hint.innerText = '❌ ' + error.message;
-      return;
-    }
-    logDebug('✅ Signup thành công.', 'ok');
-    hint.innerText = 'Đăng ký thành công! Kiểm tra email xác nhận (nếu được yêu cầu), sau đó đăng nhập.';
+    if (error){ logDebug('❌ Signup: ' + error.message, 'error'); hint.innerText = '❌ ' + error.message; return; }
+    logDebug('✅ Signup OK', 'ok');
+    hint.innerText = 'Đăng ký thành công! Hãy đăng nhập.';
     switchAuthTab('login');
   }
 }
-async function doSignOut(){
-  await sb.auth.signOut();
-  closeUserMenu();
-  showToast('🚪', 'Đã đăng xuất', 'Hẹn gặp lại!');
-}
+async function doSignOut(){ await sb.auth.signOut(); closeUserMenu(); showToast('🚪', 'Đã đăng xuất', 'Hẹn gặp lại!'); }
 function toggleUserMenu(){ document.getElementById('user-menu').classList.toggle('hidden'); }
 function closeUserMenu(){ document.getElementById('user-menu').classList.add('hidden'); }
 
 // ========== SESSION ==========
-sb.auth.onAuthStateChange((_event, session) => {
-  logDebug(`Auth state change: ${_event}, hasSession=${!!session}`);
-  handleSessionChange(session);
-});
-
+sb.auth.onAuthStateChange((_event, session) => { logDebug(`Auth state: ${_event}`); handleSessionChange(session); });
 async function handleSessionChange(session){
   currentUser = session ? session.user : null;
   if (currentUser){
-    logDebug('User hiện tại: ' + currentUser.email + ' (id: ' + currentUser.id + ')');
+    logDebug('User: ' + currentUser.email);
     try {
-      const { data: existingProfile, error: selErr } = await sb.from('profiles').select('*').eq('id', currentUser.id).maybeSingle();
-      if (selErr){
-        logDebug('⚠️ Không đọc được profiles: ' + selErr.message, 'warn');
-      }
-      if (!existingProfile){
-        logDebug('Tạo profile mới cho user...');
-        const { error: insErr } = await sb.from('profiles').insert({
-          id: currentUser.id,
-          email: currentUser.email,
-          display_name: currentUser.email.split('@')[0],
-          is_admin: false
-        });
-        if (insErr){
-          logDebug('⚠️ Không tạo được profile: ' + insErr.message + ' (có thể đã tồn tại)', 'warn');
-        } else {
-          logDebug('✅ Đã tạo profile.', 'ok');
-        }
-      }
       const { data: profile } = await sb.from('profiles').select('*').eq('id', currentUser.id).maybeSingle();
       currentProfile = profile || null;
       if (currentProfile) logDebug(`Profile: is_admin=${currentProfile.is_admin}`);
-    } catch (err){
-      logDebug('❌ Lỗi xử lý profile: ' + err.message, 'error');
-    }
-  } else {
-    currentProfile = null;
-  }
+    } catch (err){ logDebug('❌ Profile error: ' + err.message, 'error'); }
+  } else { currentProfile = null; }
   renderAuthUI();
-  if (currentUser){
-    await loadMyEntries();
-    document.getElementById('my-entries-section').classList.remove('hidden');
-    showToast('👋', 'Chào mừng!', 'Nhập Tên + Số báo danh, điền bài rồi bấm 💾 Lưu.');
-  } else {
-    myEntries = [];
-    currentEntryId = null;
-    document.getElementById('my-entries-section').classList.add('hidden');
-    updateSaveStatusUI();
-  }
+  if (currentUser){ await loadMyEntries(); document.getElementById('my-entries-section').classList.remove('hidden'); }
+  else { myEntries = []; currentEntryId = null; document.getElementById('my-entries-section').classList.add('hidden'); }
+  updateSaveStatusUI();
 }
-
 function renderAuthUI(){
   const openAuthBtn = document.getElementById('btn-open-auth');
   const chipWrap = document.getElementById('user-chip-wrap');
@@ -1154,81 +889,94 @@ function renderAuthUI(){
     chipWrap.classList.add('hidden');
     adminBtn.classList.add('hidden');
   }
-  updateSaveStatusUI();
 }
 
-// ========== BUILD TITLE ==========
-function buildTitle(){
+// ========== SAVE (by SBD) ==========
+async function saveCurrentEntry(){
+  const btn = document.getElementById('btn-save-main');
   const name = (document.getElementById('input-name').value || '').trim();
   const sbd = (document.getElementById('input-student-id').value || '').trim();
-  if (!name && !sbd) return 'Học viên chưa đặt tên';
-  if (sbd && name) return `[SBD: ${sbd}] ${name}`;
-  if (sbd) return `[SBD: ${sbd}]`;
-  return name;
-}
-function parseTitle(title){
-  const match = /^\[SBD:\s*([^\]]+)\]\s*(.*)$/.exec(title || '');
-  if (match) return { sbd: match[1].trim(), name: match[2].trim() };
-  return { sbd: '', name: title || '' };
+  if (!name || !sbd){ showToast('⚠️', 'Thiếu thông tin', 'Vui lòng nhập đầy đủ Họ tên và Số báo danh.'); return; }
+  const formData = getFormData();
+  const title = name;
+  const userId = sbd;
+  const originalText = btn.innerText;
+  btn.disabled = true; btn.innerText = '⏳ Đang lưu...'; btn.style.opacity = '0.6';
+  try {
+    const { data: existing, error: lookupErr } = await sb.from('poster_entries').select('id').eq('user_id', userId).maybeSingle();
+    if (lookupErr){ logDebug('❌ Lookup: ' + lookupErr.message, 'error'); showToast('⚠️', 'Lỗi', lookupErr.message); return; }
+    if (existing){
+      logDebug(`📝 UPDATE entry ${existing.id} for SBD: ${userId}`);
+      const { data, error } = await sb.from('poster_entries').update({ title, data: formData, updated_at: new Date().toISOString() }).eq('id', existing.id).select().single();
+      if (error){ logDebug(`❌ UPDATE lỗi: ${error.message}`, 'error'); showToast('⚠️', 'Lỗi cập nhật', error.message); return; }
+      currentEntryId = data.id;
+      logDebug(`✅ UPDATE thành công.`, 'ok');
+      showToast('💾', 'Đã cập nhật!', `SBD ${userId} — ${title}`);
+    } else {
+      const payload = { title, data: formData, user_id: userId };
+      logDebug(`📤 INSERT for SBD: ${userId}`);
+      const { data, error } = await sb.from('poster_entries').insert(payload).select().single();
+      if (error){ logDebug(`❌ INSERT lỗi: ${error.message}`, 'error'); showToast('⚠️', 'Lỗi lưu', error.message); return; }
+      currentEntryId = data.id;
+      logDebug(`✅ INSERT OK. ID: ${data.id}`, 'ok');
+      showToast('🆕', 'Đã lưu!', `SBD ${userId} — ${title}`);
+    }
+    await loadMyEntries();
+  } catch (err){ logDebug('❌ Exception: ' + err.message, 'error'); showToast('⚠️', 'Lỗi', err.message || String(err)); }
+  finally { btn.disabled = false; btn.innerText = originalText; btn.style.opacity = '1'; }
 }
 
-// ========== MY ENTRIES CRUD ==========
+// ========== MY ENTRIES ==========
 async function loadMyEntries(){
   if (!currentUser) return;
-  logDebug('Tải danh sách entries của user...');
-  const { data, error } = await sb.from('poster_entries')
-    .select('*')
-    .order('updated_at', { ascending:false });
-  if (error){
-    logDebug('❌ Lỗi tải entries: ' + error.message + ' (code: ' + (error.code||'n/a') + ')', 'error');
-    showToast('⚠️', 'Lỗi tải dữ liệu', error.message);
-    myEntries = [];
-    return;
-  }
+  logDebug('Tải entries...');
+  const { data, error } = await sb.from('poster_entries').select('*').order('updated_at', { ascending:false });
+  if (error){ logDebug('❌ Lỗi tải: ' + error.message, 'error'); myEntries = []; return; }
   myEntries = data || [];
-  logDebug(`✅ Tải được ${myEntries.length} entries.`, 'ok');
+  logDebug(`✅ ${myEntries.length} entries`, 'ok');
   renderMyEntriesList();
   updateSaveStatusUI();
 }
-
-function fmtDate(iso){
-  try {
-    const d = new Date(iso);
-    return d.toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
-  } catch(e){ return iso; }
-}
-
+function fmtDate(iso){ try { return new Date(iso).toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }); } catch(e){ return iso; } }
 function renderMyEntriesList(){
   const container = document.getElementById('my-entries-list');
   if (!myEntries.length){
     container.innerHTML = `<div class="text-center py-12 text-sm" style="color:var(--ink-muted)">
       <div class="w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center text-3xl" style="background:var(--paper-deep)">📭</div>
-      <p class="font-semibold mb-1" style="color:var(--ink-soft)">Chưa có bài nào được lưu</p>
-      <p>Nhập <strong>Tên</strong> + <strong>Số báo danh</strong>, điền thông tin rồi bấm <strong>💾 Lưu</strong>.</p>
+      <p class="font-semibold mb-1" style="color:var(--ink-soft)">Chưa có bài nào</p>
+      <p>Nhập <strong>Tên</strong> + <strong>Số báo danh</strong>, điền bài rồi bấm <strong>💾 Lưu</strong>.</p>
     </div>`;
     return;
   }
   container.innerHTML = myEntries.map(e => {
-    const parsed = parseTitle(e.title);
+    const sbd = e.user_id || '';
+    const name = e.title || '';
     const isActive = e.id === currentEntryId;
-    const fieldLabels = {
-      'input-fullname': '👤 Tên', 'input-age': '🎂 Tuổi', 'input-color': '🎨 Màu',
-      'input-hobby': '⚽ Sở thích', 'input-rooms': '🔢 Số phòng', 'input-favroom': '🏡 Phòng yêu thích',
-      'input-custom-act1': '🎯 HĐ 1', 'input-custom-act2': '🎯 HĐ 2', 'input-custom-room': '📍 Phòng HĐ'
-    };
-    const chips = Object.entries(fieldLabels).map(([key, label]) => {
-      const val = (e.data && e.data[key]) || '';
-      if (!val) return '';
-      return `<span class="field-chip"><span class="label">${label}:</span><span class="val">${escapeHtml(val)}</span></span>`;
-    }).filter(Boolean).join('');
-
+    const fieldLabels = { 'input-fullname':'👤 Tên','input-age':'🎂 Tuổi','input-color':'🎨 Màu','input-hobby':'⚽ Sở thích','input-rooms':'🔢 Số phòng','input-favroom':'🏡 Phòng Y.Thích','input-custom-act1':'🎯 HĐ1','input-custom-act2':'🎯 HĐ2','input-custom-room':'📍 Phòng HĐ' };
+    const chips = Object.entries(fieldLabels).map(([k,l]) => { const v = (e.data && e.data[k]) || ''; return v ? `<span class="field-chip"><span class="label">${l}:</span><span class="val">${escapeHtml(v)}</span></span>` : ''; }).filter(Boolean).join('');
+    // Find linked feedback record
+    const fbRecord = e.feedback_id ? adminFeedbacks.find(f => f.id === e.feedback_id) : null;
+    let feedbackHtml = '';
+    if (fbRecord){
+      const marksClass = (fbRecord.feedback_marks || 0) >= 8 ? 'marks-high' : (fbRecord.feedback_marks || 0) >= 5 ? 'marks-mid' : 'marks-low';
+      feedbackHtml = `
+        <div class="mt-2 p-2.5 rounded-lg text-xs" style="background:var(--sage-soft); border:1px solid var(--sage)">
+          <div class="flex items-center gap-2 flex-wrap mb-1">
+            <span class="marks-chip ${marksClass}">🏆 ${fbRecord.feedback_marks || 0} điểm</span>
+            <span class="font-mono text-[10px]" style="color:var(--ink-muted)">Type ${fbRecord.feedback_type}</span>
+          </div>
+          ${fbRecord.feedback_remark ? `<p><span class="font-bold" style="color:#047857">💬 Nhận xét:</span> <span style="color:var(--ink)">${escapeHtml(fbRecord.feedback_remark)}</span></p>` : ''}
+        </div>`;
+    } else if (e.feedback){
+      feedbackHtml = `<div class="mt-2 p-2.5 rounded-lg text-xs" style="background:var(--sage-soft); border:1px solid var(--sage)"><span class="font-bold" style="color:#047857">💬 Nhận xét:</span> <span style="color:var(--ink)">${escapeHtml(e.feedback)}</span></div>`;
+    }
     return `
     <div class="saved-card p-4 rounded-2xl" style="${isActive ? 'background:var(--teal-soft); border-color:var(--teal);' : 'background:#fff;'}">
       <div class="flex items-start justify-between gap-3 flex-wrap mb-3">
         <div class="min-w-0 flex-1">
           <div class="flex items-center gap-2 flex-wrap mb-1">
-            ${parsed.sbd ? `<span class="px-2 py-0.5 rounded-md text-xs font-bold font-mono text-white shadow-sm" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">SBD ${escapeHtml(parsed.sbd)}</span>` : ''}
-            <p class="text-base font-bold truncate" style="color:var(--ink)">${escapeHtml(parsed.name || 'Học viên')}</p>
+            ${sbd ? `<span class="px-2 py-0.5 rounded-md text-xs font-bold font-mono text-white shadow-sm" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">SBD ${escapeHtml(sbd)}</span>` : ''}
+            <p class="text-base font-bold truncate" style="color:var(--ink)">${escapeHtml(name || 'Học viên')}</p>
             ${isActive ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">ĐANG SỬA</span>' : ''}
           </div>
           <p class="text-[11px] font-mono" style="color:var(--ink-muted)">Cập nhật: ${fmtDate(e.updated_at)}</p>
@@ -1237,303 +985,443 @@ function renderMyEntriesList(){
           <button data-load-id="${e.id}" class="entry-load-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-sm" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">Xem</button>
         </div>
       </div>
-      <div class="flex flex-wrap">${chips || '<span class="text-xs italic" style="color:var(--ink-muted)">Chưa có dữ liệu chi tiết.</span>'}</div>
-    </div>
-    `;
+      <div class="flex flex-wrap">${chips || '<span class="text-xs italic" style="color:var(--ink-muted)">Chưa có dữ liệu.</span>'}</div>
+      ${feedbackHtml}
+    </div>`;
   }).join('');
 }
-
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+function escapeHtml(str){ return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 document.getElementById('my-entries-list').addEventListener('click', (e) => {
   const loadBtn = e.target.closest('.entry-load-btn');
-  const delBtn = e.target.closest('.entry-del-btn');
   if (loadBtn) loadEntryToForm(loadBtn.dataset.loadId);
-  if (delBtn) deleteEntryConfirm(delBtn.dataset.delId);
 });
-
 function loadEntryToForm(id){
   const entry = myEntries.find(e => e.id === id);
   if (!entry) return;
-  const parsed = parseTitle(entry.title);
-  document.getElementById('input-name').value = parsed.name;
-  document.getElementById('input-student-id').value = parsed.sbd;
+  document.getElementById('input-name').value = entry.title || '';
+  document.getElementById('input-student-id').value = entry.user_id || '';
   setFormData(entry.data || {});
   currentEntryId = entry.id;
   updateSaveStatusUI();
   renderMyEntriesList();
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  showToast('📂', 'Đã tải dữ liệu', `Đang chỉnh sửa: ${entry.title}`);
+  showToast('📂', 'Đã tải', `SBD ${entry.user_id} — ${entry.title}`);
 }
-
 function startNewDraft(){
   clearAllForm();
   currentEntryId = null;
+  document.getElementById('sbd-lookup-status').classList.add('hidden');
   updateSaveStatusUI();
   renderMyEntriesList();
   document.getElementById('input-name').focus();
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  showToast('📝', 'Bản nháp mới', 'Hãy nhập Tên + Số báo danh và điền bài.');
+  showToast('📝', 'Bản nháp mới', 'Hãy nhập Tên + Số báo danh.');
 }
-
 function scrollToMyEntries(){
   const section = document.getElementById('my-entries-section');
-  if (section.classList.contains('hidden')){
-    showToast('🔒', 'Cần đăng nhập', 'Đăng nhập để xem bài đã lưu.');
-    openAuthModal();
-    return;
-  }
+  if (section.classList.contains('hidden')){ showToast('🔒', 'Cần đăng nhập', 'Đăng nhập để xem bài đã lưu.'); openAuthModal(); return; }
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-// ========== SAVE ==========
-async function saveCurrentEntry({ asNew=false, silent=false } = {}){
-  const btn = document.getElementById('btn-save-main');
-  const name = (document.getElementById('input-name').value || '').trim();
-  const sbd = (document.getElementById('input-student-id').value || '').trim();
-  if (!name && !sbd){
-    showToast('⚠️', 'Thiếu thông tin', 'Vui lòng nhập ít nhất Tên hoặc Số báo danh.');
-    return;
-  }
-  const formData = getFormData();
-  const title = buildTitle();
-
-  const originalText = btn.innerText;
-  btn.disabled = true;
-  btn.innerText = '⏳ Đang lưu...';
-  btn.style.opacity = '0.6';
-
-  try {
-    if (currentEntryId && !asNew){
-      logDebug(`📝 UPDATE entry ${currentEntryId}: title="${title}"`);
-      const { data, error } = await sb.from('poster_entries')
-        .update({ title, data: formData, updated_at: new Date().toISOString() })
-        .eq('id', currentEntryId)
-        .select()
-        .single();
-
-      if (error){
-        logDebug(`❌ UPDATE lỗi: ${error.message} (code: ${error.code || 'n/a'})`, 'error');
-        showToast('⚠️', 'Lỗi cập nhật', error.message);
-        return;
-      }
-      logDebug(`✅ UPDATE thành công.`, 'ok');
-      if (!silent) showToast('💾', 'Đã cập nhật!', `"${title}"`);
-    } else {
-      const payload = {
-        title: title,
-        data: formData
-      };
-      logDebug(`📤 INSERT: ${JSON.stringify(payload)}`);
-
-      const { data, error } = await sb.from('poster_entries')
-        .insert(payload)
-        .select()
-        .single();
-
-      if (error){
-        logDebug(`❌ INSERT lỗi: ${error.message} (code: ${error.code || 'n/a'})`, 'error');
-        if (error.code === '23503'){
-          showToast('⚠️', 'Lỗi user_id', 'user_id không tồn tại. Hãy đăng xuất rồi đăng nhập lại.');
-        } else if (error.code === '23502'){
-          showToast('⚠️', 'Thiếu trường', 'Bảng yêu cầu trường bắt buộc. Kiểm tra schema.');
-        } else if (error.code === '42501' || error.message.includes('RLS')){
-          showToast('⚠️', 'Lỗi quyền', 'RLS policy chưa cho phép INSERT. Liên hệ admin.');
-        } else {
-          showToast('⚠️', 'Lỗi lưu', error.message);
-        }
-        return;
-      }
-      currentEntryId = data.id;
-      logDebug(`✅ INSERT thành công. ID: ${data.id}`, 'ok');
-      showToast('🆕', 'Đã lưu!', `"${title}"`);
-    }
-    await loadMyEntries();
-  } catch (err){
-    logDebug('❌ Exception khi lưu: ' + err.message, 'error');
-    showToast('⚠️', 'Lỗi bất ngờ', err.message || String(err));
-  } finally {
-    btn.disabled = false;
-    btn.innerText = originalText;
-    btn.style.opacity = '1';
-  }
-}
-
-async function deleteEntryConfirm(id){
-  const entry = myEntries.find(e => e.id === id);
-  if (!entry) return;
-  if (!confirm(`Xoá "${entry.title}"? Hành động này không thể hoàn tác.`)) return;
-  logDebug(`🗑️ DELETE entry ${id}`);
-  const { error } = await sb.from('poster_entries').delete().eq('id', id).eq('user_id', currentUser.id);
-  if (error){
-    logDebug('❌ DELETE lỗi: ' + error.message, 'error');
-    showToast('⚠️', 'Lỗi xoá', error.message);
-    return;
-  }
-  if (currentEntryId === id){ currentEntryId = null; updateSaveStatusUI(); }
-  await loadMyEntries();
-  showToast('🗑️', 'Đã xoá', `"${entry.title}"`);
-}
-
 function updateSaveStatusUI(){
   const el = document.getElementById('save-status');
-  if (!currentUser){
-    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Mỗi Số báo danh chỉ có thể lưu 1 lần, đã lưu ko thể sửa`;
-    return;
-  }
+  if (!currentUser){ el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu bài`; return; }
   if (currentEntryId){
     const entry = myEntries.find(e => e.id === currentEntryId);
-    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Đang sửa: <strong>${escapeHtml(entry ? entry.title : '')}</strong>`;
+    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Đang sửa: <strong>SBD ${escapeHtml(entry ? entry.user_id : '')}</strong> — ${escapeHtml(entry ? entry.title : '')}`;
   } else {
-    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--sun)"></span> Bản nháp — bấm 💾 Lưu`;
+    const sbd = (document.getElementById('input-student-id').value || '').trim();
+    if (sbd) el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--sun)"></span> SBD ${escapeHtml(sbd)} — bấm 💾 Lưu`;
+    else el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--sun)"></span> Nhập Số báo danh để bắt đầu`;
   }
 }
 
 // ========== ADMIN ==========
-const FIELD_LABELS = {
-  'input-fullname': 'Tên', 'input-age': 'Tuổi', 'input-color': 'Màu yêu thích',
-  'input-hobby': 'Sở thích', 'input-rooms': 'Số phòng', 'input-favroom': 'Phòng yêu thích',
-  'input-custom-act1': 'Hoạt động 1', 'input-custom-act2': 'Hoạt động 2', 'input-custom-room': 'Phòng hoạt động'
-};
-function openAdminModal(){
-  document.getElementById('admin-modal').classList.remove('hidden');
+let adminTab = 'entries';
+function openAdminModal(){ document.getElementById('admin-modal').classList.remove('hidden'); loadAdminData(); }
+function closeAdminModal(){ document.getElementById('admin-modal').classList.add('hidden'); }
+function switchAdminTab(tab){
+  adminTab = tab;
+  document.getElementById('admin-tab-entries').dataset.active = tab === 'entries';
+  document.getElementById('admin-tab-feedback').dataset.active = tab === 'feedback';
+  document.getElementById('admin-content-entries').classList.toggle('hidden', tab !== 'entries');
+  document.getElementById('admin-content-feedback').classList.toggle('hidden', tab !== 'feedback');
+  if (tab === 'feedback') renderFeedbackTemplates();
+}
+async function loadAdminData(){
+  document.getElementById('admin-content-entries').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-muted)">Đang tải...</p>`;
+  const [{ data: entries, error: eErr }, { data: feedbacks, error: fErr }] = await Promise.all([
+    sb.from('poster_entries').select('*').order('updated_at', { ascending:false }),
+    sb.from('feedback').select('*').order('id', { ascending:false })
+  ]);
+  if (eErr){ logDebug('❌ Admin entries lỗi: ' + eErr.message, 'error'); }
+  if (fErr){ logDebug('❌ Admin feedback lỗi: ' + fErr.message, 'error'); }
+  adminEntries = entries || [];
+  adminFeedbacks = feedbacks || [];
+  const evaluatedCount = adminEntries.filter(e => e.feedback_id).length;
+  document.getElementById('admin-summary').innerText = `Tổng: ${adminEntries.length} bài — ✅ Đã đánh giá: ${evaluatedCount} — ⚠️ Chưa: ${adminEntries.length - evaluatedCount} | 📋 ${adminFeedbacks.length} loại đánh giá`;
+  renderAdminEntries();
+  if (adminTab === 'feedback') renderFeedbackTemplates();
+  // Also refresh my-entries list to show feedback
+  if (currentUser) await loadMyEntries();
+}
+
+function getFeedbackTypeColorClass(type){
+  const map = { 1:'type-1', 2:'type-2', 3:'type-3', 4:'type-4', 5:'type-5' };
+  return map[type] || 'type-default';
+}
+function getMarksClass(marks){
+  if (marks >= 8) return 'marks-high';
+  if (marks >= 5) return 'marks-mid';
+  return 'marks-low';
+}
+
+function renderAdminEntries(){
+  const container = document.getElementById('admin-content-entries');
+  if (!adminEntries.length){
+    container.innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-muted)">Chưa có bài nào.</p>`;
+    return;
+  }
+  container.innerHTML = `<div class="space-y-3">${adminEntries.map(e => {
+    const sbd = e.user_id || '';
+    const name = e.title || '';
+    const hasFeedback = !!e.feedback_id;
+    const fbRecord = adminFeedbacks.find(f => f.id === e.feedback_id);
+    let feedbackDisplay = '';
+    if (fbRecord){
+      const typeClass = getFeedbackTypeColorClass(fbRecord.feedback_type);
+      const marksClass = getMarksClass(fbRecord.feedback_marks || 0);
+      feedbackDisplay = `
+        <div class="mt-3 p-3 rounded-xl border" style="border-color:var(--sage); background:var(--sage-soft)">
+          <div class="flex items-center gap-2 flex-wrap mb-1">
+            <span class="feedback-badge ${typeClass}">🏷️ Type ${fbRecord.feedback_type} — ${escapeHtml(fbRecord.feedback_name || '')}</span>
+            <span class="marks-chip ${marksClass}">🏆 ${fbRecord.feedback_marks || 0} điểm</span>
+          </div>
+          ${fbRecord.feedback_remark ? `<p class="text-xs mt-1" style="color:var(--ink)"><strong>Nhận xét:</strong> ${escapeHtml(fbRecord.feedback_remark)}</p>` : ''}
+        </div>`;
+    }
+    const dataPreview = e.data ? Object.entries({
+      'input-fullname':'Tên','input-age':'Tuổi','input-color':'Màu','input-hobby':'S.thích','input-rooms':'P.số','input-favroom':'P.Y.Thích'
+    }).map(([k,l]) => { const v = e.data[k]; return v ? `<span class="text-[11px] px-2 py-0.5 rounded-full" style="background:var(--paper); border:1px solid var(--border)"><strong>${l}:</strong> ${escapeHtml(v)}</span>` : ''; }).filter(Boolean).join(' ') : '';
+
+    return `
+    <div class="admin-entry-card p-4 rounded-2xl bg-white">
+      <div class="flex items-start justify-between gap-3 flex-wrap mb-2">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap mb-1">
+            <span class="px-2 py-0.5 rounded-md text-xs font-bold font-mono text-white shadow-sm" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">SBD ${escapeHtml(sbd)}</span>
+            <p class="text-base font-bold" style="color:var(--ink)">${escapeHtml(name)}</p>
+            ${hasFeedback ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style="background: linear-gradient(135deg, var(--sage), #059669)">✅ Đã đánh giá</span>' : '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background:var(--sun-soft); color:#B45309">⚠️ Chưa đánh giá</span>'}
+          </div>
+          <p class="text-[11px] font-mono" style="color:var(--ink-muted)">${fmtDate(e.updated_at)}</p>
+        </div>
+        <div class="flex gap-1.5 flex-shrink-0">
+          <button onclick="openFeedbackModal('${e.id}')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-sm" style="background: linear-gradient(135deg, var(--sun), #D97706)">⭐ Đánh giá</button>
+          <button onclick="adminDeleteEntry('${e.id}')" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--coral); color:var(--coral-dark)">🗑️</button>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-1">${dataPreview || '<span class="text-xs italic" style="color:var(--ink-muted)">Không có dữ liệu</span>'}</div>
+      ${feedbackDisplay}
+    </div>`;
+  }).join('')}</div>`;
+}
+async function adminDeleteEntry(id){
+  if (!confirm('Xoá bài này?')) return;
+  const { error } = await sb.from('poster_entries').delete().eq('id', id);
+  if (error){ showToast('⚠️', 'Lỗi xoá', error.message); return; }
+  showToast('🗑️', 'Đã xoá', 'Bài đã được xoá.');
   loadAdminData();
 }
-function closeAdminModal(){ document.getElementById('admin-modal').classList.add('hidden'); }
-async function loadAdminData(){
-  document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-muted)">Đang tải dữ liệu...</p>`;
-  const [{ data: profiles, error: pErr }, { data: entries, error: eErr }] = await Promise.all([
-    sb.from('profiles').select('*').order('created_at', { ascending:true }),
-    sb.from('poster_entries').select('*').order('updated_at', { ascending:false })
-  ]);
-  if (pErr || eErr){
-    logDebug('❌ Admin load lỗi: ' + (pErr || eErr).message, 'error');
-    showToast('⚠️', 'Lỗi tải dữ liệu admin', (pErr || eErr).message);
-    document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--coral)">Không tải được dữ liệu.</p>`;
-    return;
-  }
-  adminProfiles = profiles || [];
-  adminEntriesByUser = {};
-  (entries || []).forEach(e => {
-    if (!adminEntriesByUser[e.user_id]) adminEntriesByUser[e.user_id] = [];
-    adminEntriesByUser[e.user_id].push(e);
-  });
-  renderAdminList();
-}
-function getMissingProfiles(){
-  return adminProfiles.filter(p => !adminEntriesByUser[p.id] || adminEntriesByUser[p.id].length === 0);
-}
-function renderAdminList(){
-  const missing = getMissingProfiles();
-  const submittedCount = adminProfiles.length - missing.length;
-  document.getElementById('admin-summary').innerText =
-    `Tổng: ${adminProfiles.length} user — ✅ Đã nộp: ${submittedCount} — ⚠️ Chưa nộp: ${missing.length}`;
-  const container = document.getElementById('admin-list');
-  if (!adminProfiles.length){
-    container.innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-muted)">Chưa có user nào.</p>`;
-    return;
-  }
-  container.innerHTML = adminProfiles.map(p => {
-    const list = adminEntriesByUser[p.id] || [];
-    const has = list.length > 0;
-    const badge = has
-      ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--teal-soft); color:#0F766E">✅ Đã nộp (${list.length})</span>`
-      : `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--sun-soft); color:#B45309">⚠️ Chưa nộp</span>`;
-    return `
-    <div class="p-3 rounded-xl border" style="border-color:var(--border)">
-      <div class="flex items-center justify-between gap-3 flex-wrap">
-        <div class="min-w-0">
-          <p class="text-sm font-bold truncate" style="color:var(--ink)">${escapeHtml(p.display_name || p.email)}</p>
-          <p class="text-[11px] font-mono truncate" style="color:var(--ink-muted)">${escapeHtml(p.email)}</p>
+
+// ========== FEEDBACK TEMPLATES TAB (CRUD bảng feedback) ==========
+function renderFeedbackTemplates(){
+  const container = document.getElementById('admin-content-feedback');
+  container.innerHTML = `
+    <div class="mb-4 p-4 rounded-xl bg-gradient-warm border-2" style="border-color:var(--sun)">
+      <h4 class="font-display font-bold text-sm mb-3 flex items-center gap-2" style="color:var(--ink)">
+        <span>➕</span> Thêm loại đánh giá mới
+        <span class="text-[10px] font-mono font-normal px-2 py-0.5 rounded bg-white" style="color:var(--ink-soft)">→ bảng feedback</span>
+      </h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+        <div>
+          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_name</label>
+          <input id="new-fb-name" type="text" placeholder="VD: Xuất sắc" class="modern-input w-full px-3 py-2 rounded-lg text-sm">
         </div>
-        <div class="flex items-center gap-2 flex-shrink-0">
-          ${badge}
-          ${has ? `<button data-toggle-id="${p.id}" class="admin-toggle-btn px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--teal); color:var(--teal)">Xem</button>` : ''}
-          <button data-mail-id="${escapeHtml(p.email)}" class="admin-mail-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--ink)">✉️ Mail</button>
+        <div>
+          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_type</label>
+          <input id="new-fb-type" type="number" placeholder="VD: 1" class="modern-input w-full px-3 py-2 rounded-lg text-sm">
+        </div>
+        <div>
+          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_marks</label>
+          <input id="new-fb-marks" type="number" placeholder="VD: 10" class="modern-input w-full px-3 py-2 rounded-lg text-sm">
+        </div>
+        <div>
+          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_remark</label>
+          <input id="new-fb-remark" type="text" placeholder="Mô tả (tuỳ chọn)" class="modern-input w-full px-3 py-2 rounded-lg text-sm">
         </div>
       </div>
-      <div id="admin-detail-${p.id}" class="hidden mt-3 pt-3 border-t" style="border-color:var(--border)">
-        ${(list || []).map(e => {
-          const parsed = parseTitle(e.title);
-          return `
-          <div class="mb-2 p-2.5 rounded-lg" style="background:var(--paper)">
-            <div class="flex items-center gap-2 flex-wrap mb-1">
-              ${parsed.sbd ? `<span class="text-[10px] font-bold px-1.5 py-0.5 rounded font-mono text-white" style="background:var(--coral)">SBD ${escapeHtml(parsed.sbd)}</span>` : ''}
-              <p class="text-xs font-bold" style="color:var(--ink)">${escapeHtml(parsed.name || 'Học viên')}</p>
-              <span class="text-[10px] font-mono" style="color:var(--ink-muted)">— ${fmtDate(e.updated_at)}</span>
-            </div>
-            <div class="grid grid-cols-2 gap-1 text-[12px]" style="color:var(--ink-soft)">
-              ${Object.entries(FIELD_LABELS).map(([key, label]) => `<div><strong style="color:var(--ink)">${label}:</strong> ${escapeHtml((e.data && e.data[key]) || '—')}</div>`).join('')}
-            </div>
-          </div>
-          `;
-        }).join('')}
-      </div>
+      <button onclick="addFeedbackTemplate()" class="mt-3 px-4 py-2 rounded-lg text-sm font-bold text-white shadow-sm" style="background: linear-gradient(135deg, var(--sage), #059669)">💾 Thêm mới</button>
     </div>
-    `;
+
+    <div class="mb-3 flex items-center justify-between">
+      <h4 class="font-display font-bold text-sm" style="color:var(--ink)">📋 Danh sách loại đánh giá (${adminFeedbacks.length})</h4>
+      <p class="text-[11px]" style="color:var(--ink-muted)">Nhấn ✏️ để sửa inline, nhấn 💾 để lưu thay đổi</p>
+    </div>
+    <div id="feedback-templates-list" class="space-y-2"></div>
+  `;
+  renderFeedbackTemplatesList();
+}
+function renderFeedbackTemplatesList(){
+  const list = document.getElementById('feedback-templates-list');
+  if (!list) return;
+  if (!adminFeedbacks.length){
+    list.innerHTML = `<p class="text-center text-sm py-6 rounded-xl border-2 border-dashed" style="color:var(--ink-muted); border-color:var(--border)">Chưa có loại đánh giá nào. Hãy thêm mới ở trên.</p>`;
+    return;
+  }
+  list.innerHTML = adminFeedbacks.map(f => {
+    const isEditing = editingFeedbackId === f.id;
+    const typeClass = getFeedbackTypeColorClass(f.feedback_type);
+    const marksClass = getMarksClass(f.feedback_marks || 0);
+    // Count entries using this feedback
+    const usageCount = adminEntries.filter(e => e.feedback_id === f.id).length;
+
+    if (isEditing){
+      return `
+      <div class="fb-row editing p-3 rounded-xl">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-2">
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_name</label>
+            <input type="text" id="edit-fb-name-${f.id}" value="${escapeHtml(f.feedback_name || '')}" class="fb-edit-input w-full">
+          </div>
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_type</label>
+            <input type="number" id="edit-fb-type-${f.id}" value="${f.feedback_type || ''}" class="fb-edit-input w-full">
+          </div>
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_marks</label>
+            <input type="number" id="edit-fb-marks-${f.id}" value="${f.feedback_marks || ''}" class="fb-edit-input w-full">
+          </div>
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_remark</label>
+            <input type="text" id="edit-fb-remark-${f.id}" value="${escapeHtml(f.feedback_remark || '')}" class="fb-edit-input w-full">
+          </div>
+        </div>
+        <div class="flex gap-2 justify-end">
+          <button onclick="cancelEditFeedback()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-white" style="border-color:var(--border); color:var(--ink-soft)">✕ Huỷ</button>
+          <button onclick="saveEditFeedback(${f.id})" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-sm" style="background: linear-gradient(135deg, var(--sage), #059669)">💾 Lưu</button>
+        </div>
+      </div>`;
+    }
+
+    return `
+    <div class="fb-row p-3 rounded-xl bg-white">
+      <div class="flex items-center justify-between gap-3 flex-wrap">
+        <div class="flex items-center gap-3 flex-wrap min-w-0 flex-1">
+          <span class="font-mono text-[10px] px-1.5 py-0.5 rounded" style="background:var(--paper); color:var(--ink-muted)">#${f.id}</span>
+          <span class="feedback-badge ${typeClass}">🏷️ Type ${f.feedback_type}</span>
+          <span class="text-sm font-bold truncate" style="color:var(--ink)" title="${escapeHtml(f.feedback_name || '')}">${escapeHtml(f.feedback_name || '—')}</span>
+          <span class="marks-chip ${marksClass}">🏆 ${f.feedback_marks || 0}</span>
+          ${f.feedback_remark ? `<span class="text-xs truncate max-w-[200px]" style="color:var(--ink-soft)" title="${escapeHtml(f.feedback_remark)}">💬 ${escapeHtml(f.feedback_remark.substring(0,40))}${f.feedback_remark.length > 40 ? '...' : ''}</span>` : ''}
+          ${usageCount > 0 ? `<span class="text-[10px] px-2 py-0.5 rounded-full" style="background:var(--teal-soft); color:#0F766E">📎 ${usageCount} bài đang dùng</span>` : ''}
+        </div>
+        <div class="flex gap-1.5 flex-shrink-0">
+          <button onclick="startEditFeedback(${f.id})" class="px-2.5 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--teal); color:var(--teal)" title="Sửa">✏️</button>
+          <button onclick="deleteFeedbackTemplate(${f.id})" class="px-2.5 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--coral); color:var(--coral-dark)" title="Xoá">🗑️</button>
+        </div>
+      </div>
+    </div>`;
   }).join('');
 }
-document.getElementById('admin-list').addEventListener('click', (e) => {
-  const toggleBtn = e.target.closest('.admin-toggle-btn');
-  const mailBtn = e.target.closest('.admin-mail-btn');
-  if (toggleBtn){
-    document.getElementById('admin-detail-' + toggleBtn.dataset.toggleId).classList.toggle('hidden');
-  }
-  if (mailBtn){
-    mailtoSingle(mailBtn.dataset.mailId);
-  }
-});
-function mailtoSingle(email){
-  const subject = 'Nhắc nhở: hoàn thành bài luyện nói "All About Me & My Home"';
-  const body = `Chào bạn,\n\nCô/thầy thấy bạn chưa nộp bài luyện nói "All About Me & My Home". Hãy hoàn thành và lưu lại trong hệ thống nhé!\n\nCảm ơn bạn.`;
-  window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+async function addFeedbackTemplate(){
+  const name = (document.getElementById('new-fb-name').value || '').trim();
+  const type = parseInt(document.getElementById('new-fb-type').value);
+  const marks = parseInt(document.getElementById('new-fb-marks').value);
+  const remark = (document.getElementById('new-fb-remark').value || '').trim();
+  if (!name || isNaN(type) || isNaN(marks)){ showToast('⚠️', 'Thiếu thông tin', 'Vui lòng điền Tên, Loại và Điểm.'); return; }
+  logDebug(`📤 INSERT feedback: name="${name}", type=${type}, marks=${marks}`);
+  const { error } = await sb.from('feedback').insert({
+    feedback_name: name, feedback_type: type, feedback_marks: marks, feedback_remark: remark || null
+  });
+  if (error){ logDebug('❌ Insert feedback: ' + error.message, 'error'); showToast('⚠️', 'Lỗi', error.message); return; }
+  logDebug('✅ Insert feedback OK', 'ok');
+  showToast('✅', 'Đã thêm', `"${name}" — Type ${type}, ${marks} điểm`);
+  document.getElementById('new-fb-name').value = '';
+  document.getElementById('new-fb-type').value = '';
+  document.getElementById('new-fb-marks').value = '';
+  document.getElementById('new-fb-remark').value = '';
+  await loadAdminData();
 }
-function mailtoBulkMissing(){
-  const missing = getMissingProfiles();
-  if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
-  const emails = missing.map(p => p.email).filter(Boolean);
-  const subject = 'Nhắc nhở: hoàn thành bài luyện nói "All About Me & My Home"';
-  const body = `Chào các bạn,\n\nCô/thầy thấy một số bạn chưa nộp bài luyện nói "All About Me & My Home". Hãy hoàn thành và lưu lại trong hệ thống sớm nhé!\n\nCảm ơn các bạn.`;
-  const mailto = `mailto:?bcc=${encodeURIComponent(emails.join(','))}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  if (mailto.length > 1800){
-    showToast('⚠️', 'Danh sách quá dài', 'Mail app có thể không mở được — hãy dùng "Copy email chưa nộp".');
-  }
-  window.location.href = mailto;
+function startEditFeedback(id){
+  editingFeedbackId = id;
+  renderFeedbackTemplatesList();
+  // Focus first input
+  setTimeout(() => {
+    const el = document.getElementById(`edit-fb-name-${id}`);
+    if (el) el.focus();
+  }, 50);
 }
-function copyText(str){
-  if (navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(str).then(
-      () => showToast('📋', 'Đã copy!', 'Danh sách email đã được sao chép.'),
-      () => fallbackCopy(str)
-    );
+function cancelEditFeedback(){
+  editingFeedbackId = null;
+  renderFeedbackTemplatesList();
+}
+async function saveEditFeedback(id){
+  const name = (document.getElementById(`edit-fb-name-${id}`).value || '').trim();
+  const type = parseInt(document.getElementById(`edit-fb-type-${id}`).value);
+  const marks = parseInt(document.getElementById(`edit-fb-marks-${id}`).value);
+  const remark = (document.getElementById(`edit-fb-remark-${id}`).value || '').trim();
+  if (!name || isNaN(type) || isNaN(marks)){ showToast('⚠️', 'Thiếu thông tin', 'Vui lòng điền đầy đủ.'); return; }
+  logDebug(`📝 UPDATE feedback ${id}: name="${name}", type=${type}, marks=${marks}`);
+  const { error } = await sb.from('feedback').update({
+    feedback_name: name, feedback_type: type, feedback_marks: marks, feedback_remark: remark || null
+  }).eq('id', id);
+  if (error){ logDebug('❌ Update feedback: ' + error.message, 'error'); showToast('⚠️', 'Lỗi', error.message); return; }
+  logDebug('✅ Update feedback OK', 'ok');
+  showToast('💾', 'Đã cập nhật', `#${id} — "${name}"`);
+  editingFeedbackId = null;
+  await loadAdminData();
+}
+async function deleteFeedbackTemplate(id){
+  // Check if any entries use this feedback
+  const usageCount = adminEntries.filter(e => e.feedback_id === id).length;
+  let msg = `Xoá loại đánh giá #${id}?`;
+  if (usageCount > 0) msg += `\n\n⚠️ Có ${usageCount} bài đang sử dụng loại này. Các bài đó sẽ mất liên kết đánh giá.`;
+  if (!confirm(msg)) return;
+  logDebug(`🗑️ DELETE feedback ${id}`);
+  const { error } = await sb.from('feedback').delete().eq('id', id);
+  if (error){ logDebug('❌ Delete feedback: ' + error.message, 'error'); showToast('⚠️', 'Lỗi', error.message); return; }
+  logDebug('✅ Delete feedback OK', 'ok');
+  // Also clear feedback_id from entries that used this
+  if (usageCount > 0){
+    const { error: clearErr } = await sb.from('poster_entries').update({ feedback_id: null }).eq('feedback_id', id);
+    if (clearErr) logDebug('⚠️ Clear feedback_id: ' + clearErr.message, 'warn');
+  }
+  showToast('🗑️', 'Đã xoá', `Loại đánh giá #${id} đã được xoá.`);
+  await loadAdminData();
+}
+
+// ========== FEEDBACK EVALUATE MODAL ==========
+function openFeedbackModal(entryId){
+  feedbackTargetEntryId = entryId;
+  selectedFeedbackRecordId = null;
+  const entry = adminEntries.find(e => e.id === entryId);
+  if (!entry) return;
+  document.getElementById('feedback-entry-info').innerHTML = `
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="px-2 py-0.5 rounded-md text-xs font-bold font-mono text-white" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">SBD ${escapeHtml(entry.user_id || '')}</span>
+      <span class="font-bold" style="color:var(--ink)">${escapeHtml(entry.title || '')}</span>
+      <span class="text-[11px] font-mono" style="color:var(--ink-muted)">— ${fmtDate(entry.updated_at)}</span>
+    </div>
+  `;
+  // Render feedback type options from `feedback` table
+  const typeList = document.getElementById('feedback-type-list');
+  if (!adminFeedbacks.length){
+    typeList.innerHTML = `
+      <div class="p-4 rounded-xl text-center text-sm" style="background:var(--sun-soft); border:1px dashed var(--sun); color:#B45309">
+        <p class="font-bold mb-1">⚠️ Chưa có loại đánh giá nào</p>
+        <p class="text-xs">Vui lòng vào tab <strong>"Quản lý loại đánh giá"</strong> để thêm mới.</p>
+        <button onclick="switchAdminTab('feedback')" class="mt-2 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-sm" style="background: linear-gradient(135deg, var(--sage), #059669)">➕ Tạo loại đánh giá</button>
+      </div>`;
   } else {
-    fallbackCopy(str);
+    typeList.innerHTML = adminFeedbacks.map(f => {
+      const typeClass = getFeedbackTypeColorClass(f.feedback_type);
+      const marksClass = getMarksClass(f.feedback_marks || 0);
+      return `
+      <button type="button" onclick="selectFeedbackRecord(${f.id})" class="fb-select-card w-full text-left p-3 rounded-xl" data-fb-id="${f.id}">
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <div class="flex items-center gap-2 flex-wrap min-w-0 flex-1">
+            <span class="feedback-badge ${typeClass}">🏷️ Type ${f.feedback_type}</span>
+            <span class="font-bold text-sm truncate" style="color:var(--ink)">${escapeHtml(f.feedback_name || '')}</span>
+            ${f.feedback_remark ? `<span class="text-[11px] truncate max-w-[180px]" style="color:var(--ink-soft)">💬 ${escapeHtml(f.feedback_remark.substring(0,30))}${f.feedback_remark.length > 30 ? '...' : ''}</span>` : ''}
+          </div>
+          <span class="marks-chip ${marksClass} flex-shrink-0">🏆 ${f.feedback_marks || 0} đ</span>
+        </div>
+      </button>`;
+    }).join('');
+  }
+
+  // Pre-fill if entry already has feedback
+  const existingFbId = entry.feedback_id;
+  document.getElementById('feedback-remark').value = '';
+  document.getElementById('feedback-marks-display').classList.add('hidden');
+  if (existingFbId){
+    const fbRecord = adminFeedbacks.find(f => f.id === existingFbId);
+    if (fbRecord){
+      selectedFeedbackRecordId = fbRecord.id;
+      document.getElementById('feedback-remark').value = fbRecord.feedback_remark || '';
+      selectFeedbackRecord(fbRecord.id, true);
+    }
+  }
+
+  document.getElementById('feedback-modal').classList.remove('hidden');
+}
+function closeFeedbackModal(){
+  document.getElementById('feedback-modal').classList.add('hidden');
+  feedbackTargetEntryId = null;
+  selectedFeedbackRecordId = null;
+}
+function selectFeedbackRecord(fbId, silent=false){
+  selectedFeedbackRecordId = fbId;
+  const fbRecord = adminFeedbacks.find(f => f.id === fbId);
+  if (!fbRecord) return;
+  // Highlight selected card
+  document.querySelectorAll('.fb-select-card').forEach(btn => btn.classList.remove('selected'));
+  const card = document.querySelector(`.fb-select-card[data-fb-id="${fbId}"]`);
+  if (card) card.classList.add('selected');
+  // Show marks
+  const display = document.getElementById('feedback-marks-display');
+  const value = document.getElementById('feedback-marks-value');
+  const detail = document.getElementById('feedback-marks-detail');
+  display.classList.remove('hidden');
+  value.innerText = `${fbRecord.feedback_marks || 0} điểm`;
+  detail.innerHTML = `Loại <strong>${fbRecord.feedback_type}</strong> — ${escapeHtml(fbRecord.feedback_name || '')}`;
+  const marks = fbRecord.feedback_marks || 0;
+  if (marks >= 8){ display.style.borderColor = 'var(--sage)'; display.style.background = 'var(--sage-soft)'; value.style.color = '#047857'; }
+  else if (marks >= 5){ display.style.borderColor = 'var(--sun)'; display.style.background = 'var(--sun-soft)'; value.style.color = '#B45309'; }
+  else { display.style.borderColor = 'var(--coral)'; display.style.background = 'var(--coral-soft)'; value.style.color = 'var(--coral-dark)'; }
+  if (!silent) logDebug(`🎯 Selected feedback #${fbId}: "${fbRecord.feedback_name}" — ${marks} điểm`);
+}
+async function submitFeedback(){
+  if (!feedbackTargetEntryId){ showToast('⚠️', 'Lỗi', 'Không xác định bài cần đánh giá.'); return; }
+  if (!selectedFeedbackRecordId){ showToast('⚠️', 'Thiếu thông tin', 'Vui lòng chọn loại đánh giá từ danh sách.'); return; }
+  const remark = (document.getElementById('feedback-remark').value || '').trim();
+  if (!remark){ showToast('⚠️', 'Thiếu nhận xét', 'Vui lòng nhập nhận xét.'); return; }
+
+  const btn = document.getElementById('btn-submit-feedback');
+  btn.disabled = true; btn.innerText = '⏳ Đang lưu...';
+
+  try {
+    const fbRecord = adminFeedbacks.find(f => f.id === selectedFeedbackRecordId);
+    if (!fbRecord){ showToast('⚠️', 'Lỗi', 'Không tìm thấy loại đánh giá.'); return; }
+
+    // Update poster_entries: set feedback_id = selected feedback.id, feedback = remark
+    logDebug(`📝 Update entry ${feedbackTargetEntryId}: feedback_id=${selectedFeedbackRecordId}, feedback="${remark}"`);
+    const { error: updErr } = await sb.from('poster_entries')
+      .update({ feedback_id: selectedFeedbackRecordId, feedback: remark, updated_at: new Date().toISOString() })
+      .eq('id', feedbackTargetEntryId);
+
+    if (updErr){
+      logDebug('❌ Update entry: ' + updErr.message, 'error');
+      showToast('⚠️', 'Lỗi cập nhật', updErr.message);
+      return;
+    }
+    logDebug('✅ Entry updated with feedback', 'ok');
+    showToast('⭐', 'Đã đánh giá!', `SBD ${adminEntries.find(e => e.id === feedbackTargetEntryId)?.user_id || ''} — ${fbRecord.feedback_marks} điểm`);
+    closeFeedbackModal();
+    await loadAdminData();
+  } catch (err){
+    logDebug('❌ Exception: ' + err.message, 'error');
+    showToast('⚠️', 'Lỗi', err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerText = '💾 Lưu đánh giá';
   }
 }
-function fallbackCopy(str){
-  const ta = document.createElement('textarea');
-  ta.value = str; ta.style.position = 'fixed'; ta.style.opacity = '0';
-  document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); showToast('📋', 'Đã copy!', 'Danh sách email đã được sao chép.'); }
-  catch(e){ showToast('⚠️', 'Copy thất bại', 'Vui lòng chọn và copy thủ công.'); }
-  document.body.removeChild(ta);
-}
-function copyMissingEmails(){
-  const missing = getMissingProfiles();
-  if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
-  copyText(missing.map(p => p.email).filter(Boolean).join(', '));
-}
-/// set combo box
-function toggleMenu() {
-   
-}
+
+// ========== EVENT LISTENERS ==========
 document.addEventListener('click', (e) => {
   const wrap = document.getElementById('user-chip-wrap');
   if (wrap && !wrap.contains(e.target)) closeUserMenu();
 });
-
 window.addEventListener('resize', autoResizeAllInputs);
 
 // ========== INIT ==========
@@ -1541,15 +1429,17 @@ renderWordBank();
 autoResizeAllInputs();
 updateLivePreview();
 document.getElementById('input-name').focus();
-
 setTimeout(() => testConnection(), 500);
 
 Object.assign(window, {
   setActiveInput, fillWord, resetPoster, openAuthModal, closeAuthModal,
   switchAuthTab, submitAuthForm, doSignOut, toggleUserMenu, closeUserMenu,
-  startNewDraft, saveCurrentEntry, onFieldInput, openAdminModal, closeAdminModal,
-  mailtoBulkMissing, copyMissingEmails, scrollToMyEntries, loadMyEntries,
-  testConnection, toggleDebugLog, clearDebugLog
+  startNewDraft, saveCurrentEntry, onFieldInput, onStudentInfoChange,
+  openAdminModal, closeAdminModal, switchAdminTab, loadAdminData,
+  openFeedbackModal, closeFeedbackModal, selectFeedbackRecord, submitFeedback,
+  addFeedbackTemplate, deleteFeedbackTemplate, adminDeleteEntry,
+  startEditFeedback, cancelEditFeedback, saveEditFeedback,
+  scrollToMyEntries, loadMyEntries, testConnection, toggleDebugLog, clearDebugLog, toggleDropdown
 });
 </script>
 </body>
