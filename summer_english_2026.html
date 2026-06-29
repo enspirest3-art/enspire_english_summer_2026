@@ -379,7 +379,7 @@ button:active:not(:disabled){ transform: translateY(0); }
     <div class="h-8 w-px bg-slate-200"></div>
     <div class="flex items-center gap-2">
       <span class="font-display font-bold text-lg" style="color:var(--ink)">🧳 Word Passport</span>
-      <span class="hidden sm:inline font-mono text-[10px] uppercase tracking-widest px-2 py-1 rounded-full" style="background:var(--paper-deep); color:var(--ink-soft)">ESL Speaking Kit</span>
+      <span class="hidden sm:inline font-mono text-[12px] uppercase tracking-widest px-2 py-1 rounded-full" style="background:var(--paper-deep); color:var(--ink-soft)">ESL Speaking Kit</span>
     </div>
   </div>
   <div class="flex flex-wrap items-center gap-2 justify-end">
@@ -394,7 +394,6 @@ button:active:not(:disabled){ transform: translateY(0); }
       </button>
       <div id="user-menu" class="hidden absolute right-0 mt-2 w-56 bg-white border rounded-xl shadow-xl z-40 overflow-hidden" style="border-color:var(--border)">
         <button onclick="scrollToMyEntries(); closeUserMenu();" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2">📂 Bài đã lưu</button>
-        <button onclick="toggleDebugLog()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t" style="border-color:var(--border)">🐞 Xem log kết nối</button>
         <button onclick="doSignOut()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t" style="border-color:var(--border)">🚪 Đăng xuất</button>
       </div>
     </div>
@@ -402,7 +401,7 @@ button:active:not(:disabled){ transform: translateY(0); }
       🛡️ Quản trị
     </button>
     <button onclick="resetPoster()" class="px-3 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">
-      🗑️
+      🗑️ Xóa Form
     </button>
     <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg flex items-center gap-2" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">
       🖨️ In / PDF
@@ -418,7 +417,7 @@ button:active:not(:disabled){ transform: translateY(0); }
   </div>
   <div class="flex gap-2">
     <button onclick="testConnection()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">
-      🔁 Kiểm tra lại
+      🔁 Kiểm tra kết nối máy chủ
     </button>
   </div>
 </div>
@@ -562,21 +561,20 @@ button:active:not(:disabled){ transform: translateY(0); }
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Họ và tên *</label>
+            <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Họ và tên (*)</label>
             <input type="text" id="input-name" placeholder="Nguyễn Văn A"
               class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm shadow-sm">
           </div>
           <div>
-            <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Số báo danh *</label>
-            <input type="text" id="input-student-id" placeholder="VD: 001"
+            <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Số báo danh (*)</label>
+            <input type="text" id="input-student-id" placeholder="VD: MH001, SS001,MD001"
               class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm font-mono shadow-sm">
           </div>
         </div>
-        <p class="text-[11px] mt-3 flex items-center gap-1.5" style="color:var(--ink-soft)">
-          <span>💡</span> Tiêu đề bản lưu: <code class="px-1.5 py-0.5 rounded bg-white font-mono text-[10px]">[SBD: xxx] Tên</code>
+        <p class="text-[13px] mt-3 flex items-center gap-1.5" style="color:red">
+          <strong>💡 Lưu ý</strong><strong class="px-1.5 py-0.5 rounded bg-white text-[13px]">Tên trường Ví dụ Minh Khai là MK + số thứ tự => MK1. Với cụm trường ví dụ Sao sáng 1 và Sao Sáng 2 là 1SS1 2SS1 ...</strong>
         </p>
       </div>
-
       <div class="space-y-5 text-lg md:text-xl font-semibold leading-relaxed" style="color:var(--ink)">
         <div class="sentence-row"><span class="text-2xl">👋</span><span class="text-xl">Hello,</span></div>
 
@@ -586,6 +584,7 @@ button:active:not(:disabled){ transform: translateY(0); }
             class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
+            
           <span style="color:var(--ink-soft)">.</span>
         </div>
 
@@ -595,6 +594,7 @@ button:active:not(:disabled){ transform: translateY(0); }
             class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
+             
           <span>years old.</span>
         </div>
 
@@ -604,6 +604,7 @@ button:active:not(:disabled){ transform: translateY(0); }
             class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <button onclick="toggleMenu('color-menu','input-color','bank-colors')">▼</button>
           <span style="color:var(--ink-soft)">.</span>
         </div>
 
@@ -645,6 +646,7 @@ button:active:not(:disabled){ transform: translateY(0); }
               class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white"
               style="color:var(--coral-dark); border-color:var(--ink-soft)"
               onclick="setActiveInput(this)" oninput="onFieldInput()">
+              
             <span>and</span>
             <input type="text" id="input-custom-act2" placeholder="[V-ing activity]"
               class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white"
@@ -1523,7 +1525,10 @@ function copyMissingEmails(){
   if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
   copyText(missing.map(p => p.email).filter(Boolean).join(', '));
 }
-
+/// set combo box
+function toggleMenu() {
+   
+}
 document.addEventListener('click', (e) => {
   const wrap = document.getElementById('user-chip-wrap');
   if (wrap && !wrap.contains(e.target)) closeUserMenu();
