@@ -336,7 +336,7 @@ button:active:not(:disabled){
 
   <!-- Header banner với logo -->
   <div class="border-b-2 px-6 md:px-10 py-7 md:py-9 flex flex-col sm:flex-row items-center gap-5 lg:pl-16" style="border-color:var(--ink); background: linear-gradient(135deg, var(--sun-soft) 0%, #FFE8A3 100%);">
-    <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire Logo" class="company-logo-lg">
+    <!-- <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire Logo" class="company-logo-lg"> -->
     <div class="stamp">
       <span class="stamp-text">Unit 1<br>✓ Verified</span>
     </div>
@@ -349,7 +349,7 @@ button:active:not(:disabled){
   <!-- Save status bar -->
   <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-b" style="background:var(--paper-deep); border-color:var(--paper-deep)">
     <p id="save-status" class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
-      <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu kết quả của bạn
+      <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Mỗi Số báo danh chỉ có thể lưu 1 lần, đã lưu ko thể sửa
     </p>
     <div class="flex gap-2">
       <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background:var(--teal)">💾 Lưu</button>
@@ -536,8 +536,17 @@ button:active:not(:disabled){
       </p>
     </div>
   </div>
+   <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-b" style="background:var(--paper-deep); border-color:var(--paper-deep)">
+    <p id="save-status" class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
+      <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Lưu kết quả của bạn
+    </p>
+    <div class="flex gap-2">
+      <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background:var(--teal)">💾 Lưu</button>
+      <button onclick="saveCurrentEntry({asNew:true})" class="px-4 py-2 rounded-lg text-xs font-bold border-2 hover:bg-white transition" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
+    </div>
+  </div>
 </div>
-
+  
 <!-- ============ MY SAVED ENTRIES (hiển thị trực tiếp trên màn hình) ============ -->
 <div id="my-entries-section" class="no-print hidden max-w-5xl mx-auto mt-8">
   <div class="bg-white border-2 rounded-3xl shadow-lg overflow-hidden" style="border-color:var(--ink)">
@@ -1158,7 +1167,7 @@ async function deleteEntryConfirm(id){
 function updateSaveStatusUI(){
   const el = document.getElementById('save-status');
   if (!currentUser){
-    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu kết quả của bạn`;
+    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Mỗi Số báo danh chỉ có thể lưu 1 lần, đã lưu ko thể sửa`;
     return;
   }
   if (currentEntryId){
