@@ -5,115 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Word Passport — Speaking Practice: All About Me & My Home</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/fredoka@latest/vietnamese-500-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/fredoka@latest/vietnamese-600-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/fredoka@latest/vietnamese-700-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/vietnamese-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/vietnamese-500-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/vietnamese-600-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/vietnamese-700-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/vietnamese-800-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/space-mono@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/space-mono@latest/latin-700-normal.css">
 <style>
 :root{
-  --paper:#FBF7EF;
-  --paper-deep:#F2ECDD;
-  --ink:#1F2A44;
-  --ink-soft:#5A6584;
+  --paper:#FBF8F1;
+  --paper-deep:#F0E9D8;
+  --paper-soft:#FFFFFF;
+  --ink:#0F1729;
+  --ink-soft:#4A5578;
+  --ink-muted:#8B93AB;
   --coral:#FF6B5B;
-  --coral-dark:#DE4C3B;
-  --teal:#1F8780;
-  --teal-soft:#E3F3F1;
-  --sun:#FFC94D;
-  --sun-soft:#FFF2D4;
-  --sage:#74A07A;
-  --sage-soft:#E8F2E9;
+  --coral-dark:#E5483A;
+  --coral-soft:#FFE8E4;
+  --teal:#0D9488;
+  --teal-dark:#0F766E;
+  --teal-soft:#E0F5F2;
+  --sun:#F59E0B;
+  --sun-soft:#FEF3C7;
+  --sage:#10B981;
+  --sage-soft:#D1FAE5;
+  --violet:#8B5CF6;
+  --violet-soft:#EDE9FE;
+  --border:#E5E7EB;
+  --border-strong:#CBD5E1;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 41, 0.04);
+  --shadow-md: 0 4px 12px -2px rgba(15, 23, 41, 0.08), 0 2px 4px -1px rgba(15, 23, 41, 0.04);
+  --shadow-lg: 0 12px 32px -8px rgba(15, 23, 41, 0.15), 0 4px 8px -2px rgba(15, 23, 41, 0.08);
+  --shadow-xl: 0 24px 60px -12px rgba(15, 23, 41, 0.25);
 }
 *{ -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
 body{
-  font-family:'Inter',sans-serif;
-  background: linear-gradient(135deg, var(--paper) 0%, #F5EFE0 100%);
+  font-family:'Inter', system-ui, -apple-system, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(245, 158, 11, 0.08), transparent 60%),
+    radial-gradient(1000px 500px at 110% 10%, rgba(13, 148, 136, 0.08), transparent 60%),
+    radial-gradient(900px 600px at 50% 110%, rgba(139, 92, 246, 0.06), transparent 60%),
+    linear-gradient(180deg, #FAF7F0 0%, #F5F1E8 100%);
   color: var(--ink);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.font-display{ font-family:'Fredoka', sans-serif; }
+.font-display{ font-family:'Fredoka', sans-serif; letter-spacing: -0.01em; }
 .font-mono{ font-family:'Space Mono', monospace; }
 
-/* Logo styles */
-.company-logo{
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-}
-.company-logo:hover{
-  transform: scale(1.05);
-}
-.company-logo-lg{
-  height: 56px;
-  width: auto;
-  object-fit: contain;
-}
+/* Logo */
+.company-logo{ height: 36px; width: auto; object-fit: contain; transition: transform .25s ease; filter: drop-shadow(0 1px 2px rgba(0,0,0,.06)); }
+.company-logo:hover{ transform: scale(1.04); }
+.company-logo-lg{ height: 52px; width: auto; object-fit: contain; }
 
+/* Stamp */
 .stamp{
-  width:92px; height:92px; border-radius:50%;
-  border:3px solid var(--ink);
+  width: 88px; height: 88px; border-radius: 50%;
+  background: linear-gradient(135deg, #fff 0%, #FBF7EF 100%);
+  border: 2.5px solid var(--ink);
   display:flex; align-items:center; justify-content:center;
-  transform: rotate(-9deg);
+  transform: rotate(-8deg);
   position:relative; flex-shrink:0;
-  background: var(--paper);
-  box-shadow: 0 4px 12px rgba(31,42,68,0.15);
+  box-shadow: var(--shadow-md), inset 0 0 0 6px #fff;
 }
 .stamp::before{
-  content:''; position:absolute; inset:7px;
+  content:''; position:absolute; inset:6px;
   border:1.5px dashed var(--ink); border-radius:50%;
 }
 .stamp-text{
   font-family:'Fredoka', sans-serif; font-weight:700;
-  font-size:10px; line-height:1.15; text-align:center;
-  letter-spacing:.04em; text-transform:uppercase; color:var(--ink);
+  font-size:10px; line-height:1.2; text-align:center;
+  letter-spacing:.05em; text-transform:uppercase; color:var(--ink);
 }
+
 .binder-holes{
   position:absolute; left:0; top:0; bottom:0; width:28px;
   display:none;
   flex-direction:column; justify-content:space-evenly; align-items:center;
-  background: repeating-linear-gradient(180deg, transparent 0, transparent 38px, rgba(31,42,68,0.06) 38px, rgba(31,42,68,0.06) 40px);
+  background: repeating-linear-gradient(180deg, transparent 0, transparent 38px, rgba(15,23,41,0.04) 38px, rgba(15,23,41,0.04) 40px);
 }
 .binder-holes span{
-  width:13px; height:13px; border-radius:50%;
-  background: var(--paper);
+  width:12px; height:12px; border-radius:50%;
+  background: linear-gradient(135deg, #fff, #f5f5f0);
   border:2px solid var(--ink-soft);
   box-shadow: inset 0 1px 2px rgba(0,0,0,.18);
 }
 @media (min-width: 1024px){ .binder-holes{ display:flex; } }
 
-/* Input chống overflow - tự co giãn theo nội dung */
+/* Inputs */
 .blank-input{
   transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 80px;
-  max-width: 100%;
-  width: auto;
-  overflow: visible;
-  text-overflow: clip;
-  white-space: nowrap;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 8px;
+  min-width: 80px; max-width: 100%; width: auto;
+  overflow: visible; text-overflow: clip; white-space: nowrap;
+  padding: 4px 12px; border-radius: 10px;
+  font-size: inherit;
 }
 .blank-input:focus{
-  outline:none; border-color: var(--coral); background-color:#fff;
-  box-shadow: 0 0 0 4px rgba(255,107,91,0.12), 0 2px 8px rgba(255,107,91,0.2);
+  outline:none; border-color: var(--coral) !important;
+  background-color:#fff !important;
+  box-shadow: 0 0 0 4px rgba(255,107,91,0.15), 0 2px 8px rgba(255,107,91,0.2);
   transform: translateY(-1px);
 }
 .sentence-row{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 10px;
-  width: 100%;
-  overflow: visible;
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 8px 12px; width: 100%; overflow: visible;
 }
 .sentence-row > span{ flex-shrink: 0; }
 
-.tab-btn{ color: var(--ink); transition: all 0.2s ease; }
-.tab-btn[data-active="true"]{ background: var(--ink); color:#fff; box-shadow: 0 2px 8px rgba(31,42,68,0.2); }
-::-webkit-scrollbar{ width:8px; height:8px; }
-::-webkit-scrollbar-thumb{ background: var(--ink-soft); border-radius:8px; }
-::-webkit-scrollbar-thumb:hover{ background: var(--ink); }
+/* Tabs */
+.tab-btn{ color: var(--ink-soft); transition: all 0.2s ease; }
+.tab-btn[data-active="true"]{
+  background: #fff; color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
 
+/* Scrollbar */
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-track{ background: transparent; }
+::-webkit-scrollbar-thumb{ background: var(--border-strong); border-radius:8px; }
+::-webkit-scrollbar-thumb:hover{ background: var(--ink-soft); }
+
+/* Preview */
 .preview-line{ line-height: 2; word-wrap: break-word; overflow-wrap: break-word; }
 .preview-line .pv-val{
   color: var(--coral-dark);
@@ -124,11 +141,11 @@ body{
   min-width: 20px;
 }
 .preview-line .pv-empty{
-  color: var(--ink-soft);
+  color: var(--ink-muted);
   font-style: italic;
-  border-bottom: 2px dashed var(--ink-soft);
+  border-bottom: 2px dashed var(--border-strong);
   padding: 0 6px;
-  opacity: .6;
+  opacity: .7;
 }
 
 /* Status chip */
@@ -136,11 +153,11 @@ body{
   display:inline-flex; align-items:center; gap:6px;
   padding:5px 12px; border-radius:999px;
   font-size:11px; font-weight:700;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-sm);
 }
-.status-chip.ok{ background:var(--sage-soft); color:#2d6b35; }
-.status-chip.err{ background:#FDECEB; color:var(--coral-dark); }
-.status-chip.warn{ background:var(--sun-soft); color:var(--coral-dark); }
+.status-chip.ok{ background:var(--sage-soft); color:#047857; }
+.status-chip.err{ background:var(--coral-soft); color:var(--coral-dark); }
+.status-chip.warn{ background:var(--sun-soft); color:#B45309; }
 .status-chip .dot{
   width:8px; height:8px; border-radius:50%;
   background:currentColor;
@@ -148,48 +165,39 @@ body{
 }
 @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
 
-/* Saved entries cards */
+/* Saved cards */
 .saved-card{
-  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(31,42,68,0.06);
+  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border);
 }
 .saved-card:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px -8px rgba(31,42,68,0.18);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-strong);
 }
 .saved-card .field-chip{
-  display: inline-block;
-  padding: 4px 12px;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 5px 12px;
   border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  background: var(--paper-deep);
+  font-size: 11px; font-weight: 600;
+  background: var(--paper);
   color: var(--ink);
   margin: 3px;
   transition: all 0.2s ease;
+  border: 1px solid var(--border);
 }
 .saved-card .field-chip:hover{
   background: var(--sun-soft);
+  border-color: var(--sun);
 }
-.saved-card .field-chip .label{
-  color: var(--ink-soft);
-  margin-right: 5px;
-}
-.saved-card .field-chip .val{
-  color: var(--coral-dark);
-  font-weight: 700;
-}
+.saved-card .field-chip .label{ color: var(--ink-muted); margin-right: 2px; }
+.saved-card .field-chip .val{ color: var(--coral-dark); font-weight: 700; }
 
-/* Button hover effects */
-button{
-  transition: all 0.2s ease;
-}
-button:hover:not(:disabled){
-  transform: translateY(-1px);
-}
-button:active:not(:disabled){
-  transform: translateY(0);
-}
+/* Buttons */
+button{ transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+button:hover:not(:disabled){ transform: translateY(-1px); }
+button:active:not(:disabled){ transform: translateY(0); }
 
 /* Debug log */
 .debug-box{
@@ -208,75 +216,216 @@ button:active:not(:disabled){
 .debug-box .warn-line{ color:#fcd34d; }
 .debug-box .info-line{ color:#93c5fd; }
 
-/* Enhanced card shadows */
+/* Card elevated */
 .card-elevated{
-  box-shadow: 0 4px 20px -4px rgba(31,42,68,0.12), 0 2px 0 0 rgba(31,42,68,1);
+  box-shadow: var(--shadow-xl);
+  border: 1.5px solid var(--border);
 }
 
+/* Section card */
+.section-card{
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* Toolbar */
+.toolbar{
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: var(--shadow-md);
+}
+
+/* Section header */
+.section-header{
+  display: flex; align-items: center; gap: 12px;
+  padding-bottom: 16px; margin-bottom: 20px;
+  border-bottom: 1.5px dashed var(--border);
+}
+.section-badge{
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 12px;
+  font-family: 'Fredoka', sans-serif; font-weight: 700;
+  color: #fff; font-size: 15px;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+/* Word chip */
+.word-chip{
+  transition: all .2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.word-chip::before{
+  content:''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
+  opacity: 0; transition: opacity .2s;
+}
+.word-chip:hover::before{ opacity: 1; }
+.word-chip:hover{
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+/* Input field modern */
+.modern-input{
+  transition: all .2s ease;
+  border: 1.5px solid var(--border);
+  background: #fff;
+}
+.modern-input:focus{
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+}
+
+/* Gradient backgrounds */
+.bg-gradient-warm{
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 50%, #FCD34D 100%);
+}
+.bg-gradient-teal{
+  background: linear-gradient(135deg, #E0F5F2 0%, #CCFBF1 100%);
+}
+.bg-gradient-sage{
+  background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+}
+.bg-gradient-sunset{
+  background: linear-gradient(135deg, #FFE4E6 0%, #FECACA 100%);
+}
+.bg-gradient-violet{
+  background: linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%);
+}
+.bg-gradient-paper{
+  background: linear-gradient(135deg, #FAFAF6 0%, #F5F5F0 100%);
+}
+
+/* Poster header */
+.poster-header{
+  background:
+    radial-gradient(600px 300px at 80% 20%, rgba(255,255,255,0.4), transparent 60%),
+    linear-gradient(135deg, #FEF3C7 0%, #FDE68A 50%, #FCD34D 100%);
+  border-bottom: 1.5px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.poster-header::after{
+  content:''; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(15,23,41,0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(15,23,41,0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Level badge */
+.level-badge{
+  background: linear-gradient(135deg, #fff 0%, #FEF3C7 100%);
+  border: 1.5px solid var(--sun);
+  color: var(--coral-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Modal */
+.modal-backdrop{
+  background: rgba(15, 23, 41, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.modal-content{
+  animation: modalIn .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes modalIn{
+  from{ opacity: 0; transform: scale(0.95) translateY(10px); }
+  to{ opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Toast */
+#toast-message > div{
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(12px);
+}
+
+/* Divider */
+.divider-soft{
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+
+/* Print */
 @media print{
   body{ background:#fff; }
   .no-print{ display:none !important; }
   .print-card{ box-shadow:none !important; border-color:#000 !important; }
   input{ border-bottom:2px solid #000 !important; background:transparent !important; color:#000 !important; }
 }
+
+/* Responsive tweaks */
+@media (max-width: 640px){
+  .blank-input{ padding: 3px 8px; font-size: 16px; }
+}
 </style>
 </head>
-<body class="px-3 md:px-8 py-6 md:py-10">
+<body class="px-3 md:px-6 lg:px-8 py-5 md:py-8">
 
 <!-- ============ TOP TOOLBAR ============ -->
-<div class="no-print max-w-5xl mx-auto mb-5 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-lg">
+<div class="toolbar no-print max-w-6xl mx-auto mb-5 rounded-2xl px-4 py-3 flex flex-col md:flex-row md:items-center justify-between gap-3">
   <div class="flex items-center gap-3">
     <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire Logo" class="company-logo">
     <div class="h-8 w-px bg-slate-200"></div>
     <div class="flex items-center gap-2">
-      <span class="font-display font-700 text-lg" style="color:var(--ink)">🧳 Word Passport</span>
-      <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border" style="color:var(--ink-soft); border-color:var(--paper-deep)">ESL Speaking Kit</span>
+      <span class="font-display font-bold text-lg" style="color:var(--ink)">🧳 Word Passport</span>
+      <span class="hidden sm:inline font-mono text-[10px] uppercase tracking-widest px-2 py-1 rounded-full" style="background:var(--paper-deep); color:var(--ink-soft)">ESL Speaking Kit</span>
     </div>
   </div>
   <div class="flex flex-wrap items-center gap-2 justify-end">
-    <button id="btn-open-auth" onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition shadow-md hover:shadow-lg" style="background:var(--ink)">
-      👤 Đăng nhập / Đăng ký
+    <button id="btn-open-auth" onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg" style="background:var(--ink)">
+      👤 Đăng nhập
     </button>
     <div id="user-chip-wrap" class="hidden relative">
-      <button id="user-chip" onclick="toggleUserMenu()" class="px-3 py-2 text-sm font-semibold rounded-xl border flex items-center gap-2 hover:shadow-md transition" style="border-color:var(--paper-deep); color:var(--ink)">
-        <span class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:var(--teal)" id="user-avatar">?</span>
+      <button id="user-chip" onclick="toggleUserMenu()" class="px-3 py-2 text-sm font-semibold rounded-xl border flex items-center gap-2 hover:shadow-md" style="border-color:var(--border); color:var(--ink); background:#fff">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-sm" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))" id="user-avatar">?</span>
         <span id="user-email-label" class="max-w-[140px] truncate"></span>
         <span class="text-xs">▾</span>
       </button>
-      <div id="user-menu" class="hidden absolute right-0 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl z-40 overflow-hidden">
+      <div id="user-menu" class="hidden absolute right-0 mt-2 w-56 bg-white border rounded-xl shadow-xl z-40 overflow-hidden" style="border-color:var(--border)">
         <button onclick="scrollToMyEntries(); closeUserMenu();" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2">📂 Bài đã lưu</button>
-        <button onclick="toggleDebugLog()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t border-slate-100">🐞 Xem log kết nối</button>
-        <button onclick="doSignOut()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t border-slate-100">🚪 Đăng xuất</button>
+        <button onclick="toggleDebugLog()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t" style="border-color:var(--border)">🐞 Xem log kết nối</button>
+        <button onclick="doSignOut()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t" style="border-color:var(--border)">🚪 Đăng xuất</button>
       </div>
     </div>
-    <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white transition shadow-md hover:shadow-lg" style="background:var(--sage)">
+    <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--sage), #059669)">
       🛡️ Quản trị
     </button>
-    <button onclick="resetPoster()" class="px-4 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50 transition" style="border-color:var(--paper-deep); color:var(--ink-soft)">
-      🗑️ Xoá form
+    <button onclick="resetPoster()" class="px-3 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">
+      🗑️
     </button>
-    <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition shadow-md hover:shadow-lg flex items-center gap-2" style="background:var(--coral)">
-      🖨️ In / Xuất PDF
+    <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg flex items-center gap-2" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">
+      🖨️ In / PDF
     </button>
   </div>
 </div>
 
 <!-- ============ CONNECTION STATUS BAR ============ -->
-<div class="no-print max-w-5xl mx-auto mb-4 flex items-center justify-between gap-3 flex-wrap bg-white border rounded-2xl px-4 py-2.5 shadow-sm" style="border-color:var(--paper-deep)">
+<div class="no-print max-w-6xl mx-auto mb-4 flex items-center justify-between gap-3 flex-wrap section-card px-4 py-2.5">
   <div class="flex items-center gap-2 flex-wrap">
-    <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--ink-soft)">Supabase:</span>
+    <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--ink-muted)">Supabase</span>
     <span id="conn-status" class="status-chip warn"><span class="dot"></span> Đang kiểm tra...</span>
   </div>
   <div class="flex gap-2">
-    <button onclick="testConnection()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50 transition" style="border-color:var(--ink-soft); color:var(--ink-soft)">
+    <button onclick="testConnection()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">
       🔁 Kiểm tra lại
     </button>
   </div>
 </div>
 
-<!-- ============ DEBUG LOG (ẩn mặc định) ============ -->
-<div id="debug-log-wrap" class="no-print hidden max-w-5xl mx-auto mb-4">
-  <div class="bg-white border rounded-2xl p-3 shadow-sm" style="border-color:var(--paper-deep)">
+<!-- ============ DEBUG LOG ============ -->
+<div id="debug-log-wrap" class="no-print hidden max-w-6xl mx-auto mb-4">
+  <div class="section-card p-3">
     <div class="flex items-center justify-between mb-2">
       <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--ink-soft)">🐞 Debug Log</p>
       <button onclick="clearDebugLog()" class="text-[11px] font-semibold px-2 py-1 rounded hover:bg-slate-100" style="color:var(--ink-soft)">Xoá log</button>
@@ -287,7 +436,7 @@ button:active:not(:disabled){
 
 <!-- ============ TOAST ============ -->
 <div id="toast-message" class="fixed bottom-5 right-5 z-50 translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
-  <div class="text-white px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 max-w-sm" style="background:var(--ink)">
+  <div class="text-white px-5 py-4 rounded-2xl flex items-center gap-3 max-w-sm" style="background: rgba(15, 23, 41, 0.95)">
     <span class="text-xl" id="toast-icon">✅</span>
     <div>
       <p class="font-bold text-sm" id="toast-title">Success</p>
@@ -297,27 +446,27 @@ button:active:not(:disabled){
 </div>
 
 <!-- ============ AUTH MODAL ============ -->
-<div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm no-print px-4">
-  <div class="bg-white rounded-3xl border-2 max-w-md w-full p-6 shadow-2xl" style="border-color:var(--ink)">
+<div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop no-print px-4">
+  <div class="modal-content bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl" style="border: 1.5px solid var(--border)">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="font-display font-700 text-xl" style="color:var(--ink)">👤 Tài khoản của bạn</h3>
-      <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">✕</button>
+      <h3 class="font-display font-bold text-xl" style="color:var(--ink)">👤 Tài khoản của bạn</h3>
+      <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center">✕</button>
     </div>
     <div class="flex gap-2 mb-5 p-1 rounded-xl" style="background:var(--paper-deep)">
-      <button id="tab-login" data-active="true" onclick="switchAuthTab('login')" class="tab-btn flex-1 py-2 rounded-lg text-sm font-semibold transition">Đăng nhập</button>
-      <button id="tab-signup" data-active="false" onclick="switchAuthTab('signup')" class="tab-btn flex-1 py-2 rounded-lg text-sm font-semibold transition">Đăng ký</button>
+      <button id="tab-login" data-active="true" onclick="switchAuthTab('login')" class="tab-btn flex-1 py-2 rounded-lg text-sm font-semibold">Đăng nhập</button>
+      <button id="tab-signup" data-active="false" onclick="switchAuthTab('signup')" class="tab-btn flex-1 py-2 rounded-lg text-sm font-semibold">Đăng ký</button>
     </div>
     <div class="space-y-3">
       <div>
         <label class="text-xs font-semibold uppercase tracking-wide" style="color:var(--ink-soft)">Email</label>
-        <input id="auth-email" type="email" placeholder="ten@email.com" class="w-full mt-1 px-3 py-2.5 rounded-xl border bg-white text-sm" style="border-color:var(--paper-deep)">
+        <input id="auth-email" type="email" placeholder="ten@email.com" class="modern-input w-full mt-1 px-3 py-2.5 rounded-xl text-sm">
       </div>
       <div>
         <label class="text-xs font-semibold uppercase tracking-wide" style="color:var(--ink-soft)">Mật khẩu</label>
-        <input id="auth-password" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter') submitAuthForm()" class="w-full mt-1 px-3 py-2.5 rounded-xl border bg-white text-sm" style="border-color:var(--paper-deep)">
-        <p class="text-[11px] mt-1" style="color:var(--ink-soft)">Tối thiểu 6 ký tự.</p>
+        <input id="auth-password" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter') submitAuthForm()" class="modern-input w-full mt-1 px-3 py-2.5 rounded-xl text-sm">
+        <p class="text-[11px] mt-1" style="color:var(--ink-muted)">Tối thiểu 6 ký tự.</p>
       </div>
-      <button id="auth-submit-btn" onclick="submitAuthForm()" class="w-full py-2.5 rounded-xl text-white font-semibold text-sm transition shadow-md hover:shadow-lg" style="background:var(--coral)">
+      <button id="auth-submit-btn" onclick="submitAuthForm()" class="w-full py-2.5 rounded-xl text-white font-semibold text-sm shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">
         Đăng nhập
       </button>
       <p id="auth-hint" class="text-xs text-center" style="color:var(--ink-soft)"></p>
@@ -326,75 +475,97 @@ button:active:not(:disabled){
 </div>
 
 <!-- ============ ADMIN MODAL ============ -->
-<div id="admin-list" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+<div id="admin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop no-print px-4">
+  <div class="modal-content bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl" style="border: 1.5px solid var(--border)">
+    <div class="px-6 py-4 border-b flex items-center justify-between" style="border-color:var(--border)">
+      <div>
+        <h3 class="font-display font-bold text-xl" style="color:var(--ink)">🛡️ Quản trị</h3>
+        <p id="admin-summary" class="text-xs mt-0.5" style="color:var(--ink-muted)">Đang tải...</p>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="mailtoBulkMissing()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">📧 Nhắc tất cả</button>
+        <button onclick="copyMissingEmails()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">📋 Copy</button>
+        <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-700 text-xl w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center">✕</button>
+      </div>
+    </div>
+    <div id="admin-list" class="space-y-2 overflow-y-auto flex-1 p-4"></div>
+  </div>
+</div>
 
 <!-- ============ MAIN POSTER ============ -->
-<div class="print-card max-w-5xl mx-auto bg-white border-2 rounded-3xl card-elevated overflow-hidden relative" style="border-color:var(--ink)">
+<div class="print-card max-w-6xl mx-auto card-elevated rounded-3xl overflow-hidden relative bg-white">
   <div class="binder-holes">
     <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
 
-  <!-- Header banner với logo -->
-  <div class="border-b-2 px-6 md:px-10 py-7 md:py-9 flex flex-col sm:flex-row items-center gap-5 lg:pl-16" style="border-color:var(--ink); background: linear-gradient(135deg, var(--sun-soft) 0%, #FFE8A3 100%);">
-    <!-- <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire Logo" class="company-logo-lg"> -->
+  <!-- Header banner -->
+  <div class="poster-header px-6 md:px-10 py-8 md:py-10 flex flex-col sm:flex-row items-center gap-5 lg:pl-16 relative z-10">
     <div class="stamp">
       <span class="stamp-text">Unit 1<br>✓ Verified</span>
     </div>
     <div class="text-center sm:text-left">
-      <h1 class="font-display font-700 text-2xl md:text-3xl tracking-tight" style="color:var(--ink)">Let's Talk About Me &amp; My Home</h1>
-      <p class="text-sm mt-1" style="color:var(--ink-soft)">First-day speaking practice • ESL preschool &amp; young learners</p>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-2" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(8px)">
+        <span class="w-1.5 h-1.5 rounded-full" style="background: var(--coral)"></span>
+        <span class="text-[10px] font-bold uppercase tracking-widest" style="color:var(--ink-soft)">Speaking Practice</span>
+      </div>
+      <h1 class="font-display font-bold text-2xl md:text-4xl tracking-tight leading-tight" style="color:var(--ink)">Let's Talk About Me &amp; My Home</h1>
+      <p class="text-sm mt-2" style="color:var(--ink-soft)">First-day speaking practice • ESL preschool &amp; young learners</p>
     </div>
   </div>
 
   <!-- Save status bar -->
-  <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-b" style="background:var(--paper-deep); border-color:var(--paper-deep)">
+  <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-b" style="background:var(--paper); border-color:var(--border)">
     <p id="save-status" class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
       <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Mỗi Số báo danh chỉ có thể lưu 1 lần, đã lưu ko thể sửa
     </p>
     <div class="flex gap-2">
-      <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background:var(--teal)">💾 Lưu</button>
-      <button onclick="saveCurrentEntry({asNew:true})" class="px-4 py-2 rounded-lg text-xs font-bold border-2 hover:bg-white transition" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
+      <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">💾 Lưu</button>
+      <button onclick="saveCurrentEntry({asNew:true})" class="px-4 py-2 rounded-lg text-xs font-bold border-2 hover:bg-white" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
     </div>
   </div>
 
   <!-- Body grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 border-b-2 lg:pl-16" style="border-color:var(--ink)">
+  <div class="grid grid-cols-1 lg:grid-cols-12 border-b lg:pl-16" style="border-color:var(--border)">
     <!-- LEFT: speaking outline -->
-    <div class="lg:col-span-7 p-6 md:p-9 lg:border-r-2" style="border-color:var(--ink)">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--coral); border-color:var(--ink)">A</span>
-        <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Speaking Outline</h3>
+    <div class="lg:col-span-7 p-6 md:p-9 lg:border-r-2" style="border-color:var(--border)">
+      <div class="section-header">
+        <span class="section-badge" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">A</span>
+        <div>
+          <h3 class="font-display font-bold uppercase tracking-wide text-lg" style="color:var(--ink)">Speaking Outline</h3>
+          <p class="text-xs" style="color:var(--ink-muted)">Điền vào các ô trống để hoàn thành bài nói</p>
+        </div>
       </div>
 
       <!-- THÔNG TIN HỌC VIÊN -->
-      <div class="mb-6 p-5 rounded-2xl border-2" style="background: linear-gradient(135deg, var(--sun-soft) 0%, #FFE8A3 100%); border-color:var(--sun)">
-        <p class="text-xs uppercase font-bold mb-3 tracking-wider" style="color:var(--coral-dark)">📝 Thông tin học viên</p>
+      <div class="mb-6 p-5 rounded-2xl border-2 bg-gradient-warm" style="border-color:var(--sun)">
+        <p class="text-xs uppercase font-bold mb-3 tracking-wider flex items-center gap-2" style="color:var(--coral-dark)">
+          <span class="w-6 h-6 rounded-md flex items-center justify-center text-white text-[10px]" style="background:var(--coral)">📝</span>
+          Thông tin học viên
+        </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Họ và tên *</label>
             <input type="text" id="input-name" placeholder="Nguyễn Văn A"
-              class="w-full px-3 py-2.5 rounded-xl border-2 bg-white font-semibold text-sm shadow-sm focus:shadow-md transition"
-              style="border-color:var(--ink-soft); color:var(--ink)"
-              oninput="onFieldInput()">
+              class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm shadow-sm">
           </div>
           <div>
             <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Số báo danh *</label>
             <input type="text" id="input-student-id" placeholder="VD: 001"
-              class="w-full px-3 py-2.5 rounded-xl border-2 bg-white font-semibold text-sm font-mono shadow-sm focus:shadow-md transition"
-              style="border-color:var(--ink-soft); color:var(--ink)"
-              oninput="onFieldInput()">
+              class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm font-mono shadow-sm">
           </div>
         </div>
-        <p class="text-[11px] mt-2" style="color:var(--ink-soft)">💡 Tiêu đề bản lưu sẽ là: <code class="px-1 rounded bg-white">[SBD: xxx] Tên</code></p>
+        <p class="text-[11px] mt-3 flex items-center gap-1.5" style="color:var(--ink-soft)">
+          <span>💡</span> Tiêu đề bản lưu: <code class="px-1.5 py-0.5 rounded bg-white font-mono text-[10px]">[SBD: xxx] Tên</code>
+        </p>
       </div>
 
       <div class="space-y-5 text-lg md:text-xl font-semibold leading-relaxed" style="color:var(--ink)">
-        <div class="sentence-row"><span>👋</span><span>Hello,</span></div>
+        <div class="sentence-row"><span class="text-2xl">👋</span><span class="text-xl">Hello,</span></div>
 
         <div class="sentence-row">
           <span>My name is</span>
           <input type="text" id="input-fullname" placeholder="..."
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
           <span style="color:var(--ink-soft)">.</span>
@@ -403,7 +574,7 @@ button:active:not(:disabled){
         <div class="sentence-row">
           <span>I'm</span>
           <input type="text" id="input-age" placeholder="..."
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
           <span>years old.</span>
@@ -412,7 +583,7 @@ button:active:not(:disabled){
         <div class="sentence-row">
           <span>I like</span>
           <input type="text" id="input-color" placeholder="[color]"
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
           <span style="color:var(--ink-soft)">.</span>
@@ -421,7 +592,7 @@ button:active:not(:disabled){
         <div class="sentence-row">
           <span>I like</span>
           <input type="text" id="input-hobby" placeholder="[V-ing / Hobby]"
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
           <span style="color:var(--ink-soft)">.</span>
@@ -430,7 +601,7 @@ button:active:not(:disabled){
         <div class="sentence-row">
           <span>There are</span>
           <input type="text" id="input-rooms" placeholder="[number]"
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
           <span>rooms in my house.</span>
@@ -439,28 +610,31 @@ button:active:not(:disabled){
         <div class="sentence-row">
           <span>My favorite part of my home is the</span>
           <input type="text" id="input-favroom" placeholder="[favourite room]"
-            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5"
             style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
             onclick="setActiveInput(this)" oninput="onFieldInput()">
           <span style="color:var(--ink-soft)">.</span>
         </div>
 
-        <div class="p-5 rounded-2xl border-2 border-dashed mt-4" style="background: linear-gradient(135deg, var(--teal-soft) 0%, #D4EDE9 100%); border-color:var(--teal)">
-          <span class="text-xs uppercase font-bold block mb-2" style="color:var(--teal)">⭐ Custom Room Activity</span>
+        <div class="p-5 rounded-2xl border-2 border-dashed mt-4 bg-gradient-teal" style="border-color:var(--teal)">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs uppercase font-bold" style="color:var(--teal)">⭐ Custom Room Activity</span>
+            <span class="flex-1 h-px" style="background:var(--teal); opacity:.3"></span>
+          </div>
           <div class="sentence-row leading-relaxed text-base md:text-lg">
             <span>I like</span>
             <input type="text" id="input-custom-act1" placeholder="[V-ing activity]"
-              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded bg-white"
+              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white"
               style="color:var(--coral-dark); border-color:var(--ink-soft)"
               onclick="setActiveInput(this)" oninput="onFieldInput()">
             <span>and</span>
             <input type="text" id="input-custom-act2" placeholder="[V-ing activity]"
-              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded bg-white"
+              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white"
               style="color:var(--coral-dark); border-color:var(--ink-soft)"
               onclick="setActiveInput(this)" oninput="onFieldInput()">
             <span>in the</span>
             <input type="text" id="input-custom-room" placeholder="[room / area]"
-              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded bg-white"
+              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white"
               style="color:var(--coral-dark); border-color:var(--ink-soft)"
               onclick="setActiveInput(this)" oninput="onFieldInput()">
             <span style="color:var(--ink-soft)">.</span>
@@ -470,33 +644,54 @@ button:active:not(:disabled){
     </div>
 
     <!-- RIGHT: vocabulary bank -->
-    <div class="lg:col-span-5 p-6 md:p-9" style="background: linear-gradient(135deg, #FAFAF6 0%, #F5F5F0 100%);">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--teal); border-color:var(--ink)">B</span>
-        <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Vocabulary Bank</h3>
+    <div class="lg:col-span-5 p-6 md:p-9 bg-gradient-paper">
+      <div class="section-header">
+        <span class="section-badge" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">B</span>
+        <div>
+          <h3 class="font-display font-bold uppercase tracking-wide text-lg" style="color:var(--ink)">Vocabulary Bank</h3>
+          <p class="text-xs" style="color:var(--ink-muted)">Nhấn vào từ để điền vào ô đang chọn</p>
+        </div>
       </div>
-      <p class="text-xs mb-4 p-2.5 rounded-lg border" style="background:#fff; border-color:var(--paper-deep); color:var(--ink-soft)">
-        💡 <strong>Tip:</strong> Click một ô trống bên trái, rồi nhấn một từ bên dưới để điền nhanh.
-      </p>
+
+      <div class="mb-4 p-3 rounded-xl border flex items-start gap-2" style="background:#fff; border-color:var(--border)">
+        <span class="text-base">💡</span>
+        <p class="text-xs" style="color:var(--ink-soft)"><strong>Mẹo:</strong> Click vào ô trống bên trái, sau đó nhấn một từ bên dưới để điền nhanh.</p>
+      </div>
+
       <div class="space-y-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">🎨 Colors</span>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--coral-soft); color:var(--coral-dark)">🎨</span>
+            Colors
+          </span>
           <div class="flex flex-wrap gap-1.5" id="bank-colors"></div>
         </div>
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">⚽ Hobbies (V-ing)</span>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--violet-soft); color:var(--violet)">⚽</span>
+            Hobbies (V-ing)
+          </span>
           <div class="flex flex-wrap gap-1.5" id="bank-hobbies"></div>
         </div>
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--coral-dark)">🔢 Room Numbers</span>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--coral-dark)">
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px] bg-white border" style="border-color:var(--coral)">🔢</span>
+            Room Numbers
+          </span>
           <div class="flex flex-wrap gap-1.5" id="bank-numbers"></div>
         </div>
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">🏡 Rooms &amp; Areas</span>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--sun-soft); color:#B45309">🏡</span>
+            Rooms &amp; Areas
+          </span>
           <div class="flex flex-wrap gap-1.5" id="bank-rooms"></div>
         </div>
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--teal)">🏠 Room Activities (V-ing)</span>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--teal)">
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--teal-soft)">🏠</span>
+            Room Activities (V-ing)
+          </span>
           <div class="flex flex-wrap gap-1.5" id="bank-activities"></div>
         </div>
       </div>
@@ -504,10 +699,13 @@ button:active:not(:disabled){
   </div>
 
   <!-- Live preview -->
-  <div class="p-6 md:p-9 lg:pl-16 border-b-2" style="background: linear-gradient(135deg, var(--sun-soft) 0%, #FFE8A3 100%); border-color:var(--ink)">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--sun); border-color:var(--ink)">👁️</span>
-      <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Live Preview — Bài nói của bạn</h3>
+  <div class="p-6 md:p-9 lg:pl-16 border-b-2 bg-gradient-warm" style="border-color:var(--ink)">
+    <div class="section-header" style="border-color: rgba(15,23,41,0.1)">
+      <span class="section-badge" style="background: linear-gradient(135deg, var(--sun), #D97706)">👁️</span>
+      <div>
+        <h3 class="font-display font-bold uppercase tracking-wide text-lg" style="color:var(--ink)">Live Preview</h3>
+        <p class="text-xs" style="color:var(--ink-soft)">Bài nói của bạn được cập nhật theo thời gian thực</p>
+      </div>
     </div>
     <div class="bg-white border-2 rounded-2xl p-5 md:p-6 preview-line text-base md:text-lg font-medium shadow-sm" style="border-color:var(--ink); color:var(--ink)">
       <p id="live-preview">
@@ -521,13 +719,16 @@ button:active:not(:disabled){
   </div>
 
   <!-- Model passage -->
-  <div class="p-6 md:p-9 lg:pl-16" style="background: linear-gradient(135deg, var(--sage-soft) 0%, #D4E8D5 100%);">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--sage); border-color:var(--ink)">C</span>
-      <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Model Speaking Passage</h3>
+  <div class="p-6 md:p-9 lg:pl-16 bg-gradient-sage">
+    <div class="section-header" style="border-color: rgba(15,23,41,0.1)">
+      <span class="section-badge" style="background: linear-gradient(135deg, var(--sage), #059669)">C</span>
+      <div>
+        <h3 class="font-display font-bold uppercase tracking-wide text-lg" style="color:var(--ink)">Model Speaking Passage</h3>
+        <p class="text-xs" style="color:var(--ink-soft)">Bài mẫu tham khảo</p>
+      </div>
     </div>
     <div class="bg-white border-2 rounded-2xl p-5 md:p-6 relative shadow-sm" style="border-color:var(--ink)">
-      <div class="absolute -top-3 right-4 font-bold text-xs px-3 py-1 rounded-full border uppercase shadow-sm" style="background:var(--sun-soft); border-color:var(--sun); color:var(--coral-dark)">
+      <div class="absolute -top-3 right-4 level-badge font-bold text-xs px-3 py-1 rounded-full uppercase">
         Level A2 / B1
       </div>
       <p class="leading-relaxed text-base md:text-lg font-medium" style="color:var(--ink)">
@@ -536,33 +737,34 @@ button:active:not(:disabled){
       </p>
     </div>
   </div>
-   <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-b" style="background:var(--paper-deep); border-color:var(--paper-deep)">
-    <p id="save-status" class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
-      <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Lưu kết quả của bạn
+
+  <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-t" style="background:var(--paper); border-color:var(--border)">
+    <p class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
+      <span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Lưu kết quả của bạn
     </p>
     <div class="flex gap-2">
-      <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background:var(--teal)">💾 Lưu</button>
-      <button onclick="saveCurrentEntry({asNew:true})" class="px-4 py-2 rounded-lg text-xs font-bold border-2 hover:bg-white transition" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
+      <button onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">💾 Lưu</button>
+      <button onclick="saveCurrentEntry({asNew:true})" class="px-4 py-2 rounded-lg text-xs font-bold border-2 hover:bg-white" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
     </div>
   </div>
 </div>
-  
-<!-- ============ MY SAVED ENTRIES (hiển thị trực tiếp trên màn hình) ============ -->
-<div id="my-entries-section" class="no-print hidden max-w-5xl mx-auto mt-8">
-  <div class="bg-white border-2 rounded-3xl shadow-lg overflow-hidden" style="border-color:var(--ink)">
-    <div class="px-6 md:px-8 py-5 flex items-center justify-between gap-3 flex-wrap" style="background: linear-gradient(135deg, var(--teal-soft) 0%, #D4EDE9 100%); border-bottom:2px solid var(--ink)">
+
+<!-- ============ MY SAVED ENTRIES ============ -->
+<div id="my-entries-section" class="no-print hidden max-w-6xl mx-auto mt-8">
+  <div class="section-card">
+    <div class="px-6 md:px-8 py-5 flex items-center justify-between gap-3 flex-wrap bg-gradient-teal" style="border-bottom:1.5px solid var(--ink)">
       <div class="flex items-center gap-3">
-        <span class="flex h-10 w-10 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--teal); border-color:var(--ink)">📂</span>
+        <span class="section-badge" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">📂</span>
         <div>
-          <h3 class="font-display font-700 text-lg" style="color:var(--ink)">Danh sách bài đã lưu</h3>
+          <h3 class="font-display font-bold text-lg" style="color:var(--ink)">Danh sách bài đã lưu</h3>
           <p class="text-xs" style="color:var(--ink-soft)">Tất cả bản ghi bạn đã lưu vào database</p>
         </div>
       </div>
       <div class="flex gap-2">
-        <button onclick="startNewDraft()" class="px-3 py-2 rounded-xl text-xs font-bold border-2 border-dashed hover:bg-white transition shadow-sm" style="border-color:var(--teal); color:var(--teal)">
+        <button onclick="startNewDraft()" class="px-3 py-2 rounded-xl text-xs font-bold border-2 border-dashed hover:bg-white shadow-sm" style="border-color:var(--teal); color:var(--teal)">
           ➕ Tạo bản mới
         </button>
-        <button onclick="loadMyEntries()" class="px-3 py-2 rounded-xl text-xs font-bold border hover:bg-white transition shadow-sm" style="border-color:var(--ink-soft); color:var(--ink-soft)">
+        <button onclick="loadMyEntries()" class="px-3 py-2 rounded-xl text-xs font-bold border hover:bg-white shadow-sm" style="border-color:var(--border); color:var(--ink-soft)">
           🔄 Làm mới
         </button>
       </div>
@@ -571,18 +773,10 @@ button:active:not(:disabled){
   </div>
 </div>
 
-<p
-  class="no-print max-w-5xl mx-auto mt-5 flex items-center justify-center gap-2 text-[11px]"
-  style="color: var(--ink-soft);"
->
-  <img
-    src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png"
-    alt="Enspire"
-    class="h-10 opacity-60"
-  />
-  <span class="leading-none font-bold">
-    © 2026 Enspire Education. All rights reserved.
-  </span>
+<!-- Footer -->
+<p class="no-print max-w-6xl mx-auto mt-8 flex items-center justify-center gap-3 text-xs py-4" style="color: var(--ink-muted);">
+  <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire" class="h-8 opacity-60">
+  <span class="leading-none font-semibold">© 2026 Enspire Education. All rights reserved.</span>
 </p>
 
 <script type="module">
@@ -667,9 +861,9 @@ function renderWordBank(){
 }
 function wordChip(word, style){
   const base = style === 'activities'
-    ? 'background:var(--teal-soft); border-color:var(--teal); color:#155f59;'
-    : 'background:#fff; border-color:var(--paper-deep); color:var(--ink);';
-  return `<button data-word="${word}" class="word-chip px-2.5 py-1 text-xs font-semibold border rounded-lg transition hover:opacity-80" style="${base}">${word.charAt(0).toUpperCase()+word.slice(1)}</button>`;
+    ? 'background:var(--teal-soft); border-color:var(--teal); color:#0F766E;'
+    : 'background:#fff; border-color:var(--border); color:var(--ink);';
+  return `<button data-word="${word}" class="word-chip px-3 py-1.5 text-xs font-semibold border rounded-lg" style="${base}">${word.charAt(0).toUpperCase()+word.slice(1)}</button>`;
 }
 document.addEventListener('click', (e) => {
   const chip = e.target.closest('.word-chip');
@@ -987,10 +1181,10 @@ function fmtDate(iso){
 function renderMyEntriesList(){
   const container = document.getElementById('my-entries-list');
   if (!myEntries.length){
-    container.innerHTML = `<div class="text-center py-10 text-sm" style="color:var(--ink-soft)">
-      <p class="text-3xl mb-2">📭</p>
-      Bạn chưa lưu bài nào.<br>
-      Nhập <strong>Tên</strong> + <strong>Số báo danh</strong>, điền thông tin rồi bấm <strong>💾 Lưu</strong>.
+    container.innerHTML = `<div class="text-center py-12 text-sm" style="color:var(--ink-muted)">
+      <div class="w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center text-3xl" style="background:var(--paper-deep)">📭</div>
+      <p class="font-semibold mb-1" style="color:var(--ink-soft)">Chưa có bài nào được lưu</p>
+      <p>Nhập <strong>Tên</strong> + <strong>Số báo danh</strong>, điền thông tin rồi bấm <strong>💾 Lưu</strong>.</p>
     </div>`;
     return;
   }
@@ -1009,22 +1203,21 @@ function renderMyEntriesList(){
     }).filter(Boolean).join('');
 
     return `
-    <div class="saved-card p-4 rounded-2xl border-2" style="border-color:${isActive ? 'var(--teal)' : 'var(--paper-deep)'}; ${isActive ? 'background:var(--teal-soft);' : 'background:#fff;'}">
+    <div class="saved-card p-4 rounded-2xl" style="${isActive ? 'background:var(--teal-soft); border-color:var(--teal);' : 'background:#fff;'}">
       <div class="flex items-start justify-between gap-3 flex-wrap mb-3">
         <div class="min-w-0 flex-1">
-          <div class="flex items-center gap-2 flex-wrap">
-            ${parsed.sbd ? `<span class="px-2 py-0.5 rounded-md text-xs font-bold font-mono" style="background:var(--coral); color:#fff">SBD ${escapeHtml(parsed.sbd)}</span>` : ''}
+          <div class="flex items-center gap-2 flex-wrap mb-1">
+            ${parsed.sbd ? `<span class="px-2 py-0.5 rounded-md text-xs font-bold font-mono text-white shadow-sm" style="background: linear-gradient(135deg, var(--coral), var(--coral-dark))">SBD ${escapeHtml(parsed.sbd)}</span>` : ''}
             <p class="text-base font-bold truncate" style="color:var(--ink)">${escapeHtml(parsed.name || 'Học viên')}</p>
-            ${isActive ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background:var(--teal); color:#fff">ĐANG SỬA</span>' : ''}
+            ${isActive ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">ĐANG SỬA</span>' : ''}
           </div>
-          <p class="text-[11px] font-mono mt-1" style="color:var(--ink-soft)">Cập nhật: ${fmtDate(e.updated_at)}</p>
+          <p class="text-[11px] font-mono" style="color:var(--ink-muted)">Cập nhật: ${fmtDate(e.updated_at)}</p>
         </div>
         <div class="flex gap-1.5 flex-shrink-0">
-          <button data-load-id="${e.id}" class="entry-load-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-sm" style="background:var(--teal)">Xem</button>
-      
+          <button data-load-id="${e.id}" class="entry-load-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-sm" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">Xem</button>
         </div>
       </div>
-      <div class="flex flex-wrap">${chips || '<span class="text-xs italic" style="color:var(--ink-soft)">Chưa có dữ liệu chi tiết.</span>'}</div>
+      <div class="flex flex-wrap">${chips || '<span class="text-xs italic" style="color:var(--ink-muted)">Chưa có dữ liệu chi tiết.</span>'}</div>
     </div>
     `;
   }).join('');
@@ -1075,7 +1268,7 @@ function scrollToMyEntries(){
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ========== SAVE (CÓ DEBUG CHI TIẾT) ==========
+// ========== SAVE ==========
 async function saveCurrentEntry({ asNew=false, silent=false } = {}){
   const btn = document.getElementById('btn-save-main');
   const name = (document.getElementById('input-name').value || '').trim();
@@ -1190,7 +1383,7 @@ function openAdminModal(){
 }
 function closeAdminModal(){ document.getElementById('admin-modal').classList.add('hidden'); }
 async function loadAdminData(){
-  document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-soft)">Đang tải dữ liệu...</p>`;
+  document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-muted)">Đang tải dữ liệu...</p>`;
   const [{ data: profiles, error: pErr }, { data: entries, error: eErr }] = await Promise.all([
     sb.from('profiles').select('*').order('created_at', { ascending:true }),
     sb.from('poster_entries').select('*').order('updated_at', { ascending:false })
@@ -1219,21 +1412,21 @@ function renderAdminList(){
     `Tổng: ${adminProfiles.length} user — ✅ Đã nộp: ${submittedCount} — ⚠️ Chưa nộp: ${missing.length}`;
   const container = document.getElementById('admin-list');
   if (!adminProfiles.length){
-    container.innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-soft)">Chưa có user nào.</p>`;
+    container.innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-muted)">Chưa có user nào.</p>`;
     return;
   }
   container.innerHTML = adminProfiles.map(p => {
     const list = adminEntriesByUser[p.id] || [];
     const has = list.length > 0;
     const badge = has
-      ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--teal-soft); color:#155f59">✅ Đã nộp (${list.length})</span>`
-      : `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--sun-soft); color:var(--coral-dark)">⚠️ Chưa nộp</span>`;
+      ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--teal-soft); color:#0F766E">✅ Đã nộp (${list.length})</span>`
+      : `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--sun-soft); color:#B45309">⚠️ Chưa nộp</span>`;
     return `
-    <div class="p-3 rounded-xl border" style="border-color:var(--paper-deep)">
+    <div class="p-3 rounded-xl border" style="border-color:var(--border)">
       <div class="flex items-center justify-between gap-3 flex-wrap">
         <div class="min-w-0">
           <p class="text-sm font-bold truncate" style="color:var(--ink)">${escapeHtml(p.display_name || p.email)}</p>
-          <p class="text-[11px] font-mono truncate" style="color:var(--ink-soft)">${escapeHtml(p.email)}</p>
+          <p class="text-[11px] font-mono truncate" style="color:var(--ink-muted)">${escapeHtml(p.email)}</p>
         </div>
         <div class="flex items-center gap-2 flex-shrink-0">
           ${badge}
@@ -1241,15 +1434,15 @@ function renderAdminList(){
           <button data-mail-id="${escapeHtml(p.email)}" class="admin-mail-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--ink)">✉️ Mail</button>
         </div>
       </div>
-      <div id="admin-detail-${p.id}" class="hidden mt-3 pt-3 border-t" style="border-color:var(--paper-deep)">
+      <div id="admin-detail-${p.id}" class="hidden mt-3 pt-3 border-t" style="border-color:var(--border)">
         ${(list || []).map(e => {
           const parsed = parseTitle(e.title);
           return `
           <div class="mb-2 p-2.5 rounded-lg" style="background:var(--paper)">
             <div class="flex items-center gap-2 flex-wrap mb-1">
-              ${parsed.sbd ? `<span class="text-[10px] font-bold px-1.5 py-0.5 rounded font-mono" style="background:var(--coral); color:#fff">SBD ${escapeHtml(parsed.sbd)}</span>` : ''}
+              ${parsed.sbd ? `<span class="text-[10px] font-bold px-1.5 py-0.5 rounded font-mono text-white" style="background:var(--coral)">SBD ${escapeHtml(parsed.sbd)}</span>` : ''}
               <p class="text-xs font-bold" style="color:var(--ink)">${escapeHtml(parsed.name || 'Học viên')}</p>
-              <span class="text-[10px] font-mono" style="color:var(--ink-soft)">— ${fmtDate(e.updated_at)}</span>
+              <span class="text-[10px] font-mono" style="color:var(--ink-muted)">— ${fmtDate(e.updated_at)}</span>
             </div>
             <div class="grid grid-cols-2 gap-1 text-[12px]" style="color:var(--ink-soft)">
               ${Object.entries(FIELD_LABELS).map(([key, label]) => `<div><strong style="color:var(--ink)">${label}:</strong> ${escapeHtml((e.data && e.data[key]) || '—')}</div>`).join('')}
