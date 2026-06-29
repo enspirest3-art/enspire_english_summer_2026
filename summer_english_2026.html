@@ -362,7 +362,7 @@ button:active:not(:disabled){ transform: translateY(0); }
           </div>
           <div>
             <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Số báo danh (*)</label>
-            <input type="text" id="input-student-id" placeholder="VD: 001" class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm font-mono shadow-sm" oninput="onStudentInfoChange()">
+            <input type="text" id="input-student-id" placeholder="VD: 4ss1 4ss2 3ss1 3ss2 mh1 md1 ...." class="modern-input w-full px-3 py-2.5 rounded-xl font-semibold text-sm font-mono shadow-sm" oninput="onStudentInfoChange()">
           </div>
         </div>
         <div id="sbd-lookup-status" class="mt-3 hidden">
@@ -371,9 +371,13 @@ button:active:not(:disabled){ transform: translateY(0); }
             <span id="sbd-lookup-msg">Đã tìm thấy bài làm trước đó.</span>
           </div>
         </div>
-        <p class="text-[11px] mt-3 flex items-center gap-1.5" style="color:var(--ink-soft)">
-          <span>💡</span> Tiêu đề bản lưu: <code class="px-1.5 py-0.5 rounded bg-white font-mono text-[10px]">[SBD: xxx] Tên</code>
+        <p class="text-[11px] mt-3 flex items-center gap-1.5" style="color:red;font-size:13px;font-weight:bold">
+          <strong>💡</strong>Lưu ý số báo danh: <strong style="color:red;font-size:13px;font-weight:bold">Số báo danh với cụm các trường ví dụ Sao Sáng 4 là 4ss1 3ss1, Kim Đồng 1kd1 2kd2, Minh Khai là mh1 ... các trường khác tương tự</strong>
         </p>
+        <div>
+          <strong style="color:red;font-size:13px;font-weight:bold">💡 Lưu ý sửa bài làm: </strong> 
+          <strong style="color:red;font-size:13px;font-weight:bold">Nhập đúng số báo danh bản thân để sửa bài làm trước đó</strong>
+        </div>
       </div>
       <div class="space-y-5 text-lg md:text-xl font-semibold leading-relaxed" style="color:var(--ink)">
         <div class="sentence-row"><span class="text-2xl">👋</span><span class="text-xl">Hello,</span></div>
@@ -1025,7 +1029,7 @@ function scrollToMyEntries(){
 }
 function updateSaveStatusUI(){
   const el = document.getElementById('save-status');
-  if (!currentUser){ el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu bài`; return; }
+  if (!currentUser){ el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Mỗi Người có thể lưu bài 1 lần và nhập đúng số báo danh để sửa bài`; return; }
   if (currentEntryId){
     const entry = myEntries.find(e => e.id === currentEntryId);
     el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Đang sửa: <strong>SBD ${escapeHtml(entry ? entry.user_id : '')}</strong> — ${escapeHtml(entry ? entry.title : '')}`;
