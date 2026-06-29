@@ -25,11 +25,28 @@
 *{ -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
 body{
   font-family:'Inter',sans-serif;
-  background-color: var(--paper);
+  background: linear-gradient(135deg, var(--paper) 0%, #F5EFE0 100%);
   color: var(--ink);
+  min-height: 100vh;
 }
 .font-display{ font-family:'Fredoka', sans-serif; }
 .font-mono{ font-family:'Space Mono', monospace; }
+
+/* Logo styles */
+.company-logo{
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+.company-logo:hover{
+  transform: scale(1.05);
+}
+.company-logo-lg{
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
 
 .stamp{
   width:92px; height:92px; border-radius:50%;
@@ -38,6 +55,7 @@ body{
   transform: rotate(-9deg);
   position:relative; flex-shrink:0;
   background: var(--paper);
+  box-shadow: 0 4px 12px rgba(31,42,68,0.15);
 }
 .stamp::before{
   content:''; position:absolute; inset:7px;
@@ -64,41 +82,44 @@ body{
 
 /* Input chống overflow - tự co giãn theo nội dung */
 .blank-input{
-  transition: all .15s ease;
+  transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
   min-width: 80px;
   max-width: 100%;
   width: auto;
   overflow: visible;
   text-overflow: clip;
   white-space: nowrap;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 8px;
 }
 .blank-input:focus{
   outline:none; border-color: var(--coral); background-color:#fff;
-  box-shadow: 0 0 0 3px rgba(255,107,91,0.15);
+  box-shadow: 0 0 0 4px rgba(255,107,91,0.12), 0 2px 8px rgba(255,107,91,0.2);
+  transform: translateY(-1px);
 }
 .sentence-row{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px 8px;
+  gap: 8px 10px;
   width: 100%;
   overflow: visible;
 }
 .sentence-row > span{ flex-shrink: 0; }
 
-.tab-btn{ color: var(--ink); }
-.tab-btn[data-active="true"]{ background: var(--ink); color:#fff; }
+.tab-btn{ color: var(--ink); transition: all 0.2s ease; }
+.tab-btn[data-active="true"]{ background: var(--ink); color:#fff; box-shadow: 0 2px 8px rgba(31,42,68,0.2); }
 ::-webkit-scrollbar{ width:8px; height:8px; }
 ::-webkit-scrollbar-thumb{ background: var(--ink-soft); border-radius:8px; }
+::-webkit-scrollbar-thumb:hover{ background: var(--ink); }
 
 .preview-line{ line-height: 2; word-wrap: break-word; overflow-wrap: break-word; }
 .preview-line .pv-val{
   color: var(--coral-dark);
   font-weight: 800;
   border-bottom: 2px dashed var(--coral);
-  padding: 0 4px;
+  padding: 0 6px;
   display: inline-block;
   min-width: 20px;
 }
@@ -106,15 +127,16 @@ body{
   color: var(--ink-soft);
   font-style: italic;
   border-bottom: 2px dashed var(--ink-soft);
-  padding: 0 4px;
+  padding: 0 6px;
   opacity: .6;
 }
 
 /* Status chip */
 .status-chip{
   display:inline-flex; align-items:center; gap:6px;
-  padding:4px 10px; border-radius:999px;
+  padding:5px 12px; border-radius:999px;
   font-size:11px; font-weight:700;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 .status-chip.ok{ background:var(--sage-soft); color:#2d6b35; }
 .status-chip.err{ background:#FDECEB; color:var(--coral-dark); }
@@ -128,29 +150,45 @@ body{
 
 /* Saved entries cards */
 .saved-card{
-  transition: all .2s ease;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(31,42,68,0.06);
 }
 .saved-card:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px -8px rgba(31,42,68,0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -8px rgba(31,42,68,0.18);
 }
 .saved-card .field-chip{
   display: inline-block;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   font-size: 11px;
   font-weight: 600;
   background: var(--paper-deep);
   color: var(--ink);
-  margin: 2px;
+  margin: 3px;
+  transition: all 0.2s ease;
+}
+.saved-card .field-chip:hover{
+  background: var(--sun-soft);
 }
 .saved-card .field-chip .label{
   color: var(--ink-soft);
-  margin-right: 4px;
+  margin-right: 5px;
 }
 .saved-card .field-chip .val{
   color: var(--coral-dark);
   font-weight: 700;
+}
+
+/* Button hover effects */
+button{
+  transition: all 0.2s ease;
+}
+button:hover:not(:disabled){
+  transform: translateY(-1px);
+}
+button:active:not(:disabled){
+  transform: translateY(0);
 }
 
 /* Debug log */
@@ -170,6 +208,11 @@ body{
 .debug-box .warn-line{ color:#fcd34d; }
 .debug-box .info-line{ color:#93c5fd; }
 
+/* Enhanced card shadows */
+.card-elevated{
+  box-shadow: 0 4px 20px -4px rgba(31,42,68,0.12), 0 2px 0 0 rgba(31,42,68,1);
+}
+
 @media print{
   body{ background:#fff; }
   .no-print{ display:none !important; }
@@ -181,34 +224,38 @@ body{
 <body class="px-3 md:px-8 py-6 md:py-10">
 
 <!-- ============ TOP TOOLBAR ============ -->
-<div class="no-print max-w-5xl mx-auto mb-5 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm">
-  <div class="flex items-center gap-2">
-    <span class="font-display font-700 text-lg" style="color:var(--ink)">🧳 Word Passport</span>
-    <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border" style="color:var(--ink-soft); border-color:var(--paper-deep)">ESL Speaking Kit</span>
+<div class="no-print max-w-5xl mx-auto mb-5 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-lg">
+  <div class="flex items-center gap-3">
+    <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire Logo" class="company-logo">
+    <div class="h-8 w-px bg-slate-200"></div>
+    <div class="flex items-center gap-2">
+      <span class="font-display font-700 text-lg" style="color:var(--ink)">🧳 Word Passport</span>
+      <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border" style="color:var(--ink-soft); border-color:var(--paper-deep)">ESL Speaking Kit</span>
+    </div>
   </div>
   <div class="flex flex-wrap items-center gap-2 justify-end">
-    <button id="btn-open-auth" onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition" style="background:var(--ink)">
+    <button id="btn-open-auth" onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition shadow-md hover:shadow-lg" style="background:var(--ink)">
       👤 Đăng nhập / Đăng ký
     </button>
     <div id="user-chip-wrap" class="hidden relative">
-      <button id="user-chip" onclick="toggleUserMenu()" class="px-3 py-2 text-sm font-semibold rounded-xl border flex items-center gap-2" style="border-color:var(--paper-deep); color:var(--ink)">
+      <button id="user-chip" onclick="toggleUserMenu()" class="px-3 py-2 text-sm font-semibold rounded-xl border flex items-center gap-2 hover:shadow-md transition" style="border-color:var(--paper-deep); color:var(--ink)">
         <span class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:var(--teal)" id="user-avatar">?</span>
         <span id="user-email-label" class="max-w-[140px] truncate"></span>
         <span class="text-xs">▾</span>
       </button>
-      <div id="user-menu" class="hidden absolute right-0 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-lg z-40 overflow-hidden">
+      <div id="user-menu" class="hidden absolute right-0 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-xl z-40 overflow-hidden">
         <button onclick="scrollToMyEntries(); closeUserMenu();" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2">📂 Bài đã lưu</button>
         <button onclick="toggleDebugLog()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t border-slate-100">🐞 Xem log kết nối</button>
         <button onclick="doSignOut()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t border-slate-100">🚪 Đăng xuất</button>
       </div>
     </div>
-    <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white transition" style="background:var(--sage)">
+    <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white transition shadow-md hover:shadow-lg" style="background:var(--sage)">
       🛡️ Quản trị
     </button>
     <button onclick="resetPoster()" class="px-4 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50 transition" style="border-color:var(--paper-deep); color:var(--ink-soft)">
       🗑️ Xoá form
     </button>
-    <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition flex items-center gap-2" style="background:var(--coral)">
+    <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition shadow-md hover:shadow-lg flex items-center gap-2" style="background:var(--coral)">
       🖨️ In / Xuất PDF
     </button>
   </div>
@@ -224,9 +271,6 @@ body{
     <button onclick="testConnection()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50 transition" style="border-color:var(--ink-soft); color:var(--ink-soft)">
       🔁 Kiểm tra lại
     </button>
-    <!-- <button onclick="toggleDebugLog()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50 transition" style="border-color:var(--ink-soft); color:var(--ink-soft)">
-      🐞 Log
-    </button> -->
   </div>
 </div>
 
@@ -273,7 +317,7 @@ body{
         <input id="auth-password" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter') submitAuthForm()" class="w-full mt-1 px-3 py-2.5 rounded-xl border bg-white text-sm" style="border-color:var(--paper-deep)">
         <p class="text-[11px] mt-1" style="color:var(--ink-soft)">Tối thiểu 6 ký tự.</p>
       </div>
-      <button id="auth-submit-btn" onclick="submitAuthForm()" class="w-full py-2.5 rounded-xl text-white font-semibold text-sm transition" style="background:var(--coral)">
+      <button id="auth-submit-btn" onclick="submitAuthForm()" class="w-full py-2.5 rounded-xl text-white font-semibold text-sm transition shadow-md hover:shadow-lg" style="background:var(--coral)">
         Đăng nhập
       </button>
       <p id="auth-hint" class="text-xs text-center" style="color:var(--ink-soft)"></p>
@@ -282,32 +326,17 @@ body{
 </div>
 
 <!-- ============ ADMIN MODAL ============ -->
-<!-- <div id="admin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm no-print px-4">
-  <div class="bg-white rounded-3xl border-2 max-w-3xl w-full p-6 shadow-2xl max-h-[88vh] flex flex-col" style="border-color:var(--ink)">
-    <div class="flex items-center justify-between mb-1">
-      <h3 class="font-display font-700 text-xl" style="color:var(--ink)">🛡️ Bảng quản trị</h3>
-      <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">✕</button>
-    </div>
-    <p class="text-xs mb-4" style="color:var(--ink-soft)">Xem kết quả của tất cả học viên và nhắc những bạn chưa nộp.</p>
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 p-3 rounded-xl" style="background:var(--paper-deep)">
-      <p id="admin-summary" class="text-xs font-semibold" style="color:var(--ink)">Đang tải...</p>
-      <div class="flex gap-2 flex-wrap">
-        <button onclick="mailtoBulkMissing()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--coral)">✉️ Gửi mail nhắc (chưa nộp)</button>
-        <button onclick="copyMissingEmails()" class="px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--ink-soft); color:var(--ink-soft)">📋 Copy email chưa nộp</button>
-      </div>
-    </div>
-    
-  </div>
-</div> -->
 <div id="admin-list" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+
 <!-- ============ MAIN POSTER ============ -->
-<div class="print-card max-w-5xl mx-auto bg-white border-2 rounded-3xl shadow-[0_2px_0_0_rgba(31,42,68,1),0_18px_40px_-15px_rgba(31,42,68,0.35)] overflow-hidden relative" style="border-color:var(--ink)">
+<div class="print-card max-w-5xl mx-auto bg-white border-2 rounded-3xl card-elevated overflow-hidden relative" style="border-color:var(--ink)">
   <div class="binder-holes">
     <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
 
-  <!-- Header banner -->
-  <div class="border-b-2 px-6 md:px-10 py-7 md:py-9 flex flex-col sm:flex-row items-center gap-5 lg:pl-16" style="border-color:var(--ink); background: var(--sun-soft);">
+  <!-- Header banner với logo -->
+  <div class="border-b-2 px-6 md:px-10 py-7 md:py-9 flex flex-col sm:flex-row items-center gap-5 lg:pl-16" style="border-color:var(--ink); background: linear-gradient(135deg, var(--sun-soft) 0%, #FFE8A3 100%);">
+    <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire Logo" class="company-logo-lg">
     <div class="stamp">
       <span class="stamp-text">Unit 1<br>✓ Verified</span>
     </div>
@@ -323,8 +352,8 @@ body{
       <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu kết quả của bạn
     </p>
     <div class="flex gap-2">
-      <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--teal)">💾 Lưu</button>
-      <button onclick="saveCurrentEntry({asNew:true})" class="px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
+      <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background:var(--teal)">💾 Lưu</button>
+      <button onclick="saveCurrentEntry({asNew:true})" class="px-4 py-2 rounded-lg text-xs font-bold border-2 hover:bg-white transition" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
     </div>
   </div>
 
@@ -333,30 +362,30 @@ body{
     <!-- LEFT: speaking outline -->
     <div class="lg:col-span-7 p-6 md:p-9 lg:border-r-2" style="border-color:var(--ink)">
       <div class="flex items-center gap-3 mb-6">
-        <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--coral); border-color:var(--ink)">A</span>
+        <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--coral); border-color:var(--ink)">A</span>
         <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Speaking Outline</h3>
       </div>
 
       <!-- THÔNG TIN HỌC VIÊN -->
-      <div class="mb-6 p-4 rounded-2xl border-2" style="background:var(--sun-soft); border-color:var(--sun)">
+      <div class="mb-6 p-5 rounded-2xl border-2" style="background: linear-gradient(135deg, var(--sun-soft) 0%, #FFE8A3 100%); border-color:var(--sun)">
         <p class="text-xs uppercase font-bold mb-3 tracking-wider" style="color:var(--coral-dark)">📝 Thông tin học viên</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Họ và tên *</label>
             <input type="text" id="input-name" placeholder="Nguyễn Văn A"
-              class="w-full px-3 py-2 rounded-xl border-2 bg-white font-semibold text-sm"
+              class="w-full px-3 py-2.5 rounded-xl border-2 bg-white font-semibold text-sm shadow-sm focus:shadow-md transition"
               style="border-color:var(--ink-soft); color:var(--ink)"
               oninput="onFieldInput()">
           </div>
           <div>
             <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Số báo danh *</label>
             <input type="text" id="input-student-id" placeholder="VD: 001"
-              class="w-full px-3 py-2 rounded-xl border-2 bg-white font-semibold text-sm font-mono"
+              class="w-full px-3 py-2.5 rounded-xl border-2 bg-white font-semibold text-sm font-mono shadow-sm focus:shadow-md transition"
               style="border-color:var(--ink-soft); color:var(--ink)"
               oninput="onFieldInput()">
           </div>
         </div>
-        <p class="text-[11px] mt-2" style="color:var(--ink-soft)">💡 Tiêu đề bản lưu sẽ là: <code class="px-1 rounded" style="background:#fff">[SBD: xxx] Tên</code></p>
+        <p class="text-[11px] mt-2" style="color:var(--ink-soft)">💡 Tiêu đề bản lưu sẽ là: <code class="px-1 rounded bg-white">[SBD: xxx] Tên</code></p>
       </div>
 
       <div class="space-y-5 text-lg md:text-xl font-semibold leading-relaxed" style="color:var(--ink)">
@@ -416,7 +445,7 @@ body{
           <span style="color:var(--ink-soft)">.</span>
         </div>
 
-        <div class="p-4 rounded-2xl border-2 border-dashed mt-4" style="background:var(--teal-soft); border-color:var(--teal)">
+        <div class="p-5 rounded-2xl border-2 border-dashed mt-4" style="background: linear-gradient(135deg, var(--teal-soft) 0%, #D4EDE9 100%); border-color:var(--teal)">
           <span class="text-xs uppercase font-bold block mb-2" style="color:var(--teal)">⭐ Custom Room Activity</span>
           <div class="sentence-row leading-relaxed text-base md:text-lg">
             <span>I like</span>
@@ -441,12 +470,12 @@ body{
     </div>
 
     <!-- RIGHT: vocabulary bank -->
-    <div class="lg:col-span-5 p-6 md:p-9" style="background: #FAFAF6;">
+    <div class="lg:col-span-5 p-6 md:p-9" style="background: linear-gradient(135deg, #FAFAF6 0%, #F5F5F0 100%);">
       <div class="flex items-center gap-3 mb-6">
-        <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--teal); border-color:var(--ink)">B</span>
+        <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--teal); border-color:var(--ink)">B</span>
         <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Vocabulary Bank</h3>
       </div>
-      <p class="text-xs mb-4 p-2.5 rounded-lg border no-print" style="background:#fff; border-color:var(--paper-deep); color:var(--ink-soft)">
+      <p class="text-xs mb-4 p-2.5 rounded-lg border" style="background:#fff; border-color:var(--paper-deep); color:var(--ink-soft)">
         💡 <strong>Tip:</strong> Click một ô trống bên trái, rồi nhấn một từ bên dưới để điền nhanh.
       </p>
       <div class="space-y-5">
@@ -475,12 +504,12 @@ body{
   </div>
 
   <!-- Live preview -->
-  <div class="p-6 md:p-9 lg:pl-16 border-b-2" style="background: var(--sun-soft); border-color:var(--ink)">
+  <div class="p-6 md:p-9 lg:pl-16 border-b-2" style="background: linear-gradient(135deg, var(--sun-soft) 0%, #FFE8A3 100%); border-color:var(--ink)">
     <div class="flex items-center gap-3 mb-4">
-      <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--sun); border-color:var(--ink)">👁️</span>
+      <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--sun); border-color:var(--ink)">👁️</span>
       <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Live Preview — Bài nói của bạn</h3>
     </div>
-    <div class="bg-white border-2 rounded-2xl p-5 md:p-6 preview-line text-base md:text-lg font-medium" style="border-color:var(--ink); color:var(--ink)">
+    <div class="bg-white border-2 rounded-2xl p-5 md:p-6 preview-line text-base md:text-lg font-medium shadow-sm" style="border-color:var(--ink); color:var(--ink)">
       <p id="live-preview">
         👋 Hello! My name is <span class="pv-empty">...</span>. I'm <span class="pv-empty">...</span> years old.
         I like <span class="pv-empty">...</span>. I like <span class="pv-empty">...</span>.
@@ -492,13 +521,13 @@ body{
   </div>
 
   <!-- Model passage -->
-  <div class="p-6 md:p-9 lg:pl-16" style="background: var(--sage-soft);">
+  <div class="p-6 md:p-9 lg:pl-16" style="background: linear-gradient(135deg, var(--sage-soft) 0%, #D4E8D5 100%);">
     <div class="flex items-center gap-3 mb-4">
-      <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--sage); border-color:var(--ink)">C</span>
+      <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--sage); border-color:var(--ink)">C</span>
       <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Model Speaking Passage</h3>
     </div>
-    <div class="bg-white border-2 rounded-2xl p-5 md:p-6 relative" style="border-color:var(--ink)">
-      <div class="absolute -top-3 right-4 font-bold text-xs px-3 py-1 rounded-full border uppercase" style="background:var(--sun-soft); border-color:var(--sun); color:var(--coral-dark)">
+    <div class="bg-white border-2 rounded-2xl p-5 md:p-6 relative shadow-sm" style="border-color:var(--ink)">
+      <div class="absolute -top-3 right-4 font-bold text-xs px-3 py-1 rounded-full border uppercase shadow-sm" style="background:var(--sun-soft); border-color:var(--sun); color:var(--coral-dark)">
         Level A2 / B1
       </div>
       <p class="leading-relaxed text-base md:text-lg font-medium" style="color:var(--ink)">
@@ -511,20 +540,20 @@ body{
 
 <!-- ============ MY SAVED ENTRIES (hiển thị trực tiếp trên màn hình) ============ -->
 <div id="my-entries-section" class="no-print hidden max-w-5xl mx-auto mt-8">
-  <div class="bg-white border-2 rounded-3xl shadow-md overflow-hidden" style="border-color:var(--ink)">
-    <div class="px-6 md:px-8 py-5 flex items-center justify-between gap-3 flex-wrap" style="background:var(--teal-soft); border-bottom:2px solid var(--ink)">
+  <div class="bg-white border-2 rounded-3xl shadow-lg overflow-hidden" style="border-color:var(--ink)">
+    <div class="px-6 md:px-8 py-5 flex items-center justify-between gap-3 flex-wrap" style="background: linear-gradient(135deg, var(--teal-soft) 0%, #D4EDE9 100%); border-bottom:2px solid var(--ink)">
       <div class="flex items-center gap-3">
-        <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--teal); border-color:var(--ink)">📂</span>
+        <span class="flex h-10 w-10 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2 shadow-md" style="background:var(--teal); border-color:var(--ink)">📂</span>
         <div>
-          <h3 class="font-display font-700 text-lg" style="color:var(--ink)">Bài đã lưu của bạn</h3>
+          <h3 class="font-display font-700 text-lg" style="color:var(--ink)">Danh sách bài đã lưu</h3>
           <p class="text-xs" style="color:var(--ink-soft)">Tất cả bản ghi bạn đã lưu vào database</p>
         </div>
       </div>
       <div class="flex gap-2">
-        <button onclick="startNewDraft()" class="px-3 py-2 rounded-xl text-xs font-bold border-2 border-dashed hover:bg-white transition" style="border-color:var(--teal); color:var(--teal)">
+        <button onclick="startNewDraft()" class="px-3 py-2 rounded-xl text-xs font-bold border-2 border-dashed hover:bg-white transition shadow-sm" style="border-color:var(--teal); color:var(--teal)">
           ➕ Tạo bản mới
         </button>
-        <button onclick="loadMyEntries()" class="px-3 py-2 rounded-xl text-xs font-bold border hover:bg-white transition" style="border-color:var(--ink-soft); color:var(--ink-soft)">
+        <button onclick="loadMyEntries()" class="px-3 py-2 rounded-xl text-xs font-bold border hover:bg-white transition shadow-sm" style="border-color:var(--ink-soft); color:var(--ink-soft)">
           🔄 Làm mới
         </button>
       </div>
@@ -533,8 +562,9 @@ body{
   </div>
 </div>
 
-<p class="no-print max-w-5xl mx-auto text-center text-[11px] mt-5" style="color:var(--ink-soft)">
-  Dữ liệu được lưu riêng cho từng tài khoản qua Supabase — chỉ bạn và giáo viên (admin) mới xem được.
+<p class="no-print max-w-5xl mx-auto text-center text-[11px] mt-5 flex items-center justify-center gap-2" style="color:var(--ink-soft)">
+  <img src="https://wvdikewfuighsnxqjisb.supabase.co/storage/v1/object/public/enspire/enspire_assets/enspire_logo_company.png" alt="Enspire" class="h-4 w-auto opacity-60">
+  © BẢN QUYỀN THUỘC VỀ ENSPIRE
 </p>
 
 <script type="module">
@@ -747,7 +777,6 @@ async function testConnection(){
   updateConnectionStatus('warn', 'Đang kiểm tra...');
   logDebug('Bắt đầu kiểm tra kết nối Supabase...');
   try {
-    // Test 1: ping REST endpoint
     const t0 = performance.now();
     const { data, error, status } = await sb.from('poster_entries').select('id').limit(1);
     const t1 = performance.now();
@@ -837,7 +866,6 @@ async function handleSessionChange(session){
   currentUser = session ? session.user : null;
   if (currentUser){
     logDebug('User hiện tại: ' + currentUser.email + ' (id: ' + currentUser.id + ')');
-    // Upsert profile nếu chưa có
     try {
       const { data: existingProfile, error: selErr } = await sb.from('profiles').select('*').eq('id', currentUser.id).maybeSingle();
       if (selErr){
@@ -918,7 +946,6 @@ async function loadMyEntries(){
   logDebug('Tải danh sách entries của user...');
   const { data, error } = await sb.from('poster_entries')
     .select('*')
-    // .eq('user_id', currentUser.id)
     .order('updated_at', { ascending:false });
   if (error){
     logDebug('❌ Lỗi tải entries: ' + error.message + ' (code: ' + (error.code||'n/a') + ')', 'error');
@@ -975,7 +1002,7 @@ function renderMyEntriesList(){
           <p class="text-[11px] font-mono mt-1" style="color:var(--ink-soft)">Cập nhật: ${fmtDate(e.updated_at)}</p>
         </div>
         <div class="flex gap-1.5 flex-shrink-0">
-          <button data-load-id="${e.id}" class="entry-load-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--teal)">Xem</button>
+          <button data-load-id="${e.id}" class="entry-load-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-sm" style="background:var(--teal)">Xem</button>
       
         </div>
       </div>
@@ -1033,11 +1060,6 @@ function scrollToMyEntries(){
 // ========== SAVE (CÓ DEBUG CHI TIẾT) ==========
 async function saveCurrentEntry({ asNew=false, silent=false } = {}){
   const btn = document.getElementById('btn-save-main');
-  // if (!currentUser){
-  //   openAuthModal();
-  //   showToast('🔒', 'Cần đăng nhập', 'Hãy đăng nhập để lưu kết quả.');
-  //   return;
-  // }
   const name = (document.getElementById('input-name').value || '').trim();
   const sbd = (document.getElementById('input-student-id').value || '').trim();
   if (!name && !sbd){
@@ -1047,7 +1069,6 @@ async function saveCurrentEntry({ asNew=false, silent=false } = {}){
   const formData = getFormData();
   const title = buildTitle();
 
-  // Disable nút khi đang lưu
   const originalText = btn.innerText;
   btn.disabled = true;
   btn.innerText = '⏳ Đang lưu...';
@@ -1055,12 +1076,10 @@ async function saveCurrentEntry({ asNew=false, silent=false } = {}){
 
   try {
     if (currentEntryId && !asNew){
-      // UPDATE
       logDebug(`📝 UPDATE entry ${currentEntryId}: title="${title}"`);
       const { data, error } = await sb.from('poster_entries')
         .update({ title, data: formData, updated_at: new Date().toISOString() })
         .eq('id', currentEntryId)
-        //.eq('user_id', currentUser.id)
         .select()
         .single();
 
@@ -1072,9 +1091,7 @@ async function saveCurrentEntry({ asNew=false, silent=false } = {}){
       logDebug(`✅ UPDATE thành công.`, 'ok');
       if (!silent) showToast('💾', 'Đã cập nhật!', `"${title}"`);
     } else {
-      // INSERT
       const payload = {
-        // user_id: currentUser.id,
         title: title,
         data: formData
       };
@@ -1087,7 +1104,6 @@ async function saveCurrentEntry({ asNew=false, silent=false } = {}){
 
       if (error){
         logDebug(`❌ INSERT lỗi: ${error.message} (code: ${error.code || 'n/a'})`, 'error');
-        // Gợi ý cụ thể theo mã lỗi
         if (error.code === '23503'){
           showToast('⚠️', 'Lỗi user_id', 'user_id không tồn tại. Hãy đăng xuất rồi đăng nhập lại.');
         } else if (error.code === '23502'){
@@ -1292,7 +1308,6 @@ autoResizeAllInputs();
 updateLivePreview();
 document.getElementById('input-name').focus();
 
-// Kiểm tra kết nối khi tải trang
 setTimeout(() => testConnection(), 500);
 
 Object.assign(window, {
