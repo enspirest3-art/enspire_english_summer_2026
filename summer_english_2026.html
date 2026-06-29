@@ -1,867 +1,1308 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Word Passport — Speaking Practice: All About Me & My Home</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
-  :root{
-    --paper:#FBF7EF;
-    --paper-deep:#F2ECDD;
-    --ink:#1F2A44;
-    --ink-soft:#5A6584;
-    --coral:#FF6B5B;
-    --coral-dark:#DE4C3B;
-    --teal:#1F8780;
-    --teal-soft:#E3F3F1;
-    --sun:#FFC94D;
-    --sun-soft:#FFF2D4;
-    --sage:#74A07A;
-    --sage-soft:#E8F2E9;
-  }
-  *{ -webkit-tap-highlight-color: transparent; }
-  body{
-    font-family:'Inter',sans-serif;
-    background-color: var(--paper);
-    color: var(--ink);
-  }
-  .font-display{ font-family:'Fredoka', sans-serif; }
-  .font-mono{ font-family:'Space Mono', monospace; }
+:root{
+  --paper:#FBF7EF;
+  --paper-deep:#F2ECDD;
+  --ink:#1F2A44;
+  --ink-soft:#5A6584;
+  --coral:#FF6B5B;
+  --coral-dark:#DE4C3B;
+  --teal:#1F8780;
+  --teal-soft:#E3F3F1;
+  --sun:#FFC94D;
+  --sun-soft:#FFF2D4;
+  --sage:#74A07A;
+  --sage-soft:#E8F2E9;
+}
+*{ -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+body{
+  font-family:'Inter',sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+.font-display{ font-family:'Fredoka', sans-serif; }
+.font-mono{ font-family:'Space Mono', monospace; }
 
-  /* Passport ink-stamp signature element */
-  .stamp{
-    width:92px; height:92px; border-radius:50%;
-    border:3px solid var(--ink);
-    display:flex; align-items:center; justify-content:center;
-    transform: rotate(-9deg);
-    position:relative; flex-shrink:0;
-    background: var(--paper);
-  }
-  .stamp::before{
-    content:''; position:absolute; inset:7px;
-    border:1.5px dashed var(--ink); border-radius:50%;
-  }
-  .stamp-text{
-    font-family:'Fredoka', sans-serif; font-weight:700;
-    font-size:10px; line-height:1.15; text-align:center;
-    letter-spacing:.04em; text-transform:uppercase; color:var(--ink);
-  }
+.stamp{
+  width:92px; height:92px; border-radius:50%;
+  border:3px solid var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  transform: rotate(-9deg);
+  position:relative; flex-shrink:0;
+  background: var(--paper);
+}
+.stamp::before{
+  content:''; position:absolute; inset:7px;
+  border:1.5px dashed var(--ink); border-radius:50%;
+}
+.stamp-text{
+  font-family:'Fredoka', sans-serif; font-weight:700;
+  font-size:10px; line-height:1.15; text-align:center;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--ink);
+}
+.binder-holes{
+  position:absolute; left:0; top:0; bottom:0; width:28px;
+  display:none;
+  flex-direction:column; justify-content:space-evenly; align-items:center;
+  background: repeating-linear-gradient(180deg, transparent 0, transparent 38px, rgba(31,42,68,0.06) 38px, rgba(31,42,68,0.06) 40px);
+}
+.binder-holes span{
+  width:13px; height:13px; border-radius:50%;
+  background: var(--paper);
+  border:2px solid var(--ink-soft);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.18);
+}
+@media (min-width: 1024px){ .binder-holes{ display:flex; } }
 
-  /* Decorative spiral-binder holes along the poster's left margin */
-  .binder-holes{
-    position:absolute; left:0; top:0; bottom:0; width:28px;
-    display:none;
-    flex-direction:column; justify-content:space-evenly; align-items:center;
-    background: repeating-linear-gradient(180deg, transparent 0, transparent 38px, rgba(31,42,68,0.06) 38px, rgba(31,42,68,0.06) 40px);
-  }
-  .binder-holes span{
-    width:13px; height:13px; border-radius:50%;
-    background: var(--paper);
-    border:2px solid var(--ink-soft);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,.18);
-  }
-  @media (min-width: 1024px){ .binder-holes{ display:flex; } }
+/* Input chống overflow - tự co giãn theo nội dung */
+.blank-input{
+  transition: all .15s ease;
+  min-width: 80px;
+  max-width: 100%;
+  width: auto;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.blank-input:focus{
+  outline:none; border-color: var(--coral); background-color:#fff;
+  box-shadow: 0 0 0 3px rgba(255,107,91,0.15);
+}
+.sentence-row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  width: 100%;
+  overflow: visible;
+}
+.sentence-row > span{ flex-shrink: 0; }
 
-  .blank-input{ transition: all .15s ease; }
-  .blank-input:focus{
-    outline:none; border-color: var(--coral); background-color:#fff;
-    box-shadow: 0 0 0 3px rgba(255,107,91,0.15);
-  }
+.tab-btn{ color: var(--ink); }
+.tab-btn[data-active="true"]{ background: var(--ink); color:#fff; }
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-thumb{ background: var(--ink-soft); border-radius:8px; }
 
-  .tab-btn{ color: var(--ink); }
-  .tab-btn[data-active="true"]{
-    background: var(--ink); color:#fff;
-  }
+.preview-line{ line-height: 2; word-wrap: break-word; overflow-wrap: break-word; }
+.preview-line .pv-val{
+  color: var(--coral-dark);
+  font-weight: 800;
+  border-bottom: 2px dashed var(--coral);
+  padding: 0 4px;
+  display: inline-block;
+  min-width: 20px;
+}
+.preview-line .pv-empty{
+  color: var(--ink-soft);
+  font-style: italic;
+  border-bottom: 2px dashed var(--ink-soft);
+  padding: 0 4px;
+  opacity: .6;
+}
 
-  ::-webkit-scrollbar{ width:8px; height:8px; }
-  ::-webkit-scrollbar-thumb{ background: var(--ink-soft); border-radius:8px; }
+/* Status chip */
+.status-chip{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 10px; border-radius:999px;
+  font-size:11px; font-weight:700;
+}
+.status-chip.ok{ background:var(--sage-soft); color:#2d6b35; }
+.status-chip.err{ background:#FDECEB; color:var(--coral-dark); }
+.status-chip.warn{ background:var(--sun-soft); color:var(--coral-dark); }
+.status-chip .dot{
+  width:8px; height:8px; border-radius:50%;
+  background:currentColor;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
 
-  @media print{
-    body{ background:#fff; }
-    .no-print{ display:none !important; }
-    .print-card{ box-shadow:none !important; border-color:#000 !important; }
-    input{ border-bottom:2px solid #000 !important; background:transparent !important; color:#000 !important; }
-  }
+/* Saved entries cards */
+.saved-card{
+  transition: all .2s ease;
+}
+.saved-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px rgba(31,42,68,0.2);
+}
+.saved-card .field-chip{
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--paper-deep);
+  color: var(--ink);
+  margin: 2px;
+}
+.saved-card .field-chip .label{
+  color: var(--ink-soft);
+  margin-right: 4px;
+}
+.saved-card .field-chip .val{
+  color: var(--coral-dark);
+  font-weight: 700;
+}
+
+/* Debug log */
+.debug-box{
+  font-family:'Space Mono', monospace;
+  font-size:11px;
+  background:#0d1220;
+  color:#a7f3d0;
+  border-radius:12px;
+  padding:12px;
+  max-height:180px;
+  overflow-y:auto;
+  white-space:pre-wrap;
+  word-break:break-all;
+}
+.debug-box .err-line{ color:#fca5a5; }
+.debug-box .warn-line{ color:#fcd34d; }
+.debug-box .info-line{ color:#93c5fd; }
+
+@media print{
+  body{ background:#fff; }
+  .no-print{ display:none !important; }
+  .print-card{ box-shadow:none !important; border-color:#000 !important; }
+  input{ border-bottom:2px solid #000 !important; background:transparent !important; color:#000 !important; }
+}
 </style>
 </head>
-
 <body class="px-3 md:px-8 py-6 md:py-10">
 
-  <!-- ============ TOP TOOLBAR ============ -->
-  <div class="no-print max-w-5xl mx-auto mb-5 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm">
-    <div class="flex items-center gap-2">
-      <span class="font-display font-700 text-lg" style="color:var(--ink)">🧳 Word Passport</span>
-      <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border" style="color:var(--ink-soft); border-color:var(--paper-deep)">ESL Speaking Kit</span>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-2 justify-end">
-      <!-- Logged-out state -->
-      <button id="btn-open-auth" onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition" style="background:var(--ink)">
-        👤 Đăng nhập / Đăng ký
+<!-- ============ TOP TOOLBAR ============ -->
+<div class="no-print max-w-5xl mx-auto mb-5 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm">
+  <div class="flex items-center gap-2">
+    <span class="font-display font-700 text-lg" style="color:var(--ink)">🧳 Word Passport</span>
+    <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border" style="color:var(--ink-soft); border-color:var(--paper-deep)">ESL Speaking Kit</span>
+  </div>
+  <div class="flex flex-wrap items-center gap-2 justify-end">
+    <button id="btn-open-auth" onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition" style="background:var(--ink)">
+      👤 Đăng nhập / Đăng ký
+    </button>
+    <div id="user-chip-wrap" class="hidden relative">
+      <button id="user-chip" onclick="toggleUserMenu()" class="px-3 py-2 text-sm font-semibold rounded-xl border flex items-center gap-2" style="border-color:var(--paper-deep); color:var(--ink)">
+        <span class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:var(--teal)" id="user-avatar">?</span>
+        <span id="user-email-label" class="max-w-[140px] truncate"></span>
+        <span class="text-xs">▾</span>
       </button>
-
-      <!-- Logged-in state (hidden by default) -->
-      <div id="user-chip-wrap" class="hidden relative">
-        <button id="user-chip" onclick="toggleUserMenu()" class="px-3 py-2 text-sm font-semibold rounded-xl border flex items-center gap-2" style="border-color:var(--paper-deep); color:var(--ink)">
-          <span class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:var(--teal)" id="user-avatar">?</span>
-          <span id="user-email-label" class="max-w-[140px] truncate"></span>
-          <span class="text-xs">▾</span>
-        </button>
-        <div id="user-menu" class="hidden absolute right-0 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-lg z-40 overflow-hidden">
-          <button onclick="openEntriesModal(); closeUserMenu();" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2">📂 Bài đã lưu</button>
-          <button onclick="doSignOut()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t border-slate-100">🚪 Đăng xuất</button>
-        </div>
+      <div id="user-menu" class="hidden absolute right-0 mt-2 w-52 bg-white border border-slate-200 rounded-xl shadow-lg z-40 overflow-hidden">
+        <button onclick="scrollToMyEntries(); closeUserMenu();" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2">📂 Bài đã lưu</button>
+        <button onclick="toggleDebugLog()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t border-slate-100">🐞 Xem log kết nối</button>
+        <button onclick="doSignOut()" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center gap-2 border-t border-slate-100">🚪 Đăng xuất</button>
       </div>
+    </div>
+    <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white transition" style="background:var(--sage)">
+      🛡️ Quản trị
+    </button>
+    <button onclick="resetPoster()" class="px-4 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50 transition" style="border-color:var(--paper-deep); color:var(--ink-soft)">
+      🗑️ Xoá form
+    </button>
+    <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition flex items-center gap-2" style="background:var(--coral)">
+      🖨️ In / Xuất PDF
+    </button>
+  </div>
+</div>
 
-      <button id="btn-open-admin" onclick="openAdminModal()" class="hidden px-4 py-2 text-sm font-semibold rounded-xl text-white transition" style="background:var(--sage)">
-        🛡️ Quản trị
-      </button>
-      <button onclick="resetPoster()" class="px-4 py-2 text-sm font-semibold rounded-xl border hover:bg-slate-50 transition" style="border-color:var(--paper-deep); color:var(--ink-soft)">
-        🗑️ Xoá form
-      </button>
-      <button onclick="window.print()" class="px-4 py-2 text-sm font-semibold rounded-xl text-white transition flex items-center gap-2" style="background:var(--coral)">
-        🖨️ In / Xuất PDF
-      </button>
+<!-- ============ CONNECTION STATUS BAR ============ -->
+<div class="no-print max-w-5xl mx-auto mb-4 flex items-center justify-between gap-3 flex-wrap bg-white border rounded-2xl px-4 py-2.5 shadow-sm" style="border-color:var(--paper-deep)">
+  <div class="flex items-center gap-2 flex-wrap">
+    <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--ink-soft)">Supabase:</span>
+    <span id="conn-status" class="status-chip warn"><span class="dot"></span> Đang kiểm tra...</span>
+  </div>
+  <div class="flex gap-2">
+    <button onclick="testConnection()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50 transition" style="border-color:var(--ink-soft); color:var(--ink-soft)">
+      🔁 Kiểm tra lại
+    </button>
+    <!-- <button onclick="toggleDebugLog()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50 transition" style="border-color:var(--ink-soft); color:var(--ink-soft)">
+      🐞 Log
+    </button> -->
+  </div>
+</div>
+
+<!-- ============ DEBUG LOG (ẩn mặc định) ============ -->
+<div id="debug-log-wrap" class="no-print hidden max-w-5xl mx-auto mb-4">
+  <div class="bg-white border rounded-2xl p-3 shadow-sm" style="border-color:var(--paper-deep)">
+    <div class="flex items-center justify-between mb-2">
+      <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--ink-soft)">🐞 Debug Log</p>
+      <button onclick="clearDebugLog()" class="text-[11px] font-semibold px-2 py-1 rounded hover:bg-slate-100" style="color:var(--ink-soft)">Xoá log</button>
+    </div>
+    <div id="debug-log" class="debug-box"></div>
+  </div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div id="toast-message" class="fixed bottom-5 right-5 z-50 translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
+  <div class="text-white px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 max-w-sm" style="background:var(--ink)">
+    <span class="text-xl" id="toast-icon">✅</span>
+    <div>
+      <p class="font-bold text-sm" id="toast-title">Success</p>
+      <p class="text-xs opacity-80" id="toast-desc">Done.</p>
     </div>
   </div>
+</div>
 
-  <!-- ============ TOAST ============ -->
-  <div id="toast-message" class="fixed bottom-5 right-5 z-50 translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
-    <div class="text-white px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 max-w-sm" style="background:var(--ink)">
-      <span class="text-xl" id="toast-icon">✅</span>
+<!-- ============ AUTH MODAL ============ -->
+<div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm no-print px-4">
+  <div class="bg-white rounded-3xl border-2 max-w-md w-full p-6 shadow-2xl" style="border-color:var(--ink)">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-display font-700 text-xl" style="color:var(--ink)">👤 Tài khoản của bạn</h3>
+      <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">✕</button>
+    </div>
+    <div class="flex gap-2 mb-5 p-1 rounded-xl" style="background:var(--paper-deep)">
+      <button id="tab-login" data-active="true" onclick="switchAuthTab('login')" class="tab-btn flex-1 py-2 rounded-lg text-sm font-semibold transition">Đăng nhập</button>
+      <button id="tab-signup" data-active="false" onclick="switchAuthTab('signup')" class="tab-btn flex-1 py-2 rounded-lg text-sm font-semibold transition">Đăng ký</button>
+    </div>
+    <div class="space-y-3">
       <div>
-        <p class="font-bold text-sm" id="toast-title">Success</p>
-        <p class="text-xs opacity-80" id="toast-desc">Done.</p>
+        <label class="text-xs font-semibold uppercase tracking-wide" style="color:var(--ink-soft)">Email</label>
+        <input id="auth-email" type="email" placeholder="ten@email.com" class="w-full mt-1 px-3 py-2.5 rounded-xl border bg-white text-sm" style="border-color:var(--paper-deep)">
       </div>
-    </div>
-  </div>
-
-  <!-- ============ AUTH MODAL ============ -->
-  <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm no-print px-4">
-    <div class="bg-white rounded-3xl border-2 max-w-md w-full p-6 shadow-2xl" style="border-color:var(--ink)">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-display font-700 text-xl" style="color:var(--ink)">👤 Tài khoản của bạn</h3>
-        <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">✕</button>
+      <div>
+        <label class="text-xs font-semibold uppercase tracking-wide" style="color:var(--ink-soft)">Mật khẩu</label>
+        <input id="auth-password" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter') submitAuthForm()" class="w-full mt-1 px-3 py-2.5 rounded-xl border bg-white text-sm" style="border-color:var(--paper-deep)">
+        <p class="text-[11px] mt-1" style="color:var(--ink-soft)">Tối thiểu 6 ký tự.</p>
       </div>
-
-      <div class="flex gap-2 mb-5 p-1 rounded-xl" style="background:var(--paper-deep)">
-        <button id="tab-login" data-active="true" onclick="switchAuthTab('login')" class="tab-btn flex-1 py-2 rounded-lg text-sm font-semibold transition">Đăng nhập</button>
-        <button id="tab-signup" data-active="false" onclick="switchAuthTab('signup')" class="tab-btn flex-1 py-2 rounded-lg text-sm font-semibold transition">Đăng ký</button>
-      </div>
-
-      <div class="space-y-3">
-        <div>
-          <label class="text-xs font-semibold uppercase tracking-wide" style="color:var(--ink-soft)">Email</label>
-          <input id="auth-email" type="email" placeholder="ten@email.com" class="w-full mt-1 px-3 py-2.5 rounded-xl border bg-white text-sm" style="border-color:var(--paper-deep)">
-        </div>
-        <div>
-          <label class="text-xs font-semibold uppercase tracking-wide" style="color:var(--ink-soft)">Mật khẩu</label>
-          <input id="auth-password" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter') submitAuthForm()" class="w-full mt-1 px-3 py-2.5 rounded-xl border bg-white text-sm" style="border-color:var(--paper-deep)">
-          <p class="text-[11px] mt-1" style="color:var(--ink-soft)">Tối thiểu 6 ký tự.</p>
-        </div>
-
-        <button id="auth-submit-btn" onclick="submitAuthForm()" class="w-full py-2.5 rounded-xl text-white font-semibold text-sm transition" style="background:var(--coral)">
-          Đăng nhập
-        </button>
-        <p id="auth-hint" class="text-xs text-center" style="color:var(--ink-soft)"></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ MY SAVED ENTRIES MODAL ============ -->
-  <div id="entries-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm no-print px-4">
-    <div class="bg-white rounded-3xl border-2 max-w-lg w-full p-6 shadow-2xl max-h-[85vh] flex flex-col" style="border-color:var(--ink)">
-      <div class="flex items-center justify-between mb-1">
-        <h3 class="font-display font-700 text-xl" style="color:var(--ink)">📂 Bài đã lưu của bạn</h3>
-        <button onclick="closeEntriesModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">✕</button>
-      </div>
-      <p class="text-xs mb-4" style="color:var(--ink-soft)">Mở để chỉnh sửa, hoặc bắt đầu một bản nháp hoàn toàn mới.</p>
-
-      <button onclick="startNewDraft()" class="mb-3 w-full py-2.5 rounded-xl border-2 border-dashed text-sm font-semibold hover:bg-slate-50 transition" style="border-color:var(--teal); color:var(--teal)">
-        ➕ Bắt đầu bản nháp mới
+      <button id="auth-submit-btn" onclick="submitAuthForm()" class="w-full py-2.5 rounded-xl text-white font-semibold text-sm transition" style="background:var(--coral)">
+        Đăng nhập
       </button>
+      <p id="auth-hint" class="text-xs text-center" style="color:var(--ink-soft)"></p>
+    </div>
+  </div>
+</div>
 
-      <div id="entries-list" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+<!-- ============ ADMIN MODAL ============ -->
+<!-- <div id="admin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm no-print px-4">
+  <div class="bg-white rounded-3xl border-2 max-w-3xl w-full p-6 shadow-2xl max-h-[88vh] flex flex-col" style="border-color:var(--ink)">
+    <div class="flex items-center justify-between mb-1">
+      <h3 class="font-display font-700 text-xl" style="color:var(--ink)">🛡️ Bảng quản trị</h3>
+      <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">✕</button>
+    </div>
+    <p class="text-xs mb-4" style="color:var(--ink-soft)">Xem kết quả của tất cả học viên và nhắc những bạn chưa nộp.</p>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 p-3 rounded-xl" style="background:var(--paper-deep)">
+      <p id="admin-summary" class="text-xs font-semibold" style="color:var(--ink)">Đang tải...</p>
+      <div class="flex gap-2 flex-wrap">
+        <button onclick="mailtoBulkMissing()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--coral)">✉️ Gửi mail nhắc (chưa nộp)</button>
+        <button onclick="copyMissingEmails()" class="px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--ink-soft); color:var(--ink-soft)">📋 Copy email chưa nộp</button>
+      </div>
+    </div>
+    
+  </div>
+</div> -->
+<div id="admin-list" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
+<!-- ============ MAIN POSTER ============ -->
+<div class="print-card max-w-5xl mx-auto bg-white border-2 rounded-3xl shadow-[0_2px_0_0_rgba(31,42,68,1),0_18px_40px_-15px_rgba(31,42,68,0.35)] overflow-hidden relative" style="border-color:var(--ink)">
+  <div class="binder-holes">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- Header banner -->
+  <div class="border-b-2 px-6 md:px-10 py-7 md:py-9 flex flex-col sm:flex-row items-center gap-5 lg:pl-16" style="border-color:var(--ink); background: var(--sun-soft);">
+    <div class="stamp">
+      <span class="stamp-text">Unit 1<br>✓ Verified</span>
+    </div>
+    <div class="text-center sm:text-left">
+      <h1 class="font-display font-700 text-2xl md:text-3xl tracking-tight" style="color:var(--ink)">Let's Talk About Me &amp; My Home</h1>
+      <p class="text-sm mt-1" style="color:var(--ink-soft)">First-day speaking practice • ESL preschool &amp; young learners</p>
     </div>
   </div>
 
-  <!-- ============ ADMIN MODAL ============ -->
-  <div id="admin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm no-print px-4">
-    <div class="bg-white rounded-3xl border-2 max-w-3xl w-full p-6 shadow-2xl max-h-[88vh] flex flex-col" style="border-color:var(--ink)">
-      <div class="flex items-center justify-between mb-1">
-        <h3 class="font-display font-700 text-xl" style="color:var(--ink)">🛡️ Bảng quản trị</h3>
-        <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-700 text-xl leading-none">✕</button>
-      </div>
-      <p class="text-xs mb-4" style="color:var(--ink-soft)">Xem kết quả của tất cả học viên và nhắc những bạn chưa nộp.</p>
+  <!-- Save status bar -->
+  <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-b" style="background:var(--paper-deep); border-color:var(--paper-deep)">
+    <p id="save-status" class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
+      <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu kết quả của bạn
+    </p>
+    <div class="flex gap-2">
+      <button id="btn-save-main" onclick="saveCurrentEntry({asNew:false})" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--teal)">💾 Lưu</button>
+      <button onclick="saveCurrentEntry({asNew:true})" class="px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu bản mới</button>
+    </div>
+  </div>
 
-      <!-- Summary + bulk actions -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 p-3 rounded-xl" style="background:var(--paper-deep)">
-        <p id="admin-summary" class="text-xs font-semibold" style="color:var(--ink)">Đang tải...</p>
-        <div class="flex gap-2 flex-wrap">
-          <button onclick="mailtoBulkMissing()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--coral)">✉️ Gửi mail nhắc (chưa nộp)</button>
-          <button onclick="copyMissingEmails()" class="px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--ink-soft); color:var(--ink-soft)">📋 Copy email chưa nộp</button>
+  <!-- Body grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 border-b-2 lg:pl-16" style="border-color:var(--ink)">
+    <!-- LEFT: speaking outline -->
+    <div class="lg:col-span-7 p-6 md:p-9 lg:border-r-2" style="border-color:var(--ink)">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--coral); border-color:var(--ink)">A</span>
+        <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Speaking Outline</h3>
+      </div>
+
+      <!-- THÔNG TIN HỌC VIÊN -->
+      <div class="mb-6 p-4 rounded-2xl border-2" style="background:var(--sun-soft); border-color:var(--sun)">
+        <p class="text-xs uppercase font-bold mb-3 tracking-wider" style="color:var(--coral-dark)">📝 Thông tin học viên</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Họ và tên *</label>
+            <input type="text" id="input-name" placeholder="Nguyễn Văn A"
+              class="w-full px-3 py-2 rounded-xl border-2 bg-white font-semibold text-sm"
+              style="border-color:var(--ink-soft); color:var(--ink)"
+              oninput="onFieldInput()">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Số báo danh *</label>
+            <input type="text" id="input-student-id" placeholder="VD: 001"
+              class="w-full px-3 py-2 rounded-xl border-2 bg-white font-semibold text-sm font-mono"
+              style="border-color:var(--ink-soft); color:var(--ink)"
+              oninput="onFieldInput()">
+          </div>
+        </div>
+        <p class="text-[11px] mt-2" style="color:var(--ink-soft)">💡 Tiêu đề bản lưu sẽ là: <code class="px-1 rounded" style="background:#fff">[SBD: xxx] Tên</code></p>
+      </div>
+
+      <div class="space-y-5 text-lg md:text-xl font-semibold leading-relaxed" style="color:var(--ink)">
+        <div class="sentence-row"><span>👋</span><span>Hello,</span></div>
+
+        <div class="sentence-row">
+          <span>My name is</span>
+          <input type="text" id="input-fullname" placeholder="..."
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
+            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span style="color:var(--ink-soft)">.</span>
+        </div>
+
+        <div class="sentence-row">
+          <span>I'm</span>
+          <input type="text" id="input-age" placeholder="..."
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
+            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span>years old.</span>
+        </div>
+
+        <div class="sentence-row">
+          <span>I like</span>
+          <input type="text" id="input-color" placeholder="[color]"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
+            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span style="color:var(--ink-soft)">.</span>
+        </div>
+
+        <div class="sentence-row">
+          <span>I like</span>
+          <input type="text" id="input-hobby" placeholder="[V-ing / Hobby]"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
+            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span style="color:var(--ink-soft)">.</span>
+        </div>
+
+        <div class="sentence-row">
+          <span>There are</span>
+          <input type="text" id="input-rooms" placeholder="[number]"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
+            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span>rooms in my house.</span>
+        </div>
+
+        <div class="sentence-row">
+          <span>My favorite part of my home is the</span>
+          <input type="text" id="input-favroom" placeholder="[favourite room]"
+            class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded"
+            style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
+            onclick="setActiveInput(this)" oninput="onFieldInput()">
+          <span style="color:var(--ink-soft)">.</span>
+        </div>
+
+        <div class="p-4 rounded-2xl border-2 border-dashed mt-4" style="background:var(--teal-soft); border-color:var(--teal)">
+          <span class="text-xs uppercase font-bold block mb-2" style="color:var(--teal)">⭐ Custom Room Activity</span>
+          <div class="sentence-row leading-relaxed text-base md:text-lg">
+            <span>I like</span>
+            <input type="text" id="input-custom-act1" placeholder="[V-ing activity]"
+              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded bg-white"
+              style="color:var(--coral-dark); border-color:var(--ink-soft)"
+              onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <span>and</span>
+            <input type="text" id="input-custom-act2" placeholder="[V-ing activity]"
+              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded bg-white"
+              style="color:var(--coral-dark); border-color:var(--ink-soft)"
+              onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <span>in the</span>
+            <input type="text" id="input-custom-room" placeholder="[room / area]"
+              class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 rounded bg-white"
+              style="color:var(--coral-dark); border-color:var(--ink-soft)"
+              onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <span style="color:var(--ink-soft)">.</span>
+          </div>
         </div>
       </div>
-
-      <div id="admin-list" class="space-y-2 overflow-y-auto flex-1 pr-1"></div>
-    </div>
-  </div>
-
-  <!-- ============ MAIN POSTER ============ -->
-  <div class="print-card max-w-5xl mx-auto bg-white border-2 rounded-3xl shadow-[0_2px_0_0_rgba(31,42,68,1),0_18px_40px_-15px_rgba(31,42,68,0.35)] overflow-hidden relative" style="border-color:var(--ink)">
-
-    <div class="binder-holes">
-      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
 
-    <!-- Header banner -->
-    <div class="border-b-2 px-6 md:px-10 py-7 md:py-9 flex flex-col sm:flex-row items-center gap-5 lg:pl-16" style="border-color:var(--ink); background: var(--sun-soft);">
-      <div class="stamp">
-        <span class="stamp-text">Unit 1<br>✓ Verified</span>
+    <!-- RIGHT: vocabulary bank -->
+    <div class="lg:col-span-5 p-6 md:p-9" style="background: #FAFAF6;">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--teal); border-color:var(--ink)">B</span>
+        <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Vocabulary Bank</h3>
       </div>
-      <div class="text-center sm:text-left">
-        <h1 class="font-display font-700 text-2xl md:text-3xl tracking-tight" style="color:var(--ink)">Let's Talk About Me &amp; My Home</h1>
-        <p class="text-sm mt-1" style="color:var(--ink-soft)">First-day speaking practice • ESL preschool &amp; young learners</p>
-      </div>
-    </div>
-
-    <!-- Save status bar -->
-    <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-b" style="background:var(--paper-deep); border-color:var(--paper-deep)">
-      <p id="save-status" class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
-        <span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu kết quả của bạn
+      <p class="text-xs mb-4 p-2.5 rounded-lg border no-print" style="background:#fff; border-color:var(--paper-deep); color:var(--ink-soft)">
+        💡 <strong>Tip:</strong> Click một ô trống bên trái, rồi nhấn một từ bên dưới để điền nhanh.
       </p>
-      <div class="flex gap-2">
-        <button onclick="saveCurrentEntry({asNew:false})" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--teal)">💾 Lưu</button>
-        <button onclick="saveCurrentEntry({asNew:true})" class="px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--teal); color:var(--teal)">🆕 Lưu thành bản mới</button>
-      </div>
-    </div>
-
-    <!-- Body grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 border-b-2 lg:pl-16" style="border-color:var(--ink)">
-
-      <!-- LEFT: speaking outline -->
-      <div class="lg:col-span-7 p-6 md:p-9 lg:border-r-2" style="border-color:var(--ink)">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--coral); border-color:var(--ink)">A</span>
-          <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Speaking Outline</h3>
+      <div class="space-y-5">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">🎨 Colors</span>
+          <div class="flex flex-wrap gap-1.5" id="bank-colors"></div>
         </div>
-
-        <div class="space-y-5 text-lg md:text-xl font-semibold leading-relaxed" style="color:var(--ink)">
-
-          <div class="flex items-center flex-wrap gap-2"><span>👋</span><span>Hello,</span></div>
-
-          <div class="flex items-center flex-wrap gap-2">
-            <span>My name is</span>
-            <input type="text" id="input-name" placeholder="..................................."
-                   class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-64 max-w-full"
-                   style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-                   onclick="setActiveInput(this)" oninput="onFieldInput()">
-            <span style="color:var(--ink-soft)">.</span>
-          </div>
-
-          <div class="flex items-center flex-wrap gap-2">
-            <span>I'm</span>
-            <input type="text" id="input-age" placeholder="........"
-                   class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-24"
-                   style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-                   onclick="setActiveInput(this)" oninput="onFieldInput()">
-            <span>years old.</span>
-          </div>
-
-          <div class="flex items-center flex-wrap gap-2">
-            <span>I like</span>
-            <input type="text" id="input-color" placeholder="[color]"
-                   class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-40"
-                   style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-                   onclick="setActiveInput(this)" oninput="onFieldInput()">
-            <span style="color:var(--ink-soft)">.</span>
-          </div>
-
-          <div class="flex items-start flex-wrap gap-2">
-            <span>I like</span>
-            <input type="text" id="input-hobby" placeholder="[V-ing / Hobby]"
-                   class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-72 max-w-full"
-                   style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-                   onclick="setActiveInput(this)" oninput="onFieldInput()">
-            <span style="color:var(--ink-soft)">.</span>
-          </div>
-
-          <div class="flex items-center flex-wrap gap-2">
-            <span>There are</span>
-            <input type="text" id="input-rooms" placeholder="[number]"
-                   class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-24"
-                   style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-                   onclick="setActiveInput(this)" oninput="onFieldInput()">
-            <span>rooms in my house.</span>
-          </div>
-
-          <div class="flex items-start flex-wrap gap-2">
-            <span>My favorite part of my home is the</span>
-            <input type="text" id="input-favroom" placeholder="[favourite room]"
-                   class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-52"
-                   style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)"
-                   onclick="setActiveInput(this)" oninput="onFieldInput()">
-            <span style="color:var(--ink-soft)">.</span>
-          </div>
-
-          <div class="p-4 rounded-2xl border-2 border-dashed mt-4" style="background:var(--teal-soft); border-color:var(--teal)">
-            <span class="text-xs uppercase font-bold block mb-2" style="color:var(--teal)">⭐ Custom Room Activity</span>
-            <div class="flex items-center flex-wrap gap-2 leading-relaxed text-base md:text-lg">
-              <span>I like</span>
-              <input type="text" id="input-custom-act1" placeholder="[V-ing activity]"
-                     class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-44 bg-white"
-                     style="color:var(--coral-dark); border-color:var(--ink-soft)"
-                     onclick="setActiveInput(this)" oninput="onFieldInput()">
-              <span>and</span>
-              <input type="text" id="input-custom-act2" placeholder="[V-ing activity]"
-                     class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-44 bg-white"
-                     style="color:var(--coral-dark); border-color:var(--ink-soft)"
-                     onclick="setActiveInput(this)" oninput="onFieldInput()">
-              <span>in the</span>
-              <input type="text" id="input-custom-room" placeholder="[room / area]"
-                     class="blank-input font-extrabold text-center border-b-2 border-dashed px-2 py-0.5 rounded w-36 bg-white"
-                     style="color:var(--coral-dark); border-color:var(--ink-soft)"
-                     onclick="setActiveInput(this)" oninput="onFieldInput()">
-              <span style="color:var(--ink-soft)">.</span>
-            </div>
-          </div>
-
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">⚽ Hobbies (V-ing)</span>
+          <div class="flex flex-wrap gap-1.5" id="bank-hobbies"></div>
         </div>
-      </div>
-
-      <!-- RIGHT: vocabulary bank -->
-      <div class="lg:col-span-5 p-6 md:p-9" style="background: #FAFAF6;">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--teal); border-color:var(--ink)">B</span>
-          <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Vocabulary Bank</h3>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--coral-dark)">🔢 Room Numbers</span>
+          <div class="flex flex-wrap gap-1.5" id="bank-numbers"></div>
         </div>
-
-        <p class="text-xs mb-4 p-2.5 rounded-lg border no-print" style="background:#fff; border-color:var(--paper-deep); color:var(--ink-soft)">
-          💡 <strong>Tip:</strong> Click a blank on the left, then tap a word below to fill it in instantly.
-        </p>
-
-        <div class="space-y-5">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">🎨 Colors</span>
-            <div class="flex flex-wrap gap-1.5" id="bank-colors"></div>
-          </div>
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">⚽ Hobbies (V-ing)</span>
-            <div class="flex flex-wrap gap-1.5" id="bank-hobbies"></div>
-          </div>
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--coral-dark)">🔢 Room Numbers</span>
-            <div class="flex flex-wrap gap-1.5" id="bank-numbers"></div>
-          </div>
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">🏡 Rooms &amp; Areas</span>
-            <div class="flex flex-wrap gap-1.5" id="bank-rooms"></div>
-          </div>
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--teal)">🏠 Room Activities (V-ing)</span>
-            <div class="flex flex-wrap gap-1.5" id="bank-activities"></div>
-          </div>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--ink-soft)">🏡 Rooms &amp; Areas</span>
+          <div class="flex flex-wrap gap-1.5" id="bank-rooms"></div>
         </div>
-      </div>
-    </div>
-
-    <!-- Model passage -->
-    <div class="p-6 md:p-9 lg:pl-16" style="background: var(--sage-soft);">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--sage); border-color:var(--ink)">C</span>
-        <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Model Speaking Passage</h3>
-      </div>
-
-      <div class="bg-white border-2 rounded-2xl p-5 md:p-6 relative" style="border-color:var(--ink)">
-        <div class="absolute -top-3 right-4 font-bold text-xs px-3 py-1 rounded-full border uppercase" style="background:var(--sun-soft); border-color:var(--sun); color:var(--coral-dark)">
-          Level A2 / B1
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2" style="color:var(--teal)">🏠 Room Activities (V-ing)</span>
+          <div class="flex flex-wrap gap-1.5" id="bank-activities"></div>
         </div>
-        <p class="leading-relaxed text-base md:text-lg font-medium" style="color:var(--ink)">
-          "Hello! My name is <strong class="underline decoration-wavy" style="color:var(--coral)">Lan</strong>. I'm <strong class="underline decoration-wavy" style="color:var(--coral)">28</strong> years old. I like <strong class="underline decoration-wavy" style="color:var(--coral)">pink</strong>. I like <strong class="underline decoration-wavy" style="color:var(--coral)">cooking and gardening</strong>.
-          There are <strong class="underline decoration-wavy" style="color:var(--coral)">4</strong> rooms in the house. My favorite part of my home is the <strong class="underline decoration-wavy" style="color:var(--coral)">balcony</strong>. I like <strong class="underline decoration-wavy" style="color:var(--coral)">reading books</strong> and <strong class="underline decoration-wavy" style="color:var(--coral)">watering flowers</strong> in the <strong class="underline decoration-wavy" style="color:var(--coral)">balcony</strong>."
-        </p>
       </div>
     </div>
   </div>
 
-  <p class="no-print max-w-5xl mx-auto text-center text-[11px] mt-5" style="color:var(--ink-soft)">
-    Dữ liệu được lưu riêng cho từng tài khoản qua Supabase — chỉ bạn mới xem được bài của mình.
-  </p>
+  <!-- Live preview -->
+  <div class="p-6 md:p-9 lg:pl-16 border-b-2" style="background: var(--sun-soft); border-color:var(--ink)">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--sun); border-color:var(--ink)">👁️</span>
+      <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Live Preview — Bài nói của bạn</h3>
+    </div>
+    <div class="bg-white border-2 rounded-2xl p-5 md:p-6 preview-line text-base md:text-lg font-medium" style="border-color:var(--ink); color:var(--ink)">
+      <p id="live-preview">
+        👋 Hello! My name is <span class="pv-empty">...</span>. I'm <span class="pv-empty">...</span> years old.
+        I like <span class="pv-empty">...</span>. I like <span class="pv-empty">...</span>.
+        There are <span class="pv-empty">...</span> rooms in my house.
+        My favorite part of my home is the <span class="pv-empty">...</span>.
+        I like <span class="pv-empty">...</span> and <span class="pv-empty">...</span> in the <span class="pv-empty">...</span>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Model passage -->
+  <div class="p-6 md:p-9 lg:pl-16" style="background: var(--sage-soft);">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="flex h-8 w-8 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--sage); border-color:var(--ink)">C</span>
+      <h3 class="font-display font-700 uppercase tracking-wide" style="color:var(--ink)">Model Speaking Passage</h3>
+    </div>
+    <div class="bg-white border-2 rounded-2xl p-5 md:p-6 relative" style="border-color:var(--ink)">
+      <div class="absolute -top-3 right-4 font-bold text-xs px-3 py-1 rounded-full border uppercase" style="background:var(--sun-soft); border-color:var(--sun); color:var(--coral-dark)">
+        Level A2 / B1
+      </div>
+      <p class="leading-relaxed text-base md:text-lg font-medium" style="color:var(--ink)">
+        "Hello! My name is <strong class="underline decoration-wavy" style="color:var(--coral)">Lan</strong>. I'm <strong class="underline decoration-wavy" style="color:var(--coral)">28</strong> years old. I like <strong class="underline decoration-wavy" style="color:var(--coral)">pink</strong>. I like <strong class="underline decoration-wavy" style="color:var(--coral)">cooking and gardening</strong>.
+        There are <strong class="underline decoration-wavy" style="color:var(--coral)">4</strong> rooms in the house. My favorite part of my home is the <strong class="underline decoration-wavy" style="color:var(--coral)">balcony</strong>. I like <strong class="underline decoration-wavy" style="color:var(--coral)">reading books</strong> and <strong class="underline decoration-wavy" style="color:var(--coral)">watering flowers</strong> in the <strong class="underline decoration-wavy" style="color:var(--coral)">balcony</strong>."
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MY SAVED ENTRIES (hiển thị trực tiếp trên màn hình) ============ -->
+<div id="my-entries-section" class="no-print hidden max-w-5xl mx-auto mt-8">
+  <div class="bg-white border-2 rounded-3xl shadow-md overflow-hidden" style="border-color:var(--ink)">
+    <div class="px-6 md:px-8 py-5 flex items-center justify-between gap-3 flex-wrap" style="background:var(--teal-soft); border-bottom:2px solid var(--ink)">
+      <div class="flex items-center gap-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-full text-white font-display font-700 text-sm border-2" style="background:var(--teal); border-color:var(--ink)">📂</span>
+        <div>
+          <h3 class="font-display font-700 text-lg" style="color:var(--ink)">Bài đã lưu của bạn</h3>
+          <p class="text-xs" style="color:var(--ink-soft)">Tất cả bản ghi bạn đã lưu vào database</p>
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="startNewDraft()" class="px-3 py-2 rounded-xl text-xs font-bold border-2 border-dashed hover:bg-white transition" style="border-color:var(--teal); color:var(--teal)">
+          ➕ Tạo bản mới
+        </button>
+        <button onclick="loadMyEntries()" class="px-3 py-2 rounded-xl text-xs font-bold border hover:bg-white transition" style="border-color:var(--ink-soft); color:var(--ink-soft)">
+          🔄 Làm mới
+        </button>
+      </div>
+    </div>
+    <div id="my-entries-list" class="p-4 md:p-6 space-y-3"></div>
+  </div>
+</div>
+
+<p class="no-print max-w-5xl mx-auto text-center text-[11px] mt-5" style="color:var(--ink-soft)">
+  Dữ liệu được lưu riêng cho từng tài khoản qua Supabase — chỉ bạn và giáo viên (admin) mới xem được.
+</p>
 
 <script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-  // ---------- Supabase setup ----------
-  const SUPABASE_URL = 'https://wvdikewfuighsnxqjisb.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_G_jgswtnG2zza0_WmW24Fw_85kkKrpY';
-  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ========== CẤU HÌNH SUPABASE ==========
+const SUPABASE_URL = 'https://wvdikewfuighsnxqjisb.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_G_jgswtnG2zza0_WmW24Fw_85kkKrpY';
 
-  // ---------- State ----------
-  let activeInput = null;
-  let currentUser = null;
-  let currentProfile = null;
-  let currentEntryId = null;
-  let myEntries = [];
-  let authMode = 'login';
-  let autosaveTimer = null;
-  let adminProfiles = [];
-  let adminEntriesByUser = {};
+// ========== DEBUG LOG ==========
+const debugLines = [];
+function logDebug(msg, level='info'){
+  const time = new Date().toLocaleTimeString('vi-VN');
+  const line = { time, msg, level };
+  debugLines.push(line);
+  if (debugLines.length > 100) debugLines.shift();
+  renderDebugLog();
+  if (level === 'error') console.error('[SB]', msg);
+  else if (level === 'warn') console.warn('[SB]', msg);
+  else console.log('[SB]', msg);
+}
+function renderDebugLog(){
+  const el = document.getElementById('debug-log');
+  if (!el) return;
+  el.innerHTML = debugLines.map(l => {
+    const cls = l.level === 'error' ? 'err-line' : l.level === 'warn' ? 'warn-line' : 'info-line';
+    return `<div class="${cls}">[${l.time}] ${escapeHtml(String(l.msg))}</div>`;
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+function clearDebugLog(){ debugLines.length = 0; renderDebugLog(); }
+function toggleDebugLog(){
+  document.getElementById('debug-log-wrap').classList.toggle('hidden');
+}
 
-  const inputIds = [
-    'input-name', 'input-age', 'input-color', 'input-hobby',
-    'input-rooms', 'input-favroom', 'input-custom-act1',
-    'input-custom-act2', 'input-custom-room'
-  ];
-
-  // ---------- Word bank ----------
-  const WORD_BANK = {
-    'bank-colors':     ['red','pink','blue','green','yellow','purple'],
-    'bank-hobbies':    ['listening to music','shopping','travelling','gardening','playing sports','watching TV','cooking'],
-    'bank-numbers':    ['3','4','5','6','7','8'],
-    'bank-rooms':      ['bedroom','bathroom','living room','kitchen','garden','balcony'],
-    'bank-activities': ['reading books','watering flowers','sleeping','watching movies','making dinner','taking a bath','playing games','drinking hot tea']
-  };
-
-  function renderWordBank(){
-    Object.entries(WORD_BANK).forEach(([containerId, words]) => {
-      const el = document.getElementById(containerId);
-      const accent = containerId === 'bank-activities' ? 'activities' : 'default';
-      el.innerHTML = words.map(w => wordChip(w, accent)).join('');
-    });
-  }
-  function wordChip(word, style){
-    const base = style === 'activities'
-      ? 'background:var(--teal-soft); border-color:var(--teal); color:#155f59;'
-      : 'background:#fff; border-color:var(--paper-deep); color:var(--ink);';
-    return `<button data-word="${word}" class="word-chip px-2.5 py-1 text-xs font-semibold border rounded-lg transition hover:opacity-80" style="${base}">${word.charAt(0).toUpperCase()+word.slice(1)}</button>`;
-  }
-
-  document.addEventListener('click', (e) => {
-    const chip = e.target.closest('.word-chip');
-    if (chip) fillWord(chip.dataset.word);
+// ========== SUPABASE CLIENT ==========
+let sb;
+try {
+  logDebug(`Khởi tạo client: URL=${SUPABASE_URL}`);
+  logDebug(`Anon key (10 ký tự đầu): ${SUPABASE_ANON_KEY.substring(0, 10)}...`);
+  sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true }
   });
+  logDebug('Client Supabase đã tạo thành công.', 'ok');
+} catch (err){
+  logDebug('❌ Lỗi tạo client: ' + err.message, 'error');
+  updateConnectionStatus('err', 'Lỗi tạo client');
+}
 
-  // ---------- Form helpers ----------
-  function getFormData(){
-    const data = {};
-    inputIds.forEach(id => data[id] = document.getElementById(id).value);
-    return data;
+// ========== STATE ==========
+let activeInput = null;
+let currentUser = null;
+let currentProfile = null;
+let currentEntryId = null;
+let myEntries = [];
+let authMode = 'login';
+let autosaveTimer = null;
+let adminProfiles = [];
+let adminEntriesByUser = {};
+
+const inputIds = [
+  'input-fullname','input-age','input-color','input-hobby',
+  'input-rooms','input-favroom','input-custom-act1',
+  'input-custom-act2','input-custom-room'
+];
+
+// ========== WORD BANK ==========
+const WORD_BANK = {
+  'bank-colors':     ['red','pink','blue','green','yellow','purple'],
+  'bank-hobbies':    ['listening to music','shopping','travelling','gardening','playing sports','watching TV','cooking'],
+  'bank-numbers':    ['3','4','5','6','7','8'],
+  'bank-rooms':      ['bedroom','bathroom','living room','kitchen','garden','balcony'],
+  'bank-activities': ['reading books','watering flowers','sleeping','watching movies','making dinner','taking a bath','playing games','drinking hot tea']
+};
+
+function renderWordBank(){
+  Object.entries(WORD_BANK).forEach(([containerId, words]) => {
+    const el = document.getElementById(containerId);
+    const accent = containerId === 'bank-activities' ? 'activities' : 'default';
+    el.innerHTML = words.map(w => wordChip(w, accent)).join('');
+  });
+}
+function wordChip(word, style){
+  const base = style === 'activities'
+    ? 'background:var(--teal-soft); border-color:var(--teal); color:#155f59;'
+    : 'background:#fff; border-color:var(--paper-deep); color:var(--ink);';
+  return `<button data-word="${word}" class="word-chip px-2.5 py-1 text-xs font-semibold border rounded-lg transition hover:opacity-80" style="${base}">${word.charAt(0).toUpperCase()+word.slice(1)}</button>`;
+}
+document.addEventListener('click', (e) => {
+  const chip = e.target.closest('.word-chip');
+  if (chip) fillWord(chip.dataset.word);
+});
+
+// ========== AUTO-RESIZE INPUT ==========
+function autoResizeInput(el){
+  if (!el) return;
+  const canvas = autoResizeInput._canvas || (autoResizeInput._canvas = document.createElement('canvas'));
+  const ctx = canvas.getContext('2d');
+  const style = window.getComputedStyle(el);
+  ctx.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+  const placeholder = el.placeholder || '';
+  const text = el.value || placeholder;
+  const textWidth = ctx.measureText(text).width;
+  const newWidth = Math.max(80, Math.min(textWidth + 24, window.innerWidth - 80));
+  el.style.width = newWidth + 'px';
+}
+function autoResizeAllInputs(){
+  inputIds.forEach(id => autoResizeInput(document.getElementById(id)));
+}
+
+// ========== FORM HELPERS ==========
+function getFormData(){
+  const data = {};
+  inputIds.forEach(id => data[id] = document.getElementById(id).value);
+  return data;
+}
+function setFormData(data){
+  inputIds.forEach(id => {
+    const el = document.getElementById(id);
+    el.value = (data && data[id]) || '';
+    autoResizeInput(el);
+  });
+  updateLivePreview();
+}
+function clearForm(){
+  inputIds.forEach(id => {
+    const el = document.getElementById(id);
+    el.value = '';
+    autoResizeInput(el);
+  });
+  updateLivePreview();
+}
+function clearAllForm(){
+  clearForm();
+  document.getElementById('input-name').value = '';
+  document.getElementById('input-student-id').value = '';
+}
+function setActiveInput(el){ activeInput = el; }
+
+function fillWord(word){
+  if (!activeInput) {
+    showToast('👆', 'Chọn ô trống trước', 'Hãy click vào một ô trống trước khi chọn từ.');
+    return;
   }
-  function setFormData(data){
-    inputIds.forEach(id => document.getElementById(id).value = (data && data[id]) || '');
+  activeInput.value = word;
+  autoResizeInput(activeInput);
+  onFieldInput();
+  const inputs = Array.from(document.querySelectorAll('.blank-input'));
+  const idx = inputs.indexOf(activeInput);
+  if (idx !== -1 && idx < inputs.length - 1){
+    activeInput = inputs[idx + 1];
+    activeInput.focus();
+  } else {
+    activeInput = null;
   }
-  function clearForm(){
-    inputIds.forEach(id => document.getElementById(id).value = '');
+}
+
+function onFieldInput(){
+  if (document.activeElement && document.activeElement.classList.contains('blank-input')){
+    autoResizeInput(document.activeElement);
   }
-
-  function setActiveInput(el){ activeInput = el; }
-
-  function fillWord(word){
-    if (!activeInput) return;
-    activeInput.value = word;
-    onFieldInput();
-    const inputs = Array.from(document.querySelectorAll('.blank-input'));
-    const idx = inputs.indexOf(activeInput);
-    if (idx !== -1 && idx < inputs.length - 1){
-      activeInput = inputs[idx + 1];
-      activeInput.focus();
-    } else {
-      activeInput = null;
-    }
+  updateLivePreview();
+  if (currentUser && currentEntryId){
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(() => saveCurrentEntry({ silent:true }), 1500);
   }
+}
 
-  function onFieldInput(){
-    if (currentUser && currentEntryId){
-      clearTimeout(autosaveTimer);
-      autosaveTimer = setTimeout(() => saveCurrentEntry({ silent:true }), 1200);
-    }
-  }
+// ========== LIVE PREVIEW ==========
+function updateLivePreview(){
+  const v = (id) => {
+    const val = (document.getElementById(id).value || '').trim();
+    return val
+      ? `<span class="pv-val">${escapeHtml(val)}</span>`
+      : `<span class="pv-empty">...</span>`;
+  };
+  document.getElementById('live-preview').innerHTML =
+    `👋 Hello! My name is ${v('input-fullname')}. I'm ${v('input-age')} years old. ` +
+    `I like ${v('input-color')}. I like ${v('input-hobby')}. ` +
+    `There are ${v('input-rooms')} rooms in my house. ` +
+    `My favorite part of my home is the ${v('input-favroom')}. ` +
+    `I like ${v('input-custom-act1')} and ${v('input-custom-act2')} in the ${v('input-custom-room')}.`;
+}
 
-  function resetPoster(){
-    clearForm();
-    document.getElementById('input-name').focus();
-    showToast('🗑️', 'Đã xoá form', 'Các ô đã được làm trống. Bài đã lưu của bạn vẫn còn nguyên.');
-  }
+function resetPoster(){
+  if (!confirm('Xoá trắng tất cả các ô? Bài đã lưu trong database sẽ không bị ảnh hưởng.')) return;
+  clearAllForm();
+  document.getElementById('input-name').focus();
+  showToast('🗑️', 'Đã xoá form', 'Các ô đã được làm trống.');
+}
 
-  // ---------- Toast ----------
-  function showToast(icon, title, desc){
-    document.getElementById('toast-icon').innerText = icon;
-    document.getElementById('toast-title').innerText = title;
-    document.getElementById('toast-desc').innerText = desc;
-    const toast = document.getElementById('toast-message');
-    toast.classList.remove('translate-y-20','opacity-0');
-    setTimeout(() => toast.classList.add('translate-y-20','opacity-0'), 3800);
-  }
+// ========== TOAST ==========
+function showToast(icon, title, desc){
+  document.getElementById('toast-icon').innerText = icon;
+  document.getElementById('toast-title').innerText = title;
+  document.getElementById('toast-desc').innerText = desc;
+  const toast = document.getElementById('toast-message');
+  toast.classList.remove('translate-y-20','opacity-0');
+  setTimeout(() => toast.classList.add('translate-y-20','opacity-0'), 3800);
+}
 
-  // ---------- Auth modal ----------
-  function openAuthModal(){ document.getElementById('auth-modal').classList.remove('hidden'); }
-  function closeAuthModal(){
-    document.getElementById('auth-modal').classList.add('hidden');
-    document.getElementById('auth-hint').innerText = '';
-  }
-  function switchAuthTab(mode){
-    authMode = mode;
-    document.getElementById('tab-login').dataset.active = mode === 'login';
-    document.getElementById('tab-signup').dataset.active = mode === 'signup';
-    document.getElementById('auth-submit-btn').innerText = mode === 'login' ? 'Đăng nhập' : 'Tạo tài khoản';
-    document.getElementById('auth-hint').innerText = '';
-  }
+// ========== CONNECTION STATUS ==========
+function updateConnectionStatus(type, text){
+  const el = document.getElementById('conn-status');
+  el.className = 'status-chip ' + (type === 'ok' ? 'ok' : type === 'err' ? 'err' : 'warn');
+  el.innerHTML = `<span class="dot"></span> ${escapeHtml(text)}`;
+}
 
-  async function submitAuthForm(){
-    const email = document.getElementById('auth-email').value.trim();
-    const password = document.getElementById('auth-password').value;
-    const hint = document.getElementById('auth-hint');
-    if (!email || !password){ hint.innerText = 'Vui lòng nhập đầy đủ email và mật khẩu.'; return; }
-
-    hint.innerText = 'Đang xử lý...';
-    if (authMode === 'login'){
-      const { error } = await sb.auth.signInWithPassword({ email, password });
-      if (error){ hint.innerText = error.message; return; }
-      closeAuthModal();
-    } else {
-      const { error } = await sb.auth.signUp({ email, password });
-      if (error){ hint.innerText = error.message; return; }
-      hint.innerText = 'Đăng ký thành công! Kiểm tra email xác nhận (nếu được yêu cầu), sau đó đăng nhập.';
-      switchAuthTab('login');
-    }
-  }
-
-  async function doSignOut(){
-    await sb.auth.signOut();
-    closeUserMenu();
-    showToast('🚪', 'Đã đăng xuất', 'Hẹn gặp lại!');
-  }
-
-  function toggleUserMenu(){ document.getElementById('user-menu').classList.toggle('hidden'); }
-  function closeUserMenu(){ document.getElementById('user-menu').classList.add('hidden'); }
-
-  // ---------- Session handling ----------
-  sb.auth.onAuthStateChange((_event, session) => handleSessionChange(session));
-
-  async function handleSessionChange(session){
-    currentUser = session ? session.user : null;
-    if (currentUser){
-      const { data: profile, error } = await sb.from('profiles').select('*').eq('id', currentUser.id).single();
-      if (error) console.warn('Không tải được profile:', error.message);
-      currentProfile = profile || null;
-    } else {
-      currentProfile = null;
-    }
-    renderAuthUI();
-    if (currentUser){
-      await loadMyEntries();
-      if (myEntries.length > 0) openEntriesModal();
-      else showToast('👋', 'Chào mừng!', 'Điền thông tin rồi bấm "Lưu" để cất bản đầu tiên của bạn.');
-    } else {
-      myEntries = [];
-      currentEntryId = null;
-      updateSaveStatusUI();
-    }
-  }
-
-  function renderAuthUI(){
-    const openAuthBtn = document.getElementById('btn-open-auth');
-    const chipWrap = document.getElementById('user-chip-wrap');
-    const adminBtn = document.getElementById('btn-open-admin');
-    if (currentUser){
-      openAuthBtn.classList.add('hidden');
-      chipWrap.classList.remove('hidden');
-      document.getElementById('user-email-label').innerText = currentUser.email;
-      document.getElementById('user-avatar').innerText = currentUser.email.charAt(0).toUpperCase();
-      adminBtn.classList.toggle('hidden', !(currentProfile && currentProfile.is_admin));
-    } else {
-      openAuthBtn.classList.remove('hidden');
-      chipWrap.classList.add('hidden');
-      adminBtn.classList.add('hidden');
-    }
-    updateSaveStatusUI();
-  }
-
-  // ---------- Entries CRUD ----------
-  async function loadMyEntries(){
-    const { data, error } = await sb.from('poster_entries').select('*').order('updated_at', { ascending:false });
-    if (error){ showToast('⚠️', 'Lỗi tải dữ liệu', error.message); myEntries = []; return; }
-    myEntries = data || [];
-    renderEntriesList();
-  }
-
-  function fmtDate(iso){
-    try {
-      const d = new Date(iso);
-      return d.toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
-    } catch(e){ return iso; }
-  }
-
-  function renderEntriesList(){
-    const container = document.getElementById('entries-list');
-    if (!myEntries.length){
-      container.innerHTML = `<div class="text-center py-8 text-sm" style="color:var(--ink-soft)">
-        Bạn chưa lưu bài nào.<br>Điền thông tin trên poster rồi bấm <strong>💾 Lưu</strong>.
-      </div>`;
+async function testConnection(){
+  updateConnectionStatus('warn', 'Đang kiểm tra...');
+  logDebug('Bắt đầu kiểm tra kết nối Supabase...');
+  try {
+    // Test 1: ping REST endpoint
+    const t0 = performance.now();
+    const { data, error, status } = await sb.from('poster_entries').select('id').limit(1);
+    const t1 = performance.now();
+    const ms = Math.round(t1 - t0);
+    logDebug(`SELECT test: status=${status}, time=${ms}ms`);
+    if (error){
+      logDebug(`❌ Lỗi SELECT: ${error.message} (code: ${error.code || 'n/a'})`, 'error');
+      if (error.code === 'PGRST301' || error.message.includes('JWT') || error.message.includes('Invalid')){
+        updateConnectionStatus('err', 'Anon key sai / hết hạn');
+        logDebug('💡 Gợi ý: Kiểm tra lại anon key trong Supabase Dashboard > Settings > API', 'warn');
+      } else if (error.code === '42P01'){
+        updateConnectionStatus('err', 'Bảng chưa tồn tại');
+        logDebug('💡 Gợi ý: Tạo bảng poster_entries trong Supabase SQL Editor', 'warn');
+      } else if (error.message.includes('RLS') || error.code === '42501'){
+        updateConnectionStatus('err', 'Lỗi phân quyền RLS');
+        logDebug('💡 Gợi ý: Bật RLS policy cho phép anon/select', 'warn');
+      } else {
+        updateConnectionStatus('err', 'Lỗi: ' + error.message.substring(0, 50));
+      }
       return;
     }
-    container.innerHTML = myEntries.map(e => `
-      <div class="flex items-center justify-between gap-3 p-3 rounded-xl border ${e.id===currentEntryId ? 'ring-2' : ''}" style="border-color:var(--paper-deep); ${e.id===currentEntryId ? 'box-shadow:0 0 0 2px var(--teal) inset;' : ''}">
-        <div class="min-w-0">
-          <p class="text-sm font-bold truncate" style="color:var(--ink)">${escapeHtml(e.title || 'Học viên')}</p>
-          <p class="text-[11px] font-mono" style="color:var(--ink-soft)">Cập nhật: ${fmtDate(e.updated_at)}</p>
+    logDebug(`✅ Kết nối OK. Trả về ${data ? data.length : 0} dòng.`, 'ok');
+    updateConnectionStatus('ok', `Kết nối OK (${ms}ms)`);
+  } catch (err){
+    logDebug('❌ Exception: ' + err.message, 'error');
+    updateConnectionStatus('err', 'Lỗi mạng / URL sai');
+  }
+}
+
+// ========== AUTH ==========
+function openAuthModal(){ document.getElementById('auth-modal').classList.remove('hidden'); }
+function closeAuthModal(){
+  document.getElementById('auth-modal').classList.add('hidden');
+  document.getElementById('auth-hint').innerText = '';
+}
+function switchAuthTab(mode){
+  authMode = mode;
+  document.getElementById('tab-login').dataset.active = mode === 'login';
+  document.getElementById('tab-signup').dataset.active = mode === 'signup';
+  document.getElementById('auth-submit-btn').innerText = mode === 'login' ? 'Đăng nhập' : 'Tạo tài khoản';
+  document.getElementById('auth-hint').innerText = '';
+}
+async function submitAuthForm(){
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const hint = document.getElementById('auth-hint');
+  if (!email || !password){ hint.innerText = 'Vui lòng nhập đầy đủ email và mật khẩu.'; return; }
+  hint.innerText = 'Đang xử lý...';
+  logDebug(`Auth: ${authMode} - ${email}`);
+  if (authMode === 'login'){
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error){
+      logDebug('❌ Login lỗi: ' + error.message, 'error');
+      hint.innerText = '❌ ' + error.message;
+      return;
+    }
+    logDebug('✅ Login thành công. User ID: ' + data.user.id, 'ok');
+    closeAuthModal();
+    showToast('✅', 'Đăng nhập thành công', `Chào ${email}!`);
+  } else {
+    const { data, error } = await sb.auth.signUp({ email, password });
+    if (error){
+      logDebug('❌ Signup lỗi: ' + error.message, 'error');
+      hint.innerText = '❌ ' + error.message;
+      return;
+    }
+    logDebug('✅ Signup thành công.', 'ok');
+    hint.innerText = 'Đăng ký thành công! Kiểm tra email xác nhận (nếu được yêu cầu), sau đó đăng nhập.';
+    switchAuthTab('login');
+  }
+}
+async function doSignOut(){
+  await sb.auth.signOut();
+  closeUserMenu();
+  showToast('🚪', 'Đã đăng xuất', 'Hẹn gặp lại!');
+}
+function toggleUserMenu(){ document.getElementById('user-menu').classList.toggle('hidden'); }
+function closeUserMenu(){ document.getElementById('user-menu').classList.add('hidden'); }
+
+// ========== SESSION ==========
+sb.auth.onAuthStateChange((_event, session) => {
+  logDebug(`Auth state change: ${_event}, hasSession=${!!session}`);
+  handleSessionChange(session);
+});
+
+async function handleSessionChange(session){
+  currentUser = session ? session.user : null;
+  if (currentUser){
+    logDebug('User hiện tại: ' + currentUser.email + ' (id: ' + currentUser.id + ')');
+    // Upsert profile nếu chưa có
+    try {
+      const { data: existingProfile, error: selErr } = await sb.from('profiles').select('*').eq('id', currentUser.id).maybeSingle();
+      if (selErr){
+        logDebug('⚠️ Không đọc được profiles: ' + selErr.message, 'warn');
+      }
+      if (!existingProfile){
+        logDebug('Tạo profile mới cho user...');
+        const { error: insErr } = await sb.from('profiles').insert({
+          id: currentUser.id,
+          email: currentUser.email,
+          display_name: currentUser.email.split('@')[0],
+          is_admin: false
+        });
+        if (insErr){
+          logDebug('⚠️ Không tạo được profile: ' + insErr.message + ' (có thể đã tồn tại)', 'warn');
+        } else {
+          logDebug('✅ Đã tạo profile.', 'ok');
+        }
+      }
+      const { data: profile } = await sb.from('profiles').select('*').eq('id', currentUser.id).maybeSingle();
+      currentProfile = profile || null;
+      if (currentProfile) logDebug(`Profile: is_admin=${currentProfile.is_admin}`);
+    } catch (err){
+      logDebug('❌ Lỗi xử lý profile: ' + err.message, 'error');
+    }
+  } else {
+    currentProfile = null;
+  }
+  renderAuthUI();
+  if (currentUser){
+    await loadMyEntries();
+    document.getElementById('my-entries-section').classList.remove('hidden');
+    showToast('👋', 'Chào mừng!', 'Nhập Tên + Số báo danh, điền bài rồi bấm 💾 Lưu.');
+  } else {
+    myEntries = [];
+    currentEntryId = null;
+    document.getElementById('my-entries-section').classList.add('hidden');
+    updateSaveStatusUI();
+  }
+}
+
+function renderAuthUI(){
+  const openAuthBtn = document.getElementById('btn-open-auth');
+  const chipWrap = document.getElementById('user-chip-wrap');
+  const adminBtn = document.getElementById('btn-open-admin');
+  if (currentUser){
+    openAuthBtn.classList.add('hidden');
+    chipWrap.classList.remove('hidden');
+    document.getElementById('user-email-label').innerText = currentUser.email;
+    document.getElementById('user-avatar').innerText = currentUser.email.charAt(0).toUpperCase();
+    adminBtn.classList.toggle('hidden', !(currentProfile && currentProfile.is_admin));
+  } else {
+    openAuthBtn.classList.remove('hidden');
+    chipWrap.classList.add('hidden');
+    adminBtn.classList.add('hidden');
+  }
+  updateSaveStatusUI();
+}
+
+// ========== BUILD TITLE ==========
+function buildTitle(){
+  const name = (document.getElementById('input-name').value || '').trim();
+  const sbd = (document.getElementById('input-student-id').value || '').trim();
+  if (!name && !sbd) return 'Học viên chưa đặt tên';
+  if (sbd && name) return `[SBD: ${sbd}] ${name}`;
+  if (sbd) return `[SBD: ${sbd}]`;
+  return name;
+}
+function parseTitle(title){
+  const match = /^\[SBD:\s*([^\]]+)\]\s*(.*)$/.exec(title || '');
+  if (match) return { sbd: match[1].trim(), name: match[2].trim() };
+  return { sbd: '', name: title || '' };
+}
+
+// ========== MY ENTRIES CRUD ==========
+async function loadMyEntries(){
+  if (!currentUser) return;
+  logDebug('Tải danh sách entries của user...');
+  const { data, error } = await sb.from('poster_entries')
+    .select('*')
+    // .eq('user_id', currentUser.id)
+    .order('updated_at', { ascending:false });
+  if (error){
+    logDebug('❌ Lỗi tải entries: ' + error.message + ' (code: ' + (error.code||'n/a') + ')', 'error');
+    showToast('⚠️', 'Lỗi tải dữ liệu', error.message);
+    myEntries = [];
+    return;
+  }
+  myEntries = data || [];
+  logDebug(`✅ Tải được ${myEntries.length} entries.`, 'ok');
+  renderMyEntriesList();
+  updateSaveStatusUI();
+}
+
+function fmtDate(iso){
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  } catch(e){ return iso; }
+}
+
+function renderMyEntriesList(){
+  const container = document.getElementById('my-entries-list');
+  if (!myEntries.length){
+    container.innerHTML = `<div class="text-center py-10 text-sm" style="color:var(--ink-soft)">
+      <p class="text-3xl mb-2">📭</p>
+      Bạn chưa lưu bài nào.<br>
+      Nhập <strong>Tên</strong> + <strong>Số báo danh</strong>, điền thông tin rồi bấm <strong>💾 Lưu</strong>.
+    </div>`;
+    return;
+  }
+  container.innerHTML = myEntries.map(e => {
+    const parsed = parseTitle(e.title);
+    const isActive = e.id === currentEntryId;
+    const fieldLabels = {
+      'input-fullname': '👤 Tên', 'input-age': '🎂 Tuổi', 'input-color': '🎨 Màu',
+      'input-hobby': '⚽ Sở thích', 'input-rooms': '🔢 Số phòng', 'input-favroom': '🏡 Phòng yêu thích',
+      'input-custom-act1': '🎯 HĐ 1', 'input-custom-act2': '🎯 HĐ 2', 'input-custom-room': '📍 Phòng HĐ'
+    };
+    const chips = Object.entries(fieldLabels).map(([key, label]) => {
+      const val = (e.data && e.data[key]) || '';
+      if (!val) return '';
+      return `<span class="field-chip"><span class="label">${label}:</span><span class="val">${escapeHtml(val)}</span></span>`;
+    }).filter(Boolean).join('');
+
+    return `
+    <div class="saved-card p-4 rounded-2xl border-2" style="border-color:${isActive ? 'var(--teal)' : 'var(--paper-deep)'}; ${isActive ? 'background:var(--teal-soft);' : 'background:#fff;'}">
+      <div class="flex items-start justify-between gap-3 flex-wrap mb-3">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            ${parsed.sbd ? `<span class="px-2 py-0.5 rounded-md text-xs font-bold font-mono" style="background:var(--coral); color:#fff">SBD ${escapeHtml(parsed.sbd)}</span>` : ''}
+            <p class="text-base font-bold truncate" style="color:var(--ink)">${escapeHtml(parsed.name || 'Học viên')}</p>
+            ${isActive ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background:var(--teal); color:#fff">ĐANG SỬA</span>' : ''}
+          </div>
+          <p class="text-[11px] font-mono mt-1" style="color:var(--ink-soft)">Cập nhật: ${fmtDate(e.updated_at)}</p>
         </div>
         <div class="flex gap-1.5 flex-shrink-0">
-          <button data-load-id="${e.id}" class="entry-load-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--teal)">Mở</button>
-          <button data-del-id="${e.id}" class="entry-del-btn px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--coral); color:var(--coral)">Xoá</button>
+          <button data-load-id="${e.id}" class="entry-load-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--teal)">✏️ Sửa</button>
+          <button data-del-id="${e.id}" class="entry-del-btn px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--coral); color:var(--coral)">🗑️</button>
         </div>
       </div>
-    `).join('');
-  }
+      <div class="flex flex-wrap">${chips || '<span class="text-xs italic" style="color:var(--ink-soft)">Chưa có dữ liệu chi tiết.</span>'}</div>
+    </div>
+    `;
+  }).join('');
+}
 
-  function escapeHtml(str){
-    return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 
-  document.getElementById('entries-list').addEventListener('click', (e) => {
-    const loadBtn = e.target.closest('.entry-load-btn');
-    const delBtn = e.target.closest('.entry-del-btn');
-    if (loadBtn) loadEntryToForm(loadBtn.dataset.loadId);
-    if (delBtn) deleteEntryConfirm(delBtn.dataset.delId);
-  });
+document.getElementById('my-entries-list').addEventListener('click', (e) => {
+  const loadBtn = e.target.closest('.entry-load-btn');
+  const delBtn = e.target.closest('.entry-del-btn');
+  if (loadBtn) loadEntryToForm(loadBtn.dataset.loadId);
+  if (delBtn) deleteEntryConfirm(delBtn.dataset.delId);
+});
 
-  function loadEntryToForm(id){
-    const entry = myEntries.find(e => e.id === id);
-    if (!entry) return;
-    setFormData(entry.data || {});
-    currentEntryId = entry.id;
-    updateSaveStatusUI();
-    closeEntriesModal();
-    showToast('📂', 'Đã tải dữ liệu', `Đang chỉnh sửa: ${entry.title}`);
-  }
+function loadEntryToForm(id){
+  const entry = myEntries.find(e => e.id === id);
+  if (!entry) return;
+  const parsed = parseTitle(entry.title);
+  document.getElementById('input-name').value = parsed.name;
+  document.getElementById('input-student-id').value = parsed.sbd;
+  setFormData(entry.data || {});
+  currentEntryId = entry.id;
+  updateSaveStatusUI();
+  renderMyEntriesList();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  showToast('📂', 'Đã tải dữ liệu', `Đang chỉnh sửa: ${entry.title}`);
+}
 
-  function startNewDraft(){
-    clearForm();
-    currentEntryId = null;
-    updateSaveStatusUI();
-    closeEntriesModal();
-    document.getElementById('input-name').focus();
-  }
-
-  async function saveCurrentEntry({ asNew=false, silent=false } = {}){
-    if (!currentUser){
-      openAuthModal();
-      showToast('🔒', 'Cần đăng nhập', 'Hãy đăng nhập để lưu kết quả của bạn.');
-      return;
-    }
-    const formData = getFormData();
-    const title = (formData['input-name'] || '').trim() || 'Học viên chưa đặt tên';
-
-    if (currentEntryId && !asNew){
-      const { error } = await sb.from('poster_entries').update({ title, data: formData }).eq('id', currentEntryId);
-      if (error){ showToast('⚠️', 'Lỗi lưu', error.message); return; }
-      if (!silent) showToast('💾', 'Đã lưu!', `Cập nhật "${title}" thành công.`);
-    } else {
-      const { data, error } = await sb.from('poster_entries')
-        .insert({ user_id: currentUser.id, title, data: formData })
-        .select().single();
-      if (error){ showToast('⚠️', 'Lỗi lưu', error.message); return; }
-      currentEntryId = data.id;
-      showToast('🆕', 'Đã lưu!', `Tạo bản mới "${title}" thành công.`);
-    }
-    await loadMyEntries();
-    updateSaveStatusUI();
-  }
-
-  async function deleteEntryConfirm(id){
-    const entry = myEntries.find(e => e.id === id);
-    if (!entry) return;
-    if (!confirm(`Xoá "${entry.title}"? Hành động này không thể hoàn tác.`)) return;
-    const { error } = await sb.from('poster_entries').delete().eq('id', id);
-    if (error){ showToast('⚠️', 'Lỗi xoá', error.message); return; }
-    if (currentEntryId === id){ currentEntryId = null; updateSaveStatusUI(); }
-    await loadMyEntries();
-    showToast('🗑️', 'Đã xoá', `Đã xoá "${entry.title}".`);
-  }
-
-  function updateSaveStatusUI(){
-    const el = document.getElementById('save-status');
-    if (!currentUser){
-      el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu kết quả của bạn`;
-      return;
-    }
-    if (currentEntryId){
-      const entry = myEntries.find(e => e.id === currentEntryId);
-      el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Đã lưu: <strong>${escapeHtml(entry ? entry.title : '')}</strong>`;
-    } else {
-      el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--sun)"></span> Bản nháp chưa lưu — bấm 💾 Lưu`;
-    }
-  }
-
-  function openEntriesModal(){ renderEntriesList(); document.getElementById('entries-modal').classList.remove('hidden'); }
-  function closeEntriesModal(){ document.getElementById('entries-modal').classList.add('hidden'); }
-
-  // ---------- Admin panel ----------
-  const FIELD_LABELS = {
-    'input-name': 'Tên', 'input-age': 'Tuổi', 'input-color': 'Màu yêu thích',
-    'input-hobby': 'Sở thích', 'input-rooms': 'Số phòng', 'input-favroom': 'Phòng yêu thích',
-    'input-custom-act1': 'Hoạt động 1', 'input-custom-act2': 'Hoạt động 2', 'input-custom-room': 'Phòng hoạt động'
-  };
-
-  function openAdminModal(){
-    document.getElementById('admin-modal').classList.remove('hidden');
-    loadAdminData();
-  }
-  function closeAdminModal(){ document.getElementById('admin-modal').classList.add('hidden'); }
-
-  async function loadAdminData(){
-    document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-soft)">Đang tải dữ liệu...</p>`;
-
-    const [{ data: profiles, error: pErr }, { data: entries, error: eErr }] = await Promise.all([
-      sb.from('profiles').select('*').order('created_at', { ascending:true }),
-      sb.from('poster_entries').select('*').order('updated_at', { ascending:false })
-    ]);
-
-    if (pErr || eErr){
-      showToast('⚠️', 'Lỗi tải dữ liệu admin', (pErr || eErr).message);
-      document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--coral)">Không tải được dữ liệu.</p>`;
-      return;
-    }
-
-    adminProfiles = profiles || [];
-    adminEntriesByUser = {};
-    (entries || []).forEach(e => {
-      if (!adminEntriesByUser[e.user_id]) adminEntriesByUser[e.user_id] = [];
-      adminEntriesByUser[e.user_id].push(e);
-    });
-
-    renderAdminList();
-  }
-
-  function getMissingProfiles(){
-    return adminProfiles.filter(p => !adminEntriesByUser[p.id] || adminEntriesByUser[p.id].length === 0);
-  }
-
-  function renderAdminList(){
-    const missing = getMissingProfiles();
-    const submittedCount = adminProfiles.length - missing.length;
-    document.getElementById('admin-summary').innerText =
-      `Tổng: ${adminProfiles.length} user — ✅ Đã nộp: ${submittedCount} — ⚠️ Chưa nộp: ${missing.length}`;
-
-    const container = document.getElementById('admin-list');
-    if (!adminProfiles.length){
-      container.innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-soft)">Chưa có user nào.</p>`;
-      return;
-    }
-
-    container.innerHTML = adminProfiles.map(p => {
-      const list = adminEntriesByUser[p.id] || [];
-      const has = list.length > 0;
-      const latest = has ? list[0] : null;
-      const badge = has
-        ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--teal-soft); color:#155f59">✅ Đã nộp (${list.length})</span>`
-        : `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--sun-soft); color:var(--coral-dark)">⚠️ Chưa nộp</span>`;
-
-      return `
-        <div class="p-3 rounded-xl border" style="border-color:var(--paper-deep)">
-          <div class="flex items-center justify-between gap-3 flex-wrap">
-            <div class="min-w-0">
-              <p class="text-sm font-bold truncate" style="color:var(--ink)">${escapeHtml(p.display_name || p.email)}</p>
-              <p class="text-[11px] font-mono truncate" style="color:var(--ink-soft)">${escapeHtml(p.email)}</p>
-            </div>
-            <div class="flex items-center gap-2 flex-shrink-0">
-              ${badge}
-              ${has ? `<button data-toggle-id="${p.id}" class="admin-toggle-btn px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--teal); color:var(--teal)">Xem</button>` : ''}
-              <button data-mail-id="${escapeHtml(p.email)}" class="admin-mail-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--ink)">✉️ Mail</button>
-            </div>
-          </div>
-          <div id="admin-detail-${p.id}" class="hidden mt-3 pt-3 border-t" style="border-color:var(--paper-deep)">
-            ${(list || []).map(e => `
-              <div class="mb-2 p-2.5 rounded-lg" style="background:var(--paper)">
-                <p class="text-xs font-bold mb-1" style="color:var(--ink)">${escapeHtml(e.title)} <span class="font-mono font-normal" style="color:var(--ink-soft)">— ${fmtDate(e.updated_at)}</span></p>
-                <div class="grid grid-cols-2 gap-1 text-[12px]" style="color:var(--ink-soft)">
-                  ${Object.entries(FIELD_LABELS).map(([key, label]) => `<div><strong style="color:var(--ink)">${label}:</strong> ${escapeHtml((e.data && e.data[key]) || '—')}</div>`).join('')}
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  document.getElementById('admin-list').addEventListener('click', (e) => {
-    const toggleBtn = e.target.closest('.admin-toggle-btn');
-    const mailBtn = e.target.closest('.admin-mail-btn');
-    if (toggleBtn){
-      document.getElementById('admin-detail-' + toggleBtn.dataset.toggleId).classList.toggle('hidden');
-    }
-    if (mailBtn){
-      mailtoSingle(mailBtn.dataset.mailId);
-    }
-  });
-
-  function mailtoSingle(email){
-    const subject = 'Nhắc nhở: hoàn thành bài luyện nói "All About Me & My Home"';
-    const body = `Chào bạn,\n\nCô/thầy thấy bạn chưa nộp bài luyện nói "All About Me & My Home". Hãy hoàn thành và lưu lại trong hệ thống nhé!\n\nCảm ơn bạn.`;
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }
-
-  function mailtoBulkMissing(){
-    const missing = getMissingProfiles();
-    if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
-    const emails = missing.map(p => p.email).filter(Boolean);
-    const subject = 'Nhắc nhở: hoàn thành bài luyện nói "All About Me & My Home"';
-    const body = `Chào các bạn,\n\nCô/thầy thấy một số bạn chưa nộp bài luyện nói "All About Me & My Home". Hãy hoàn thành và lưu lại trong hệ thống sớm nhé!\n\nCảm ơn các bạn.`;
-    const mailto = `mailto:?bcc=${encodeURIComponent(emails.join(','))}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    if (mailto.length > 1800){
-      showToast('⚠️', 'Danh sách quá dài', 'Mail app có thể không mở được link quá dài — hãy dùng "Copy email chưa nộp" rồi dán tay vào ô Bcc.');
-    }
-    window.location.href = mailto;
-  }
-
-  function copyText(str){
-    if (navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(str).then(
-        () => showToast('📋', 'Đã copy!', 'Danh sách email đã được sao chép.'),
-        () => fallbackCopy(str)
-      );
-    } else {
-      fallbackCopy(str);
-    }
-  }
-  function fallbackCopy(str){
-    const ta = document.createElement('textarea');
-    ta.value = str; ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); showToast('📋', 'Đã copy!', 'Danh sách email đã được sao chép.'); }
-    catch(e){ showToast('⚠️', 'Copy thất bại', 'Vui lòng chọn và copy thủ công.'); }
-    document.body.removeChild(ta);
-  }
-
-  function copyMissingEmails(){
-    const missing = getMissingProfiles();
-    if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
-    copyText(missing.map(p => p.email).filter(Boolean).join(', '));
-  }
-
-  // close dropdown when clicking elsewhere
-  document.addEventListener('click', (e) => {
-    const wrap = document.getElementById('user-chip-wrap');
-    if (wrap && !wrap.contains(e.target)) closeUserMenu();
-  });
-
-  // ---------- Init ----------
-  renderWordBank();
+function startNewDraft(){
+  clearAllForm();
+  currentEntryId = null;
+  updateSaveStatusUI();
+  renderMyEntriesList();
   document.getElementById('input-name').focus();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  showToast('📝', 'Bản nháp mới', 'Hãy nhập Tên + Số báo danh và điền bài.');
+}
 
-  // expose functions used by inline onclick="" attributes
-  Object.assign(window, {
-    setActiveInput, fillWord, resetPoster, openAuthModal, closeAuthModal,
-    switchAuthTab, submitAuthForm, doSignOut, toggleUserMenu, closeUserMenu,
-    openEntriesModal, closeEntriesModal, startNewDraft, saveCurrentEntry,
-    onFieldInput, openAdminModal, closeAdminModal, mailtoBulkMissing, copyMissingEmails
+function scrollToMyEntries(){
+  const section = document.getElementById('my-entries-section');
+  if (section.classList.contains('hidden')){
+    showToast('🔒', 'Cần đăng nhập', 'Đăng nhập để xem bài đã lưu.');
+    openAuthModal();
+    return;
+  }
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ========== SAVE (CÓ DEBUG CHI TIẾT) ==========
+async function saveCurrentEntry({ asNew=false, silent=false } = {}){
+  const btn = document.getElementById('btn-save-main');
+  // if (!currentUser){
+  //   openAuthModal();
+  //   showToast('🔒', 'Cần đăng nhập', 'Hãy đăng nhập để lưu kết quả.');
+  //   return;
+  // }
+  const name = (document.getElementById('input-name').value || '').trim();
+  const sbd = (document.getElementById('input-student-id').value || '').trim();
+  if (!name && !sbd){
+    showToast('⚠️', 'Thiếu thông tin', 'Vui lòng nhập ít nhất Tên hoặc Số báo danh.');
+    return;
+  }
+  const formData = getFormData();
+  const title = buildTitle();
+
+  // Disable nút khi đang lưu
+  const originalText = btn.innerText;
+  btn.disabled = true;
+  btn.innerText = '⏳ Đang lưu...';
+  btn.style.opacity = '0.6';
+
+  try {
+    if (currentEntryId && !asNew){
+      // UPDATE
+      logDebug(`📝 UPDATE entry ${currentEntryId}: title="${title}"`);
+      const { data, error } = await sb.from('poster_entries')
+        .update({ title, data: formData, updated_at: new Date().toISOString() })
+        .eq('id', currentEntryId)
+        //.eq('user_id', currentUser.id)
+        .select()
+        .single();
+
+      if (error){
+        logDebug(`❌ UPDATE lỗi: ${error.message} (code: ${error.code || 'n/a'})`, 'error');
+        showToast('⚠️', 'Lỗi cập nhật', error.message);
+        return;
+      }
+      logDebug(`✅ UPDATE thành công.`, 'ok');
+      if (!silent) showToast('💾', 'Đã cập nhật!', `"${title}"`);
+    } else {
+      // INSERT
+      const payload = {
+        // user_id: currentUser.id,
+        title: title,
+        data: formData
+      };
+      logDebug(`📤 INSERT: ${JSON.stringify(payload)}`);
+
+      const { data, error } = await sb.from('poster_entries')
+        .insert(payload)
+        .select()
+        .single();
+
+      if (error){
+        logDebug(`❌ INSERT lỗi: ${error.message} (code: ${error.code || 'n/a'})`, 'error');
+        // Gợi ý cụ thể theo mã lỗi
+        if (error.code === '23503'){
+          showToast('⚠️', 'Lỗi user_id', 'user_id không tồn tại. Hãy đăng xuất rồi đăng nhập lại.');
+        } else if (error.code === '23502'){
+          showToast('⚠️', 'Thiếu trường', 'Bảng yêu cầu trường bắt buộc. Kiểm tra schema.');
+        } else if (error.code === '42501' || error.message.includes('RLS')){
+          showToast('⚠️', 'Lỗi quyền', 'RLS policy chưa cho phép INSERT. Liên hệ admin.');
+        } else {
+          showToast('⚠️', 'Lỗi lưu', error.message);
+        }
+        return;
+      }
+      currentEntryId = data.id;
+      logDebug(`✅ INSERT thành công. ID: ${data.id}`, 'ok');
+      showToast('🆕', 'Đã lưu!', `"${title}"`);
+    }
+    await loadMyEntries();
+  } catch (err){
+    logDebug('❌ Exception khi lưu: ' + err.message, 'error');
+    showToast('⚠️', 'Lỗi bất ngờ', err.message || String(err));
+  } finally {
+    btn.disabled = false;
+    btn.innerText = originalText;
+    btn.style.opacity = '1';
+  }
+}
+
+async function deleteEntryConfirm(id){
+  const entry = myEntries.find(e => e.id === id);
+  if (!entry) return;
+  if (!confirm(`Xoá "${entry.title}"? Hành động này không thể hoàn tác.`)) return;
+  logDebug(`🗑️ DELETE entry ${id}`);
+  const { error } = await sb.from('poster_entries').delete().eq('id', id).eq('user_id', currentUser.id);
+  if (error){
+    logDebug('❌ DELETE lỗi: ' + error.message, 'error');
+    showToast('⚠️', 'Lỗi xoá', error.message);
+    return;
+  }
+  if (currentEntryId === id){ currentEntryId = null; updateSaveStatusUI(); }
+  await loadMyEntries();
+  showToast('🗑️', 'Đã xoá', `"${entry.title}"`);
+}
+
+function updateSaveStatusUI(){
+  const el = document.getElementById('save-status');
+  if (!currentUser){
+    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--ink-soft)"></span> Đăng nhập để lưu kết quả của bạn`;
+    return;
+  }
+  if (currentEntryId){
+    const entry = myEntries.find(e => e.id === currentEntryId);
+    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Đang sửa: <strong>${escapeHtml(entry ? entry.title : '')}</strong>`;
+  } else {
+    el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:var(--sun)"></span> Bản nháp — bấm 💾 Lưu`;
+  }
+}
+
+// ========== ADMIN ==========
+const FIELD_LABELS = {
+  'input-fullname': 'Tên', 'input-age': 'Tuổi', 'input-color': 'Màu yêu thích',
+  'input-hobby': 'Sở thích', 'input-rooms': 'Số phòng', 'input-favroom': 'Phòng yêu thích',
+  'input-custom-act1': 'Hoạt động 1', 'input-custom-act2': 'Hoạt động 2', 'input-custom-room': 'Phòng hoạt động'
+};
+function openAdminModal(){
+  document.getElementById('admin-modal').classList.remove('hidden');
+  loadAdminData();
+}
+function closeAdminModal(){ document.getElementById('admin-modal').classList.add('hidden'); }
+async function loadAdminData(){
+  document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-soft)">Đang tải dữ liệu...</p>`;
+  const [{ data: profiles, error: pErr }, { data: entries, error: eErr }] = await Promise.all([
+    sb.from('profiles').select('*').order('created_at', { ascending:true }),
+    sb.from('poster_entries').select('*').order('updated_at', { ascending:false })
+  ]);
+  if (pErr || eErr){
+    logDebug('❌ Admin load lỗi: ' + (pErr || eErr).message, 'error');
+    showToast('⚠️', 'Lỗi tải dữ liệu admin', (pErr || eErr).message);
+    document.getElementById('admin-list').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--coral)">Không tải được dữ liệu.</p>`;
+    return;
+  }
+  adminProfiles = profiles || [];
+  adminEntriesByUser = {};
+  (entries || []).forEach(e => {
+    if (!adminEntriesByUser[e.user_id]) adminEntriesByUser[e.user_id] = [];
+    adminEntriesByUser[e.user_id].push(e);
   });
+  renderAdminList();
+}
+function getMissingProfiles(){
+  return adminProfiles.filter(p => !adminEntriesByUser[p.id] || adminEntriesByUser[p.id].length === 0);
+}
+function renderAdminList(){
+  const missing = getMissingProfiles();
+  const submittedCount = adminProfiles.length - missing.length;
+  document.getElementById('admin-summary').innerText =
+    `Tổng: ${adminProfiles.length} user — ✅ Đã nộp: ${submittedCount} — ⚠️ Chưa nộp: ${missing.length}`;
+  const container = document.getElementById('admin-list');
+  if (!adminProfiles.length){
+    container.innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-soft)">Chưa có user nào.</p>`;
+    return;
+  }
+  container.innerHTML = adminProfiles.map(p => {
+    const list = adminEntriesByUser[p.id] || [];
+    const has = list.length > 0;
+    const badge = has
+      ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--teal-soft); color:#155f59">✅ Đã nộp (${list.length})</span>`
+      : `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:var(--sun-soft); color:var(--coral-dark)">⚠️ Chưa nộp</span>`;
+    return `
+    <div class="p-3 rounded-xl border" style="border-color:var(--paper-deep)">
+      <div class="flex items-center justify-between gap-3 flex-wrap">
+        <div class="min-w-0">
+          <p class="text-sm font-bold truncate" style="color:var(--ink)">${escapeHtml(p.display_name || p.email)}</p>
+          <p class="text-[11px] font-mono truncate" style="color:var(--ink-soft)">${escapeHtml(p.email)}</p>
+        </div>
+        <div class="flex items-center gap-2 flex-shrink-0">
+          ${badge}
+          ${has ? `<button data-toggle-id="${p.id}" class="admin-toggle-btn px-3 py-1.5 rounded-lg text-xs font-bold border" style="border-color:var(--teal); color:var(--teal)">Xem</button>` : ''}
+          <button data-mail-id="${escapeHtml(p.email)}" class="admin-mail-btn px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:var(--ink)">✉️ Mail</button>
+        </div>
+      </div>
+      <div id="admin-detail-${p.id}" class="hidden mt-3 pt-3 border-t" style="border-color:var(--paper-deep)">
+        ${(list || []).map(e => {
+          const parsed = parseTitle(e.title);
+          return `
+          <div class="mb-2 p-2.5 rounded-lg" style="background:var(--paper)">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              ${parsed.sbd ? `<span class="text-[10px] font-bold px-1.5 py-0.5 rounded font-mono" style="background:var(--coral); color:#fff">SBD ${escapeHtml(parsed.sbd)}</span>` : ''}
+              <p class="text-xs font-bold" style="color:var(--ink)">${escapeHtml(parsed.name || 'Học viên')}</p>
+              <span class="text-[10px] font-mono" style="color:var(--ink-soft)">— ${fmtDate(e.updated_at)}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1 text-[12px]" style="color:var(--ink-soft)">
+              ${Object.entries(FIELD_LABELS).map(([key, label]) => `<div><strong style="color:var(--ink)">${label}:</strong> ${escapeHtml((e.data && e.data[key]) || '—')}</div>`).join('')}
+            </div>
+          </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+    `;
+  }).join('');
+}
+document.getElementById('admin-list').addEventListener('click', (e) => {
+  const toggleBtn = e.target.closest('.admin-toggle-btn');
+  const mailBtn = e.target.closest('.admin-mail-btn');
+  if (toggleBtn){
+    document.getElementById('admin-detail-' + toggleBtn.dataset.toggleId).classList.toggle('hidden');
+  }
+  if (mailBtn){
+    mailtoSingle(mailBtn.dataset.mailId);
+  }
+});
+function mailtoSingle(email){
+  const subject = 'Nhắc nhở: hoàn thành bài luyện nói "All About Me & My Home"';
+  const body = `Chào bạn,\n\nCô/thầy thấy bạn chưa nộp bài luyện nói "All About Me & My Home". Hãy hoàn thành và lưu lại trong hệ thống nhé!\n\nCảm ơn bạn.`;
+  window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+function mailtoBulkMissing(){
+  const missing = getMissingProfiles();
+  if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
+  const emails = missing.map(p => p.email).filter(Boolean);
+  const subject = 'Nhắc nhở: hoàn thành bài luyện nói "All About Me & My Home"';
+  const body = `Chào các bạn,\n\nCô/thầy thấy một số bạn chưa nộp bài luyện nói "All About Me & My Home". Hãy hoàn thành và lưu lại trong hệ thống sớm nhé!\n\nCảm ơn các bạn.`;
+  const mailto = `mailto:?bcc=${encodeURIComponent(emails.join(','))}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  if (mailto.length > 1800){
+    showToast('⚠️', 'Danh sách quá dài', 'Mail app có thể không mở được — hãy dùng "Copy email chưa nộp".');
+  }
+  window.location.href = mailto;
+}
+function copyText(str){
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(str).then(
+      () => showToast('📋', 'Đã copy!', 'Danh sách email đã được sao chép.'),
+      () => fallbackCopy(str)
+    );
+  } else {
+    fallbackCopy(str);
+  }
+}
+function fallbackCopy(str){
+  const ta = document.createElement('textarea');
+  ta.value = str; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast('📋', 'Đã copy!', 'Danh sách email đã được sao chép.'); }
+  catch(e){ showToast('⚠️', 'Copy thất bại', 'Vui lòng chọn và copy thủ công.'); }
+  document.body.removeChild(ta);
+}
+function copyMissingEmails(){
+  const missing = getMissingProfiles();
+  if (!missing.length){ showToast('🎉', 'Tuyệt vời!', 'Mọi user đều đã nộp bài.'); return; }
+  copyText(missing.map(p => p.email).filter(Boolean).join(', '));
+}
+
+document.addEventListener('click', (e) => {
+  const wrap = document.getElementById('user-chip-wrap');
+  if (wrap && !wrap.contains(e.target)) closeUserMenu();
+});
+
+window.addEventListener('resize', autoResizeAllInputs);
+
+// ========== INIT ==========
+renderWordBank();
+autoResizeAllInputs();
+updateLivePreview();
+document.getElementById('input-name').focus();
+
+// Kiểm tra kết nối khi tải trang
+setTimeout(() => testConnection(), 500);
+
+Object.assign(window, {
+  setActiveInput, fillWord, resetPoster, openAuthModal, closeAuthModal,
+  switchAuthTab, submitAuthForm, doSignOut, toggleUserMenu, closeUserMenu,
+  startNewDraft, saveCurrentEntry, onFieldInput, openAdminModal, closeAdminModal,
+  mailtoBulkMissing, copyMissingEmails, scrollToMyEntries, loadMyEntries,
+  testConnection, toggleDebugLog, clearDebugLog
+});
 </script>
 </body>
 </html>
+
