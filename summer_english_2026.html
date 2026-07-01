@@ -371,12 +371,12 @@ button:active:not(:disabled){ transform: translateY(0); }
             <span id="sbd-lookup-msg">Đã tìm thấy bài làm trước đó.</span>
           </div>
         </div>
-        <p class="text-[11px] mt-3 flex items-center gap-1.5" style="color:red;font-size:13px;font-weight:bold">
-          <strong>💡</strong>Lưu ý số báo danh: <strong style="color:red;font-size:13px;font-weight:bold">Số báo danh với cụm các trường ví dụ Sao Sáng 4 là 4ss1 3ss1, Kim Đồng 1kd1 2kd2, Minh Khai là mh1 ... các trường khác tương tự</strong>
+        <p class="text-[11px] mt-3 flex items-center gap-1.5" style="color:rgb(202, 115, 236);font-size:13px;font-weight:bold">
+          <strong>💡</strong>Lưu ý số báo danh: <strong style="color:rgb(202, 115, 236);font-size:13px;font-weight:bold">Số báo danh với cụm các trường ví dụ Sao Sáng 4 là 4ss1 3ss1, Kim Đồng 1kd1 2kd2, Minh Khai là mh1 ... các trường khác tương tự</strong>
         </p>
         <div>
-          <strong style="color:red;font-size:13px;font-weight:bold">💡 Lưu ý sửa bài làm: </strong> 
-          <strong style="color:red;font-size:13px;font-weight:bold">Nhập đúng số báo danh bản thân để sửa bài làm trước đó</strong>
+          <strong style="color:rgb(202, 115, 236);font-size:13px;font-weight:bold">💡 Lưu ý sửa bài làm: </strong> 
+          <strong style="color:rgb(202, 115, 236);font-size:13px;font-weight:bold">Nhập đúng số báo danh bản thân để sửa bài làm trước đó</strong>
         </div>
       </div>
       <div class="space-y-5 text-lg md:text-xl font-semibold leading-relaxed" style="color:var(--ink)">
@@ -455,11 +455,20 @@ button:active:not(:disabled){ transform: translateY(0); }
         </div>
       </div>
     </div>
+    <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-t" style="background:var(--paper); border-color:var(--border)">
+    <p class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
+      <span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Lưu kết quả của bạn
+    </p>
+    <div class="flex gap-2">
+      <button onclick="saveCurrentEntry()" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">💾 Lưu bài làm</button>
+    </div>
+  </div>
     <div class="lg:col-span-5 p-6 md:p-9 bg-gradient-paper">
       <div class="section-header">
         <span class="section-badge" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">B</span>
         <div>
           <h3 class="font-display font-bold uppercase tracking-wide text-lg" style="color:var(--ink)">Vocabulary Bank</h3>
+          
           <!-- <p class="text-xs" style="color:var(--ink-muted)">Nhấn vào từ để điền vào ô đang chọn</p> -->
         </div>
       </div>
@@ -525,14 +534,14 @@ button:active:not(:disabled){ transform: translateY(0); }
       </p>
     </div>
   </div>
-  <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-t" style="background:var(--paper); border-color:var(--border)">
+  <!-- <div class="no-print flex flex-col sm:flex-row items-center justify-between gap-3 px-6 md:px-10 lg:pl-16 py-3 border-t" style="background:var(--paper); border-color:var(--border)">
     <p class="text-xs font-semibold flex items-center gap-2" style="color:var(--ink-soft)">
       <span class="w-2 h-2 rounded-full" style="background:var(--teal)"></span> Lưu kết quả của bạn
     </p>
     <div class="flex gap-2">
       <button onclick="saveCurrentEntry()" class="px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:shadow-lg" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">💾 Lưu</button>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- ============ MY SAVED ENTRIES ============ -->
