@@ -188,7 +188,7 @@ button:active:not(:disabled){ transform: translateY(0); }
 </div>
 
 <!-- ============ CONNECTION STATUS BAR ============ -->
-<div class="no-print max-w-6xl mx-auto mb-4 flex items-center justify-between gap-3 flex-wrap section-card px-4 py-2.5">
+<!-- <div class="no-print max-w-6xl mx-auto mb-4 flex items-center justify-between gap-3 flex-wrap section-card px-4 py-2.5">
   <div class="flex items-center gap-2 flex-wrap">
     <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--ink-muted)">Supabase</span>
     <span id="conn-status" class="status-chip warn"><span class="dot"></span> Đang kiểm tra...</span>
@@ -196,7 +196,7 @@ button:active:not(:disabled){ transform: translateY(0); }
   <div class="flex gap-2">
     <button onclick="testConnection()" class="px-3 py-1.5 rounded-lg text-xs font-bold border hover:bg-slate-50" style="border-color:var(--border); color:var(--ink-soft)">🔁 Kiểm tra kết nối</button>
   </div>
-</div>
+</div> -->
 
 <!-- ============ DEBUG LOG ============ -->
 <div id="debug-log-wrap" class="no-print hidden max-w-6xl mx-auto mb-4">
@@ -394,7 +394,7 @@ button:active:not(:disabled){ transform: translateY(0); }
         <div class="sentence-row">
           <span>I like</span>
           <span class="input-with-dropdown">
-            <input type="text" id="input-color" placeholder="[color]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <input type="text" readonly id="input-color" placeholder="[color]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
             <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-color', event)" aria-expanded="false" title="Chọn màu">▾</button>
             <div id="dd-color" class="dropdown-menu" role="listbox"></div>
           </span>
@@ -403,7 +403,7 @@ button:active:not(:disabled){ transform: translateY(0); }
         <div class="sentence-row">
           <span>I like</span>
           <span class="input-with-dropdown">
-            <input type="text" id="input-hobby" placeholder="[V-ing / Hobby]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <input type="text" readonly id="input-hobby" placeholder="[V-ing / Hobby]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
             <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-hobby', event)" aria-expanded="false" title="Chọn sở thích">▾</button>
             <div id="dd-hobby" class="dropdown-menu" role="listbox"></div>
           </span>
@@ -412,7 +412,7 @@ button:active:not(:disabled){ transform: translateY(0); }
         <div class="sentence-row">
           <span>There are</span>
           <span class="input-with-dropdown">
-            <input type="text" id="input-rooms" placeholder="[number]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <input type="text" readonly id="input-rooms" placeholder="[number]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
             <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-rooms', event)" aria-expanded="false" title="Chọn số phòng">▾</button>
             <div id="dd-rooms" class="dropdown-menu" role="listbox"></div>
           </span>
@@ -421,7 +421,7 @@ button:active:not(:disabled){ transform: translateY(0); }
         <div class="sentence-row">
           <span>My favorite part of my home is the</span>
           <span class="input-with-dropdown">
-            <input type="text" id="input-favroom" placeholder="[favourite room]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+            <input type="text" readonly id="input-favroom" placeholder="[favourite room]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5" style="color:var(--coral-dark); border-color:var(--ink-soft); background:var(--paper)" onclick="setActiveInput(this)" oninput="onFieldInput()">
             <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-favroom', event)" aria-expanded="false" title="Chọn phòng">▾</button>
             <div id="dd-favroom" class="dropdown-menu" role="listbox"></div>
           </span>
@@ -435,19 +435,18 @@ button:active:not(:disabled){ transform: translateY(0); }
           <div class="sentence-row leading-relaxed text-base md:text-lg">
             <span>I like</span>
             <span class="input-with-dropdown">
-              <input type="text" id="input-custom-act1" placeholder="[V-ing activity]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+              <input type="text" id="input-custom-act1" readonly placeholder="[V-ing activity]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
               <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-act1', event)" aria-expanded="false" title="Chọn hoạt động">▾</button>
               <div id="dd-act1" class="dropdown-menu" role="listbox"></div>
             </span>
             <span>and</span>
             <span class="input-with-dropdown">
-              <input type="text" id="input-custom-act2" placeholder="[V-ing activity]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+              <input type="text" id="input-custom-act2" readonly placeholder="[V-ing activity]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
               <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-act2', event)" aria-expanded="false" title="Chọn hoạt động">▾</button>
               <div id="dd-act2" class="dropdown-menu" role="listbox"></div>
             </span>
-            <span>in the</span>
             <span class="input-with-dropdown">
-              <input type="text" id="input-custom-room" placeholder="[room / area]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
+              <input type="text" id="input-custom-room" readonly placeholder="[room / area]" class="blank-input font-extrabold text-center border-b-2 border-dashed py-0.5 bg-white" style="color:var(--coral-dark); border-color:var(--ink-soft)" onclick="setActiveInput(this)" oninput="onFieldInput()">
               <button type="button" class="dropdown-toggle-btn" onclick="toggleDropdown('dd-custom-room', event)" aria-expanded="false" title="Chọn phòng">▾</button>
               <div id="dd-custom-room" class="dropdown-menu" role="listbox"></div>
             </span>
@@ -461,13 +460,13 @@ button:active:not(:disabled){ transform: translateY(0); }
         <span class="section-badge" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark))">B</span>
         <div>
           <h3 class="font-display font-bold uppercase tracking-wide text-lg" style="color:var(--ink)">Vocabulary Bank</h3>
-          <p class="text-xs" style="color:var(--ink-muted)">Nhấn vào từ để điền vào ô đang chọn</p>
+          <!-- <p class="text-xs" style="color:var(--ink-muted)">Nhấn vào từ để điền vào ô đang chọn</p> -->
         </div>
       </div>
-      <div class="mb-4 p-3 rounded-xl border flex items-start gap-2" style="background:#fff; border-color:var(--border)">
+      <!-- <div class="mb-4 p-3 rounded-xl border flex items-start gap-2" style="background:#fff; border-color:var(--border)">
         <span class="text-base">💡</span>
         <p class="text-xs" style="color:var(--ink-soft)"><strong>Mẹo:</strong> Click vào ô trống, sau đó nhấn từ bên dưới hoặc dùng nút <strong>▾</strong> để chọn.</p>
-      </div>
+      </div> -->
       <div class="space-y-5">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
@@ -489,7 +488,7 @@ button:active:not(:disabled){ transform: translateY(0); }
         </div>
         <div>
           <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--ink-soft)">
-            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--sun-soft); color:#B45309">🏡</span> Rooms &amp; Areas
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--sun-soft); color:#B45309">🏡</span> Favorite Room
           </span>
           <div class="flex flex-wrap gap-1.5" id="bank-rooms"></div>
         </div>
@@ -498,6 +497,12 @@ button:active:not(:disabled){ transform: translateY(0); }
             <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--teal-soft)">🏠</span> Room Activities (V-ing)
           </span>
           <div class="flex flex-wrap gap-1.5" id="bank-activities"></div>
+        </div>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider block mb-2 flex items-center gap-2" style="color:var(--violet)">
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px]" style="background:var(--violet-soft)">📍</span> Room + Preposition (for activities)
+          </span>
+          <div class="flex flex-wrap gap-1.5" id="bank-room-areas"></div>
         </div>
       </div>
     </div>
@@ -617,23 +622,24 @@ const WORD_BANK = {
   'bank-hobbies':    ['listening to music','shopping','travelling','gardening','playing sports','watching TV','cooking'],
   'bank-numbers':    ['3','4','5','6','7','8'],
   'bank-rooms':      ['bedroom','bathroom','living room','kitchen','garden','balcony'],
-  'bank-activities': ['reading books','watering on','sleeping','watching movies','making dinner','taking a bath','playing games','drinking hot tea']
+  'bank-activities': ['reading books','watering flowers','sleeping','watching movies','making dinner','taking a bath','playing games','drinking hot tea'],
+  'bank-room-areas': ['in the bedroom','in the bathroom','in the living room','in the kitchen','in the garden','on the balcony']
 };
 const COLOR_HEX = { 'red':'#EF4444','pink':'#EC4899','blue':'#3B82F6','green':'#10B981','yellow':'#F59E0B','purple':'#8B5CF6' };
 const DROPDOWN_CONFIG = {
   'dd-color':       { bankId:'bank-colors',     targetId:'input-color',       header:'Colors',          headerIcon:'🎨' },
   'dd-hobby':       { bankId:'bank-hobbies',    targetId:'input-hobby',       header:'Hobbies (V-ing)', headerIcon:'⚽' },
   'dd-rooms':       { bankId:'bank-numbers',    targetId:'input-rooms',       header:'Room Numbers',    headerIcon:'🔢' },
-  'dd-favroom':     { bankId:'bank-rooms',      targetId:'input-favroom',     header:'Rooms & Areas',   headerIcon:'🏡' },
+  'dd-favroom':     { bankId:'bank-rooms',      targetId:'input-favroom',     header:'Favorite Room',   headerIcon:'🏡' },
   'dd-act1':        { bankId:'bank-activities', targetId:'input-custom-act1', header:'Activities (V-ing)', headerIcon:'🏠' },
   'dd-act2':        { bankId:'bank-activities', targetId:'input-custom-act2', header:'Activities (V-ing)', headerIcon:'🏠' },
-  'dd-custom-room': { bankId:'bank-rooms',      targetId:'input-custom-room', header:'Rooms & Areas',   headerIcon:'🏡' }
+  'dd-custom-room': { bankId:'bank-room-areas', targetId:'input-custom-room', header:'Room + Preposition', headerIcon:'📍' }
 };
 
 function renderWordBank(){
   Object.entries(WORD_BANK).forEach(([containerId, words]) => {
     const el = document.getElementById(containerId);
-    const accent = containerId === 'bank-activities' ? 'activities' : 'default';
+    const accent = (containerId === 'bank-activities' || containerId === 'bank-room-areas') ? 'activities' : 'default';
     el.innerHTML = words.map(w => wordChip(w, accent)).join('');
   });
   Object.entries(DROPDOWN_CONFIG).forEach(([ddId, cfg]) => renderDropdownMenu(ddId, cfg));
@@ -725,11 +731,11 @@ function clearForm(){ inputIds.forEach(id => { const el = document.getElementByI
 function clearAllForm(){ clearForm(); document.getElementById('input-name').value = ''; document.getElementById('input-student-id').value = ''; }
 function setActiveInput(el){ activeInput = el; }
 function fillWord(word){
-  if (!activeInput){ showToast('👆', 'Chọn ô trống trước', 'Hãy click vào một ô trống trước khi chọn từ.'); return; }
-  activeInput.value = word; autoResizeInput(activeInput); onFieldInput();
-  const inputs = Array.from(document.querySelectorAll('.blank-input'));
-  const idx = inputs.indexOf(activeInput);
-  if (idx !== -1 && idx < inputs.length - 1){ activeInput = inputs[idx + 1]; activeInput.focus(); } else { activeInput = null; }
+  // if (!activeInput){ showToast('👆', 'Chọn ô trống trước', 'Hãy click vào một ô trống trước khi chọn từ.'); return; }
+  // activeInput.value = word; autoResizeInput(activeInput); onFieldInput();
+  // const inputs = Array.from(document.querySelectorAll('.blank-input'));
+  // const idx = inputs.indexOf(activeInput);
+  // if (idx !== -1 && idx < inputs.length - 1){ activeInput = inputs[idx + 1]; activeInput.focus(); } else { activeInput = null; }
 }
 function onFieldInput(){
   if (document.activeElement && document.activeElement.classList.contains('blank-input')) autoResizeInput(document.activeElement);
@@ -784,7 +790,7 @@ function updateLivePreview(){
     `I like ${v('input-color')}. I like ${v('input-hobby')}. ` +
     `There are ${v('input-rooms')} rooms in my house. ` +
     `My favorite part of my home is the ${v('input-favroom')}. ` +
-    `I like ${v('input-custom-act1')} and ${v('input-custom-act2')} in the ${v('input-custom-room')}.`;
+    `I like ${v('input-custom-act1')} and ${v('input-custom-act2')} ${v('input-custom-room')}.`;
 }
 function resetPoster(){
   if (!confirm('Xoá trắng tất cả các ô?')) return;
@@ -1448,4 +1454,3 @@ Object.assign(window, {
 </script>
 </body>
 </html>
-
