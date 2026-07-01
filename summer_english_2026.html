@@ -984,7 +984,7 @@ function renderMyEntriesList(){
             <span class="marks-chip ${marksClass}">🏆 ${fbRecord.feedback_marks || 0} điểm</span>
             <span class="font-mono text-[10px]" style="color:var(--ink-muted)">Type ${fbRecord.feedback_type}</span>
           </div>
-          ${fbRecord.feedback_remark ? `<p><span class="font-bold" style="color:#047857">💬 Nhận xét:</span> <span style="color:var(--ink)">${escapeHtml(fbRecord.feedback_remark)}</span></p>` : ''}
+          ${fbRecord.feedback_remark ? `<p><span class="font-bold" style="color:#047857">💬 Đánh giá:</span> <span style="color:var(--ink)">${escapeHtml(fbRecord.feedback_remark)}</span></p>` : ''}
         </div>`;
     } else if (e.feedback){
       feedbackHtml = `<div class="mt-2 p-2.5 rounded-lg text-xs" style="background:var(--sage-soft); border:1px solid var(--sage)"><span class="font-bold" style="color:#047857">💬 Nhận xét:</span> <span style="color:var(--ink)">${escapeHtml(e.feedback)}</span></div>`;
@@ -1070,8 +1070,8 @@ function switchAdminTab(tab){
 async function loadAdminData(){
   document.getElementById('admin-content-entries').innerHTML = `<p class="text-center text-sm py-8" style="color:var(--ink-muted)">Đang tải...</p>`;
   const [{ data: entries, error: eErr }, { data: feedbacks, error: fErr }] = await Promise.all([
-    sb.from('poster_entries').select('*').order('updated_at', { ascending:false }),
-    sb.from('feedback').select('*').order('id', { ascending:false })
+    sb.from('poster_entries').select('*').order('id', { ascending:true }),
+    sb.from('feedback').select('*').order('id', { ascending:true })
   ]);
   if (eErr){ logDebug('❌ Admin entries lỗi: ' + eErr.message, 'error'); }
   if (fErr){ logDebug('❌ Admin feedback lỗi: ' + fErr.message, 'error'); }
@@ -1120,7 +1120,7 @@ function renderAdminEntries(){
         </div>`;
     }
     const dataPreview = e.data ? Object.entries({
-      'input-fullname':'Tên','input-age':'Tuổi','input-color':'Màu','input-hobby':'S.thích','input-rooms':'P.số','input-favroom':'P.Y.Thích'
+      'input-fullname':'Tên','input-age':'Tuổi','input-color':'Màu','input-hobby':'S.thích','input-rooms':'P.số','input-favroom':'P.Y.Thích',
     }).map(([k,l]) => { const v = e.data[k]; return v ? `<span class="text-[11px] px-2 py-0.5 rounded-full" style="background:var(--paper); border:1px solid var(--border)"><strong>${l}:</strong> ${escapeHtml(v)}</span>` : ''; }).filter(Boolean).join(' ') : '';
 
     return `
@@ -1163,19 +1163,19 @@ function renderFeedbackTemplates(){
       </h4>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
         <div>
-          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_name</label>
+          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Tên đánh giá</label>
           <input id="new-fb-name" type="text" placeholder="VD: Xuất sắc" class="modern-input w-full px-3 py-2 rounded-lg text-sm">
         </div>
         <div>
-          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_type</label>
+          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Loại đánh giá (chỉ nhập số)</label>
           <input id="new-fb-type" type="number" placeholder="VD: 1" class="modern-input w-full px-3 py-2 rounded-lg text-sm">
         </div>
         <div>
-          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_marks</label>
+          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Số điểm (chỉ nhập số)</label>
           <input id="new-fb-marks" type="number" placeholder="VD: 10" class="modern-input w-full px-3 py-2 rounded-lg text-sm">
         </div>
         <div>
-          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">feedback_remark</label>
+          <label class="text-[10px] font-bold uppercase tracking-wide block mb-1" style="color:var(--ink-soft)">Mô tả (tuỳ chọn)</label>
           <input id="new-fb-remark" type="text" placeholder="Mô tả (tuỳ chọn)" class="modern-input w-full px-3 py-2 rounded-lg text-sm">
         </div>
       </div>
